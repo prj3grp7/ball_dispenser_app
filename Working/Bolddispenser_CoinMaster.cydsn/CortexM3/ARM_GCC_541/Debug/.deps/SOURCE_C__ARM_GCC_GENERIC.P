@@ -1,0 +1,166 @@
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/CortexM3/ARM_GCC_541/Debug/CoinDetection.o : //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/ADC_DelSig_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/ADC_DelSig_1_AMux.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/ADC_DelSig_1_Ext_CP_Clk.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/ADC_DelSig_1_IRQ.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/ADC_DelSig_1_theACLK.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Clock_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Clock_2.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/CyDmac.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/CyFlash.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/CyLib.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/CySpc.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/I2C.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/I2C_PVT.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/I2C_Timer.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/IR_puls.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/IR_puls_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Interrupt.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Interrupt_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Motor_Reg_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Motor_Reg_2.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Motor_Timer.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/PWM_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/PhotoDiode.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/PhotoDiode_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Pin_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Pin_1_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/RST_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/RST_1_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/SCL_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/SCL_1_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/SDA_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/SDA_1_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Sample_Hold_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/UART.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/UART_IntClock.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cmsis_armcc.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cmsis_compiler.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cmsis_gcc.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/core_cm3.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/core_cm3_psoc5.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cyPm.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cy_em_eeprom.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cydevice.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cydevice_trm.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cydisabledsheets.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cyfitter.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cyfitter_cfg.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cypins.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cytypes.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/isr.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/isr_detection.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/isr_timer.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/isr_uart_rx.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_empty.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_empty_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_1_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_2.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_2_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_3.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_3_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_4.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_4_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_5.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_5_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_6.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_6_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_7.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_7_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_8.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_8_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_full.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_full_aliases.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/project.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/timer_clock.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/timer_clock_1.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Balldispenser.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/CoinDetection.c //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/CoinDetection.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/MotorControl.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/RPi_IF.h //vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/UART_debug.h 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/ADC_DelSig_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/ADC_DelSig_1_AMux.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/ADC_DelSig_1_Ext_CP_Clk.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/ADC_DelSig_1_IRQ.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/ADC_DelSig_1_theACLK.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Clock_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Clock_2.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/CyDmac.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/CyFlash.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/CyLib.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/CySpc.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/I2C.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/I2C_PVT.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/I2C_Timer.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/IR_puls.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/IR_puls_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Interrupt.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Interrupt_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Motor_Reg_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Motor_Reg_2.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Motor_Timer.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/PWM_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/PhotoDiode.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/PhotoDiode_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Pin_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Pin_1_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/RST_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/RST_1_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/SCL_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/SCL_1_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/SDA_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/SDA_1_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/Sample_Hold_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/UART.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/UART_IntClock.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cmsis_armcc.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cmsis_compiler.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cmsis_gcc.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/core_cm3.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/core_cm3_psoc5.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cyPm.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cy_em_eeprom.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cydevice.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cydevice_trm.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cydisabledsheets.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cyfitter.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cyfitter_cfg.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cypins.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/cytypes.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/isr.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/isr_detection.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/isr_timer.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/isr_uart_rx.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_empty.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_empty_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_1_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_2.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_2_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_3.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_3_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_4.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_4_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_5.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_5_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_6.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_6_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_7.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_7_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_8.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_enable_8_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_full.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/pin_full_aliases.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/project.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/timer_clock.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Generated_Source/PSoC5/timer_clock_1.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/Balldispenser.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/CoinDetection.c : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/CoinDetection.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/MotorControl.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/RPi_IF.h : 
+
+//vmware-host/Shared\ Folders/Documents/BallDispApp/Workspace12/Bolddispenser_CoinMaster.cydsn/UART_debug.h : 
+

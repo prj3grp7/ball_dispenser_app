@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace12\Bolddispenser_CoinMaster\TopDesign">
+<ExpandedNodeIds>
+<v>Workspace12</v>
+<v>Workspace12\Bolddispenser_CoinMaster</v>
+<v>Workspace12\Bolddispenser_CoinMaster\TopDesign</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Pins</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Analog</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Clocks</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Interrupts</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\DMA</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\System</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Directives</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Flash Security</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\EEPROM</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\Balldispenser.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\CoinDetection.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\cyapicallbacks.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\MotorControl.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\RPi_IF.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\UART_debug.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\Balldispenser.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\CoinDetection.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\main.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\MotorControl.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\RPi_IF.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\UART_debug.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\isr_detection</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Workspace12</v>
+<v>Workspace12\Bolddispenser_CoinMaster</v>
+<v>Workspace12\Bolddispenser_CoinMaster\TopDesign</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Pins</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Analog</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Clocks</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Interrupts</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\DMA</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\System</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Directives</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\Flash Security</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.cydwr\EEPROM</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\Balldispenser.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\CoinDetection.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\cyapicallbacks.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\MotorControl.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\RPi_IF.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Header Files\UART_debug.h</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\Balldispenser.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\CoinDetection.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\main.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\MotorControl.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\RPi_IF.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Source Files\UART_debug.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\ADC_DelSig_1</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\ADC_DelSig_1_AMux</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\ADC_DelSig_1_Ext_CP_Clk</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\ADC_DelSig_1_IRQ</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\ADC_DelSig_1_theACLK</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\Clock_1</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\Clock_2</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\cy_boot</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\I2C</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\I2C_Timer</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\Interrupt</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\IR_puls</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\isr</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\isr_detection</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\isr_detection\isr_detection.c</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Generated_Source\PSoC5\isr_detection\isr_detection.h</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Workspace12</v>
+<v>Workspace12\Bolddispenser_CoinMaster</v>
+<v>Workspace12\Bolddispenser_CoinMaster\TopDesign</v>
+<v>Workspace12\Bolddispenser_CoinMaster\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Workspace12</v>
+<v>Workspace12\Bolddispenser_CoinMaster</v>
+<v>Workspace12\Bolddispenser_CoinMaster\TopDesign</v>
+<v>Workspace12\Bolddispenser_CoinMaster\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Workspace12</v>
+<v>Workspace12\Bolddispenser_CoinMaster</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_AMux.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_Ext_CP_Clk.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_INT.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_IRQ.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_theACLK.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Balldispenser.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CoinDetection.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_BOOT.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_INT.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_MASTER.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_SLAVE.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Timer.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Timer_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Interrupt.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\IR_puls.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\isr.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_detection.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_timer.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_1_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_2.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_2_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Timer.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Timer_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\MotorControl.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\PhotoDiode.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_empty.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_2.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_3.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_4.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_5.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_6.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_7.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_8.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_full.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\RPi_IF.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\RST_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Sample_Hold_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Sample_Hold_1_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\SCL_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\SDA_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\timer_clock.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\timer_clock_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_BOOT.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_debug.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_INT.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_IntClock.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Bolddispenser_CoinMaster.elf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Bolddispenser_CoinMaster.hex</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Bolddispenser_CoinMaster.map</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.gpdsc</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster.rpt</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Bolddispenser_CoinMaster_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Workspace12</v>
+<v>Workspace12\Bolddispenser_CoinMaster</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_AMux.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_Ext_CP_Clk.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_INT.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_IRQ.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_theACLK.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Balldispenser.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CoinDetection.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_BOOT.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_INT.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_MASTER.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_SLAVE.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Timer.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Timer_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Interrupt.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\IR_puls.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\isr.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_detection.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_timer.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_1.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_1_PM.lst</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_2.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Workspace12</v>
+<v>Workspace12\Bolddispenser_CoinMaster</v>
+<v>Workspace12\Bolddispenser_CoinMaster\PSoC 5LP Architecture TRM</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CY8C58LP Family Datasheet</v>
+<v>Workspace12\Bolddispenser_CoinMaster\System Reference Guides</v>
+<v>Workspace12\Bolddispenser_CoinMaster\System Reference Guides\cy_boot_v5_80</v>
+<v>Workspace12\Bolddispenser_CoinMaster\ADC_DelSig_v3_30.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_clock_v2_20</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_isr_v1_70</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_pins_v2_20</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CyControlReg_v1_80</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CyControlReg_v1_80\CyControlReg_v1_80.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Gnd_v1_0</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Gnd_v1_0\Gnd_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\I2C_v3_50.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\LED_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\NPN_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\PhotoDiode_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Power_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\PWM_v3_30.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Resistor_v1_0</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Sample_Hold_v1_40.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Timer_v2_80</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Timer_v2_80\Timer_v2_80.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\UART_v2_50.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\ZeroTerminal</v>
+<v>Workspace12\Bolddispenser_CoinMaster\ZeroTerminal\ZeroTerminal.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Workspace12</v>
+<v>Workspace12\Bolddispenser_CoinMaster</v>
+<v>Workspace12\Bolddispenser_CoinMaster\PSoC 5LP Architecture TRM</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CY8C58LP Family Datasheet</v>
+<v>Workspace12\Bolddispenser_CoinMaster\System Reference Guides</v>
+<v>Workspace12\Bolddispenser_CoinMaster\System Reference Guides\cy_boot_v5_80</v>
+<v>Workspace12\Bolddispenser_CoinMaster\ADC_DelSig_v3_30.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_clock_v2_20</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_isr_v1_70</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_pins_v2_20</v>
+<v>Workspace12\Bolddispenser_CoinMaster\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CyControlReg_v1_80</v>
+<v>Workspace12\Bolddispenser_CoinMaster\CyControlReg_v1_80\CyControlReg_v1_80.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Gnd_v1_0</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Gnd_v1_0\Gnd_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\I2C_v3_50.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\LED_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\NPN_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\PhotoDiode_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Power_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\PWM_v3_30.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Resistor_v1_0</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Sample_Hold_v1_40.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Timer_v2_80</v>
+<v>Workspace12\Bolddispenser_CoinMaster\Timer_v2_80\Timer_v2_80.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\UART_v2_50.pdf</v>
+<v>Workspace12\Bolddispenser_CoinMaster\ZeroTerminal</v>
+<v>Workspace12\Bolddispenser_CoinMaster\ZeroTerminal\ZeroTerminal.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\Bolddispenser_CoinMaster.cydsn\main.c" />
+<name v=".\Bolddispenser_CoinMaster.cydsn\MotorControl.c" />
+<name v=".\Bolddispenser_CoinMaster.cydsn\Balldispenser.c" />
+<name v=".\Bolddispenser_CoinMaster.cydsn\CoinDetection.c" />
+<name v=".\Bolddispenser_CoinMaster.cydsn\CoinDetection.h" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1029, 681" SelectedTabbedMdiWindow="c727ddc8-285c-47ee-8e73-4ee2ee8aaa1f"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="db382d34-e351-4766-83bc-c80587a1fda1" /><DocumentWindow Key="\\vmware-host\Shared Folders\Documents\BallDispApp\Workspace12\Bolddispenser_CoinMaster.cydsn\main.c" Guid="b17892c1-b9f7-483b-a1da-a8e1b88a8e83" /><DocumentWindow Key="\\vmware-host\Shared Folders\Documents\BallDispApp\Workspace12\Bolddispenser_CoinMaster.cydsn\MotorControl.c" Guid="f94d33fb-91cb-44c3-8c58-d000cc0d3029" /><DocumentWindow Key="\\vmware-host\Shared Folders\Documents\BallDispApp\Workspace12\Bolddispenser_CoinMaster.cydsn\Balldispenser.c" Guid="59d8690e-cf57-45d2-88c9-b9a9ec2e485b" /><DocumentWindow Key="\\vmware-host\Shared Folders\Documents\BallDispApp\Workspace12\Bolddispenser_CoinMaster.cydsn\CoinDetection.c" Guid="c727ddc8-285c-47ee-8e73-4ee2ee8aaa1f" /><DocumentWindow Key="\\vmware-host\Shared Folders\Documents\BallDispApp\Workspace12\Bolddispenser_CoinMaster.cydsn\CoinDetection.h" Guid="b4dada43-3f6c-4a92-8506-50220e0f08b0" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

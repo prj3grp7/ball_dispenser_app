@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="CoinMaster2000-000\CoinMaster2000\Source Files\main.c">
+<ExpandedNodeIds>
+<v>CoinMaster2000-000</v>
+<v>CoinMaster2000-000\CoinMaster2000</v>
+<v>CoinMaster2000-000\CoinMaster2000\TopDesign</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Pins</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Analog</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Clocks</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Interrupts</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\DMA</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\System</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Directives</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Flash Security</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\EEPROM</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\BallDispenser.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\CoinDetection.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\cyapicallbacks.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\MotorControl.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\MotorControl2.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\RPI_IF.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\UARTffs.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\BallDispenser.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\CoinDetection.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\main.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\MotorControl.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\MotorControl2.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\RPI_IF.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\UARTffs.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\UART.h</v>
+<v>CoinMaster2000-000\Design01</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CoinMaster2000-000</v>
+<v>CoinMaster2000-000\CoinMaster2000</v>
+<v>CoinMaster2000-000\CoinMaster2000\TopDesign</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Pins</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Analog</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Clocks</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Interrupts</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\DMA</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\System</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Directives</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\Flash Security</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.cydwr\EEPROM</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\BallDispenser.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\CoinDetection.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\cyapicallbacks.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\MotorControl.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\MotorControl2.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\RPI_IF.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Header Files\UARTffs.h</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\BallDispenser.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\CoinDetection.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\main.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\MotorControl.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\MotorControl2.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\RPI_IF.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Source Files\UARTffs.c</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\ADC_DelSig_1</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\ADC_DelSig_1_AMux</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\ADC_DelSig_1_Ext_CP_Clk</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\ADC_DelSig_1_IRQ</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\ADC_DelSig_1_theACLK</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\Clock_1</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\Clock_2</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\cy_boot</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\I2C</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\I2C_Timer</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\Interrupt</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\IR_puls</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\isr</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\isr_detection</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\isr_timer</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\isr_timer_2</v>
+<v>CoinMaster2000-000\CoinMaster2000\Generated_Source\PSoC5\isr_uart_rx</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>CoinMaster2000-000</v>
+<v>CoinMaster2000-000\CoinMaster2000</v>
+<v>CoinMaster2000-000\CoinMaster2000\TopDesign</v>
+<v>CoinMaster2000-000\CoinMaster2000\TopDesign\TopDesign.cysch</v>
+<v>CoinMaster2000-000\Design01</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CoinMaster2000-000</v>
+<v>CoinMaster2000-000\CoinMaster2000</v>
+<v>CoinMaster2000-000\CoinMaster2000\TopDesign</v>
+<v>CoinMaster2000-000\CoinMaster2000\TopDesign\TopDesign.cysch</v>
+<v>CoinMaster2000-000\Design01</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>CoinMaster2000-000</v>
+<v>CoinMaster2000-000\CoinMaster2000</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_AMux.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_Ext_CP_Clk.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_INT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_IRQ.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_theACLK.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\BallDispenser.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CoinDetection.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_BOOT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_INT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_MASTER.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_SLAVE.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Timer.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Timer_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Interrupt.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\IR_puls.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\isr.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_detection.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_timer.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_timer_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_2_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Timer.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Timer_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Timer_2_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Timer_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\MotorControl.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\MotorControl2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\PhotoDiode.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_empty.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_3.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_4.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_5.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_6.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_7.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_enable_8.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\pin_full.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\RPI_IF.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\RST_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Sample_Hold_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Sample_Hold_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\SCL_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\SDA_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\timer_clock.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\timer_clock_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\timer_clock_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_BOOT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_INT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_IntClock.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UARTffs.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\CoinMaster2000.elf</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\CoinMaster2000.hex</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\CoinMaster2000.map</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_DelSig_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_DelSig_1_AMux.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_DelSig_1_Ext_CP_Clk.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_DelSig_1_INT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_DelSig_1_IRQ.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_DelSig_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\ADC_DelSig_1_theACLK.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\BallDispenser.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Clock_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Clock_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Cm3Start.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\CoinDetection.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\cy_em_eeprom.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\CyBootAsmGnu.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\CyDmac.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\cyfitter_cfg.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\CyFlash.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\CyLib.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\cymetadata.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\cyPm.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\CySpc.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\cyutils.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\I2C.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\I2C_BOOT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\I2C_INT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\I2C_MASTER.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\I2C_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\I2C_SLAVE.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\I2C_Timer.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\I2C_Timer_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Interrupt.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\IR_puls.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\isr.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\isr_detection.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\isr_timer.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\isr_timer_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\isr_uart_rx.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\main.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Motor_Reg_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Motor_Reg_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Motor_Reg_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Motor_Reg_2_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Motor_Timer.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Motor_Timer_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Motor_Timer_2_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Motor_Timer_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\MotorControl.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\MotorControl2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\PhotoDiode.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Pin_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\pin_empty.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\pin_enable_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\pin_enable_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\pin_enable_3.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\pin_enable_4.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\pin_enable_5.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\pin_enable_6.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\pin_enable_7.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\pin_enable_8.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\pin_full.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\PWM_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\PWM_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\RPI_IF.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\RST_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Sample_Hold_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Sample_Hold_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\SCL_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\SDA_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\timer_clock.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\timer_clock_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\timer_clock_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UART.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UART_BOOT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UART_INT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UART_IntClock.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UART_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UARTffs.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\CoinMaster2000.elf</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\CoinMaster2000.hex</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\CoinMaster2000.map</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.gpdsc</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000.rpt</v>
+<v>CoinMaster2000-000\CoinMaster2000\CoinMaster2000_timing.html</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Timer.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Timer_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_BOOT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_INT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_IntClock.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Motor_Reg.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Motor_Reg_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Timer.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\Timer_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UART_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UART_1_BOOT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UART_1_INT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UART_1_IntClock.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Release\Listing Files\UART_1_PM.lst</v>
+<v>CoinMaster2000-000\Design01</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CoinMaster2000-000</v>
+<v>CoinMaster2000-000\CoinMaster2000</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_AMux.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_Ext_CP_Clk.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_INT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_IRQ.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_theACLK.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\BallDispenser.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CoinDetection.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_BOOT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_INT.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_MASTER.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_SLAVE.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Timer.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\I2C_Timer_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Interrupt.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\IR_puls.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\isr.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_detection.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_timer.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_timer_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_1.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_1_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_2.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Reg_2_PM.lst</v>
+<v>CoinMaster2000-000\CoinMaster2000\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_Timer.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>CoinMaster2000-000</v>
+<v>CoinMaster2000-000\CoinMaster2000</v>
+<v>CoinMaster2000-000\CoinMaster2000\PSoC 5LP Architecture TRM</v>
+<v>CoinMaster2000-000\CoinMaster2000\CY8C58LP Family Datasheet</v>
+<v>CoinMaster2000-000\CoinMaster2000\System Reference Guides</v>
+<v>CoinMaster2000-000\CoinMaster2000\System Reference Guides\cy_boot_v5_80</v>
+<v>CoinMaster2000-000\CoinMaster2000\ADC_DelSig_v3_30.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_clock_v2_20</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_isr_v1_70</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_pins_v2_20</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\CyControlReg_v1_80</v>
+<v>CoinMaster2000-000\CoinMaster2000\CyControlReg_v1_80\CyControlReg_v1_80.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Gnd_v1_0</v>
+<v>CoinMaster2000-000\CoinMaster2000\Gnd_v1_0\Gnd_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\I2C_v3_50.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\LED_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\NPN_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\PhotoDiode_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Power_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\PWM_v3_30.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Resistor_v1_0</v>
+<v>CoinMaster2000-000\CoinMaster2000\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Sample_Hold_v1_40.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Timer_v2_80</v>
+<v>CoinMaster2000-000\CoinMaster2000\Timer_v2_80\Timer_v2_80.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\UART_v2_50.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\ZeroTerminal</v>
+<v>CoinMaster2000-000\CoinMaster2000\ZeroTerminal\ZeroTerminal.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\System Reference Guides\cy_boot_v5_70</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_clock_v2_20.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\CyControlReg_v1_80.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Timer_v2_80.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\ZeroTerminal.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CoinMaster2000-000</v>
+<v>CoinMaster2000-000\CoinMaster2000</v>
+<v>CoinMaster2000-000\CoinMaster2000\PSoC 5LP Architecture TRM</v>
+<v>CoinMaster2000-000\CoinMaster2000\CY8C58LP Family Datasheet</v>
+<v>CoinMaster2000-000\CoinMaster2000\System Reference Guides</v>
+<v>CoinMaster2000-000\CoinMaster2000\System Reference Guides\cy_boot_v5_80</v>
+<v>CoinMaster2000-000\CoinMaster2000\ADC_DelSig_v3_30.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_clock_v2_20</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_isr_v1_70</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_pins_v2_20</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\CyControlReg_v1_80</v>
+<v>CoinMaster2000-000\CoinMaster2000\CyControlReg_v1_80\CyControlReg_v1_80.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Gnd_v1_0</v>
+<v>CoinMaster2000-000\CoinMaster2000\Gnd_v1_0\Gnd_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\I2C_v3_50.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\LED_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\NPN_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\PhotoDiode_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Power_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\PWM_v3_30.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Resistor_v1_0</v>
+<v>CoinMaster2000-000\CoinMaster2000\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Sample_Hold_v1_40.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Timer_v2_80</v>
+<v>CoinMaster2000-000\CoinMaster2000\Timer_v2_80\Timer_v2_80.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\UART_v2_50.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\ZeroTerminal</v>
+<v>CoinMaster2000-000\CoinMaster2000\ZeroTerminal\ZeroTerminal.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\System Reference Guides\cy_boot_v5_70</v>
+<v>CoinMaster2000-000\CoinMaster2000\cy_clock_v2_20.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\CyControlReg_v1_80.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\Timer_v2_80.pdf</v>
+<v>CoinMaster2000-000\CoinMaster2000\ZeroTerminal.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+<dataGuid v="6c335137-fa19-46ce-bc2d-2fbeb6d5f2a2">
+<CyGuid_70084457-cd6a-4593-9ed0-7f6eeb432dc2 type_name="CyDesigner.Common.ProjMgmt.GUI.CyDependenciesCustomData" version="1">
+<dictName v=".\CoinMaster2000.cyprj">
+<listName />
+</dictName>
+</CyGuid_70084457-cd6a-4593-9ed0-7f6eeb432dc2>
+</dataGuid>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded>
+<project v="..\..\Player Side App\rpi_Boundary\PlayerSide_slave\Design01.cydsn\Design01.cyprj" />
+</Unloaded>
+<OpenDocs>
+<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\BallDispenser.h" />
+<name v=".\CoinDetection.h" />
+<name v=".\cyapicallbacks.h" />
+<name v=".\MotorControl.h" />
+<name v=".\MotorControl2.h" />
+<name v=".\RPI_IF.h" />
+<name v=".\UARTffs.h" />
+<name v=".\BallDispenser.c" />
+<name v=".\CoinDetection.c" />
+<name v=".\RPI_IF.c" />
+<name v=".\MotorControl.c" />
+<name v=".\UARTffs.c" />
+<name v=".\CoinMaster2000.cydwr" />
+<name v=".\main.c" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1450, 704" SelectedTabbedMdiWindow="9852b5aa-bc36-4a03-a22f-8353a2102bdc"><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\TopDesign\TopDesign.cysch" Guid="ac57ba26-604a-4f7b-9d2d-7d5dcc056401" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\BallDispenser.h" Guid="bc35c122-1f81-47a2-ac35-5bb63f05e7e5" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\CoinDetection.h" Guid="9513c73c-159d-4f22-a0da-239ed89de6f6" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\cyapicallbacks.h" Guid="f49de820-890d-4fbf-b3e3-65aecdcc4b57" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\MotorControl.h" Guid="2852508b-6e14-45c7-8bb6-f751d111b57e" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\MotorControl2.h" Guid="51c160df-9e78-4dd1-ab2d-ddb361634dda" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\RPI_IF.h" Guid="8284c63b-a9a4-4058-9821-754a47177936" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\UARTffs.h" Guid="df9aeaa9-43a2-40e0-af7b-bdc3644a1084" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\BallDispenser.c" Guid="8a95d7c4-7ace-4ddb-8299-208323ee4775" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\CoinDetection.c" Guid="9e133773-4ef7-48a7-98ca-3777ad02d054" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\RPI_IF.c" Guid="4679ada7-5f5f-4c3e-8ed3-abf1da71fa81" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\MotorControl.c" Guid="fe2fda01-9f32-45c1-bfcd-ca2183d39760" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\UARTffs.c" Guid="efd783c4-899f-4f7b-afcf-a894f6ed0ca9" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="5b5085b7-73b6-4409-922e-9bd5fc69b6db" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\CoinMaster2000.cydwr" Guid="3a0971e7-eabf-4976-8753-d349747544c0" /><DocumentWindow Key="C:\Users\Aaron B. Sanchez\Documents\GitHub\ball_dispenser_app\CoinMaster2000.cydsn\main.c" Guid="9852b5aa-bc36-4a03-a22f-8353a2102bdc" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="Debug" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

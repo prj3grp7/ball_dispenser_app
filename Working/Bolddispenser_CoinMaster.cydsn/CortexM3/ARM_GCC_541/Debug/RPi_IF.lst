@@ -1,0 +1,1699 @@
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"RPi_IF.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.resetReadBuffer,"ax",%progbits
+  20              		.align	2
+  21              		.global	resetReadBuffer
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	resetReadBuffer, %function
+  25              	resetReadBuffer:
+  26              	.LFB65:
+  27              		.file 1 "RPi_IF.c"
+   1:RPi_IF.c      **** #include "RPi_IF.h"
+   2:RPi_IF.c      **** 
+   3:RPi_IF.c      **** #define DISPENSE_OFF 0x15
+   4:RPi_IF.c      **** #define DISPENSE_ON 0x14
+   5:RPi_IF.c      **** #define COIN_DETECTED 0x1E
+   6:RPi_IF.c      **** #define DISPENSER_EMPTY 0x1F
+   7:RPi_IF.c      **** #define DISPENSER_NOT_EMPTY 0x20
+   8:RPi_IF.c      **** 
+   9:RPi_IF.c      **** int n;
+  10:RPi_IF.c      **** volatile int timer_run_out=0;
+  11:RPi_IF.c      **** 
+  12:RPi_IF.c      **** 
+  13:RPi_IF.c      **** uint8_t readBuffer[256];
+  14:RPi_IF.c      **** uint8_t writeBuffer[256];
+  15:RPi_IF.c      **** 
+  16:RPi_IF.c      **** 
+  17:RPi_IF.c      **** /*******************************************************************************
+  18:RPi_IF.c      **** * Function Name: RPI_IF_init
+  19:RPi_IF.c      **** ********************************************************************************
+  20:RPi_IF.c      **** *
+  21:RPi_IF.c      **** * Summary:    This function initialises the I2C communication between the PSoC
+  22:RPi_IF.c      ****               and the GameController
+  23:RPi_IF.c      **** *
+  24:RPi_IF.c      **** * Parameters:
+  25:RPi_IF.c      **** *  None.
+  26:RPi_IF.c      **** *
+  27:RPi_IF.c      **** * Return:
+  28:RPi_IF.c      **** *  None.
+  29:RPi_IF.c      **** *
+  30:RPi_IF.c      **** *******************************************************************************/
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 2
+
+
+  31:RPi_IF.c      **** void RPI_IF_init()
+  32:RPi_IF.c      **** {
+  33:RPi_IF.c      ****     I2C_Start();
+  34:RPi_IF.c      ****     I2C_EnableInt();
+  35:RPi_IF.c      ****     
+  36:RPi_IF.c      ****     I2C_SlaveInitReadBuf((uint8_t*)readBuffer,255);
+  37:RPi_IF.c      ****     I2C_SlaveInitWriteBuf((uint8_t*)writeBuffer,255);
+  38:RPi_IF.c      ****     
+  39:RPi_IF.c      ****     resetReadBuffer();
+  40:RPi_IF.c      **** 
+  41:RPi_IF.c      **** }
+  42:RPi_IF.c      **** 
+  43:RPi_IF.c      **** 
+  44:RPi_IF.c      **** 
+  45:RPi_IF.c      **** /*******************************************************************************
+  46:RPi_IF.c      **** * Function Name: resetReadBuffer
+  47:RPi_IF.c      **** ********************************************************************************
+  48:RPi_IF.c      **** *
+  49:RPi_IF.c      **** * Summary:    This function clears the I2C readbuffer during initialisation
+  50:RPi_IF.c      **** *
+  51:RPi_IF.c      **** * Parameters:
+  52:RPi_IF.c      **** *  None.
+  53:RPi_IF.c      **** *
+  54:RPi_IF.c      **** * Return:
+  55:RPi_IF.c      **** *  None.
+  56:RPi_IF.c      **** *
+  57:RPi_IF.c      **** *******************************************************************************/
+  58:RPi_IF.c      **** void resetReadBuffer()
+  59:RPi_IF.c      **** {
+  28              		.loc 1 59 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34              	.LBB2:
+  60:RPi_IF.c      ****     for(int i = 0; i < 255; i++)
+  35              		.loc 1 60 0
+  36 0000 0023     		movs	r3, #0
+  37 0002 03E0     		b	.L2
+  38              	.LVL1:
+  39              	.L3:
+  61:RPi_IF.c      ****     {
+  62:RPi_IF.c      ****         readBuffer[i] = 0xFF;
+  40              		.loc 1 62 0 discriminator 3
+  41 0004 FF21     		movs	r1, #255
+  42 0006 034A     		ldr	r2, .L4
+  43 0008 D154     		strb	r1, [r2, r3]
+  60:RPi_IF.c      ****     for(int i = 0; i < 255; i++)
+  44              		.loc 1 60 0 discriminator 3
+  45 000a 0133     		adds	r3, r3, #1
+  46              	.LVL2:
+  47              	.L2:
+  60:RPi_IF.c      ****     for(int i = 0; i < 255; i++)
+  48              		.loc 1 60 0 is_stmt 0 discriminator 1
+  49 000c FE2B     		cmp	r3, #254
+  50 000e F9DD     		ble	.L3
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 3
+
+
+  51              	.LBE2:
+  63:RPi_IF.c      ****     }
+  64:RPi_IF.c      ****  
+  65:RPi_IF.c      **** }
+  52              		.loc 1 65 0 is_stmt 1
+  53 0010 7047     		bx	lr
+  54              	.L5:
+  55 0012 00BF     		.align	2
+  56              	.L4:
+  57 0014 00000000 		.word	readBuffer
+  58              		.cfi_endproc
+  59              	.LFE65:
+  60              		.size	resetReadBuffer, .-resetReadBuffer
+  61              		.section	.text.RPI_IF_init,"ax",%progbits
+  62              		.align	2
+  63              		.global	RPI_IF_init
+  64              		.thumb
+  65              		.thumb_func
+  66              		.type	RPI_IF_init, %function
+  67              	RPI_IF_init:
+  68              	.LFB64:
+  32:RPi_IF.c      ****     I2C_Start();
+  69              		.loc 1 32 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73 0000 08B5     		push	{r3, lr}
+  74              		.cfi_def_cfa_offset 8
+  75              		.cfi_offset 3, -8
+  76              		.cfi_offset 14, -4
+  33:RPi_IF.c      ****     I2C_EnableInt();
+  77              		.loc 1 33 0
+  78 0002 FFF7FEFF 		bl	I2C_Start
+  79              	.LVL3:
+  34:RPi_IF.c      ****     
+  80              		.loc 1 34 0
+  81 0006 0122     		movs	r2, #1
+  82 0008 064B     		ldr	r3, .L8
+  83 000a 1A60     		str	r2, [r3]
+  36:RPi_IF.c      ****     I2C_SlaveInitWriteBuf((uint8_t*)writeBuffer,255);
+  84              		.loc 1 36 0
+  85 000c FF21     		movs	r1, #255
+  86 000e 0648     		ldr	r0, .L8+4
+  87 0010 FFF7FEFF 		bl	I2C_SlaveInitReadBuf
+  88              	.LVL4:
+  37:RPi_IF.c      ****     
+  89              		.loc 1 37 0
+  90 0014 FF21     		movs	r1, #255
+  91 0016 0548     		ldr	r0, .L8+8
+  92 0018 FFF7FEFF 		bl	I2C_SlaveInitWriteBuf
+  93              	.LVL5:
+  39:RPi_IF.c      **** 
+  94              		.loc 1 39 0
+  95 001c FFF7FEFF 		bl	resetReadBuffer
+  96              	.LVL6:
+  97 0020 08BD     		pop	{r3, pc}
+  98              	.L9:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 4
+
+
+  99 0022 00BF     		.align	2
+ 100              	.L8:
+ 101 0024 00E100E0 		.word	-536813312
+ 102 0028 00000000 		.word	readBuffer
+ 103 002c 00000000 		.word	writeBuffer
+ 104              		.cfi_endproc
+ 105              	.LFE64:
+ 106              		.size	RPI_IF_init, .-RPI_IF_init
+ 107              		.section	.text.SendToRPi,"ax",%progbits
+ 108              		.align	2
+ 109              		.global	SendToRPi
+ 110              		.thumb
+ 111              		.thumb_func
+ 112              		.type	SendToRPi, %function
+ 113              	SendToRPi:
+ 114              	.LFB68:
+  66:RPi_IF.c      **** 
+  67:RPi_IF.c      **** 
+  68:RPi_IF.c      **** 
+  69:RPi_IF.c      **** /*******************************************************************************
+  70:RPi_IF.c      **** * Function Name: resetReadBuffer
+  71:RPi_IF.c      **** ********************************************************************************
+  72:RPi_IF.c      **** *
+  73:RPi_IF.c      **** * Summary:    This function clears the I2C readbuffer during initialisation
+  74:RPi_IF.c      **** *
+  75:RPi_IF.c      **** * Parameters:
+  76:RPi_IF.c      **** *  None.
+  77:RPi_IF.c      **** *
+  78:RPi_IF.c      **** * Return:
+  79:RPi_IF.c      **** *  None.
+  80:RPi_IF.c      **** *
+  81:RPi_IF.c      **** *******************************************************************************/
+  82:RPi_IF.c      **** void coinInserted()
+  83:RPi_IF.c      **** {
+  84:RPi_IF.c      ****     SendToRPi(COIN_DETECTED);
+  85:RPi_IF.c      ****     dispenserStatus();
+  86:RPi_IF.c      **** }
+  87:RPi_IF.c      **** 
+  88:RPi_IF.c      **** void dispenserStatus()
+  89:RPi_IF.c      **** {
+  90:RPi_IF.c      ****     if(countBalls() == 4)
+  91:RPi_IF.c      ****     {
+  92:RPi_IF.c      ****         SendToRPi(DISPENSER_EMPTY);
+  93:RPi_IF.c      ****     }
+  94:RPi_IF.c      ****     else if(countBalls() <= 2)
+  95:RPi_IF.c      ****     {
+  96:RPi_IF.c      ****         SendToRPi(DISPENSER_NOT_EMPTY);
+  97:RPi_IF.c      ****     }
+  98:RPi_IF.c      **** }
+  99:RPi_IF.c      **** 
+ 100:RPi_IF.c      **** 
+ 101:RPi_IF.c      **** void SendToRPi(int message)
+ 102:RPi_IF.c      **** {
+ 115              		.loc 1 102 0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 0
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 5
+
+
+ 119              	.LVL7:
+ 120 0000 10B5     		push	{r4, lr}
+ 121              		.cfi_def_cfa_offset 8
+ 122              		.cfi_offset 4, -8
+ 123              		.cfi_offset 14, -4
+ 124 0002 0446     		mov	r4, r0
+ 103:RPi_IF.c      ****     resetReadBuffer();
+ 125              		.loc 1 103 0
+ 126 0004 FFF7FEFF 		bl	resetReadBuffer
+ 127              	.LVL8:
+ 104:RPi_IF.c      ****     readBuffer[0] = message;
+ 128              		.loc 1 104 0
+ 129 0008 064B     		ldr	r3, .L12
+ 130 000a 1C70     		strb	r4, [r3]
+ 105:RPi_IF.c      ****     I2C_SlaveClearReadBuf();
+ 131              		.loc 1 105 0
+ 132 000c FFF7FEFF 		bl	I2C_SlaveClearReadBuf
+ 133              	.LVL9:
+ 106:RPi_IF.c      ****     Interrupt_Write(0);
+ 134              		.loc 1 106 0
+ 135 0010 0020     		movs	r0, #0
+ 136 0012 FFF7FEFF 		bl	Interrupt_Write
+ 137              	.LVL10:
+ 107:RPi_IF.c      ****     CyDelay(1);
+ 138              		.loc 1 107 0
+ 139 0016 0120     		movs	r0, #1
+ 140 0018 FFF7FEFF 		bl	CyDelay
+ 141              	.LVL11:
+ 108:RPi_IF.c      ****     Interrupt_Write(1);
+ 142              		.loc 1 108 0
+ 143 001c 0120     		movs	r0, #1
+ 144 001e FFF7FEFF 		bl	Interrupt_Write
+ 145              	.LVL12:
+ 146 0022 10BD     		pop	{r4, pc}
+ 147              	.LVL13:
+ 148              	.L13:
+ 149              		.align	2
+ 150              	.L12:
+ 151 0024 00000000 		.word	readBuffer
+ 152              		.cfi_endproc
+ 153              	.LFE68:
+ 154              		.size	SendToRPi, .-SendToRPi
+ 155              		.section	.text.dispenserStatus,"ax",%progbits
+ 156              		.align	2
+ 157              		.global	dispenserStatus
+ 158              		.thumb
+ 159              		.thumb_func
+ 160              		.type	dispenserStatus, %function
+ 161              	dispenserStatus:
+ 162              	.LFB67:
+  89:RPi_IF.c      ****     if(countBalls() == 4)
+ 163              		.loc 1 89 0
+ 164              		.cfi_startproc
+ 165              		@ args = 0, pretend = 0, frame = 0
+ 166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167 0000 08B5     		push	{r3, lr}
+ 168              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 6
+
+
+ 169              		.cfi_offset 3, -8
+ 170              		.cfi_offset 14, -4
+  90:RPi_IF.c      ****     {
+ 171              		.loc 1 90 0
+ 172 0002 FFF7FEFF 		bl	countBalls
+ 173              	.LVL14:
+ 174 0006 0428     		cmp	r0, #4
+ 175 0008 03D1     		bne	.L15
+  92:RPi_IF.c      ****     }
+ 176              		.loc 1 92 0
+ 177 000a 1F20     		movs	r0, #31
+ 178 000c FFF7FEFF 		bl	SendToRPi
+ 179              	.LVL15:
+ 180 0010 08BD     		pop	{r3, pc}
+ 181              	.L15:
+  94:RPi_IF.c      ****     {
+ 182              		.loc 1 94 0
+ 183 0012 FFF7FEFF 		bl	countBalls
+ 184              	.LVL16:
+ 185 0016 0228     		cmp	r0, #2
+ 186 0018 02DC     		bgt	.L14
+  96:RPi_IF.c      ****     }
+ 187              		.loc 1 96 0
+ 188 001a 2020     		movs	r0, #32
+ 189 001c FFF7FEFF 		bl	SendToRPi
+ 190              	.LVL17:
+ 191              	.L14:
+ 192 0020 08BD     		pop	{r3, pc}
+ 193              		.cfi_endproc
+ 194              	.LFE67:
+ 195              		.size	dispenserStatus, .-dispenserStatus
+ 196 0022 00BF     		.section	.text.coinInserted,"ax",%progbits
+ 197              		.align	2
+ 198              		.global	coinInserted
+ 199              		.thumb
+ 200              		.thumb_func
+ 201              		.type	coinInserted, %function
+ 202              	coinInserted:
+ 203              	.LFB66:
+  83:RPi_IF.c      ****     SendToRPi(COIN_DETECTED);
+ 204              		.loc 1 83 0
+ 205              		.cfi_startproc
+ 206              		@ args = 0, pretend = 0, frame = 0
+ 207              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208 0000 08B5     		push	{r3, lr}
+ 209              		.cfi_def_cfa_offset 8
+ 210              		.cfi_offset 3, -8
+ 211              		.cfi_offset 14, -4
+  84:RPi_IF.c      ****     dispenserStatus();
+ 212              		.loc 1 84 0
+ 213 0002 1E20     		movs	r0, #30
+ 214 0004 FFF7FEFF 		bl	SendToRPi
+ 215              	.LVL18:
+  85:RPi_IF.c      **** }
+ 216              		.loc 1 85 0
+ 217 0008 FFF7FEFF 		bl	dispenserStatus
+ 218              	.LVL19:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 7
+
+
+ 219 000c 08BD     		pop	{r3, pc}
+ 220              		.cfi_endproc
+ 221              	.LFE66:
+ 222              		.size	coinInserted, .-coinInserted
+ 223 000e 00BF     		.section	.text.RPi_IF_handleData,"ax",%progbits
+ 224              		.align	2
+ 225              		.global	RPi_IF_handleData
+ 226              		.thumb
+ 227              		.thumb_func
+ 228              		.type	RPi_IF_handleData, %function
+ 229              	RPi_IF_handleData:
+ 230              	.LFB69:
+ 109:RPi_IF.c      **** }
+ 110:RPi_IF.c      **** 
+ 111:RPi_IF.c      **** 
+ 112:RPi_IF.c      **** 
+ 113:RPi_IF.c      **** /*******************************************************************************
+ 114:RPi_IF.c      **** * Function Name: RPi_IF_handleData
+ 115:RPi_IF.c      **** ********************************************************************************
+ 116:RPi_IF.c      **** *
+ 117:RPi_IF.c      **** * Summary:    This function reads the write buffer and calls the correct 
+ 118:RPi_IF.c      ****               function depending on the contents of the buffer
+ 119:RPi_IF.c      **** *
+ 120:RPi_IF.c      **** * Parameters:
+ 121:RPi_IF.c      **** *  None.
+ 122:RPi_IF.c      **** *
+ 123:RPi_IF.c      **** * Return:
+ 124:RPi_IF.c      **** *  None.
+ 125:RPi_IF.c      **** *
+ 126:RPi_IF.c      **** *******************************************************************************/
+ 127:RPi_IF.c      **** void RPi_IF_handleData()
+ 128:RPi_IF.c      **** {
+ 231              		.loc 1 128 0
+ 232              		.cfi_startproc
+ 233              		@ args = 0, pretend = 0, frame = 0
+ 234              		@ frame_needed = 0, uses_anonymous_args = 0
+ 235 0000 38B5     		push	{r3, r4, r5, lr}
+ 236              		.cfi_def_cfa_offset 16
+ 237              		.cfi_offset 3, -16
+ 238              		.cfi_offset 4, -12
+ 239              		.cfi_offset 5, -8
+ 240              		.cfi_offset 14, -4
+ 129:RPi_IF.c      ****     if(I2C_SlaveClearWriteStatus() & I2C_SSTAT_WR_CMPLT)
+ 241              		.loc 1 129 0
+ 242 0002 FFF7FEFF 		bl	I2C_SlaveClearWriteStatus
+ 243              	.LVL20:
+ 244 0006 10F0100F 		tst	r0, #16
+ 245 000a 19D0     		beq	.L20
+ 246              	.LBB3:
+ 130:RPi_IF.c      ****     {
+ 131:RPi_IF.c      ****         
+ 132:RPi_IF.c      ****         int writeSize = I2C_SlaveGetWriteBufSize();
+ 247              		.loc 1 132 0
+ 248 000c FFF7FEFF 		bl	I2C_SlaveGetWriteBufSize
+ 249              	.LVL21:
+ 250 0010 0546     		mov	r5, r0
+ 251              	.LVL22:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 8
+
+
+ 252              	.LBB4:
+ 133:RPi_IF.c      ****         for(int i = 0; i < writeSize; i++)
+ 253              		.loc 1 133 0
+ 254 0012 0024     		movs	r4, #0
+ 255 0014 12E0     		b	.L22
+ 256              	.LVL23:
+ 257              	.L26:
+ 134:RPi_IF.c      ****         {
+ 135:RPi_IF.c      ****             switch (writeBuffer[i])
+ 258              		.loc 1 135 0
+ 259 0016 0B4B     		ldr	r3, .L28
+ 260 0018 1B5D     		ldrb	r3, [r3, r4]	@ zero_extendqisi2
+ 261 001a 142B     		cmp	r3, #20
+ 262 001c 02D0     		beq	.L24
+ 263 001e 152B     		cmp	r3, #21
+ 264 0020 06D0     		beq	.L25
+ 265 0022 0AE0     		b	.L23
+ 266              	.L24:
+ 136:RPi_IF.c      ****             {
+ 137:RPi_IF.c      ****                 case DISPENSE_ON:{
+ 138:RPi_IF.c      ****                     UART_PutString("Enable\r\n");
+ 267              		.loc 1 138 0
+ 268 0024 0848     		ldr	r0, .L28+4
+ 269 0026 FFF7FEFF 		bl	UART_PutString
+ 270              	.LVL24:
+ 139:RPi_IF.c      ****                     enableDispenser();
+ 271              		.loc 1 139 0
+ 272 002a FFF7FEFF 		bl	enableDispenser
+ 273              	.LVL25:
+ 140:RPi_IF.c      ****                     break;}
+ 274              		.loc 1 140 0
+ 275 002e 04E0     		b	.L23
+ 276              	.L25:
+ 141:RPi_IF.c      ****                 case DISPENSE_OFF:{
+ 142:RPi_IF.c      ****                     UART_PutString("Disable\r\n");
+ 277              		.loc 1 142 0
+ 278 0030 0648     		ldr	r0, .L28+8
+ 279 0032 FFF7FEFF 		bl	UART_PutString
+ 280              	.LVL26:
+ 143:RPi_IF.c      ****                     disableDispenser();
+ 281              		.loc 1 143 0
+ 282 0036 FFF7FEFF 		bl	disableDispenser
+ 283              	.LVL27:
+ 284              	.L23:
+ 133:RPi_IF.c      ****         {
+ 285              		.loc 1 133 0 discriminator 2
+ 286 003a 0134     		adds	r4, r4, #1
+ 287              	.LVL28:
+ 288              	.L22:
+ 133:RPi_IF.c      ****         {
+ 289              		.loc 1 133 0 is_stmt 0 discriminator 1
+ 290 003c AC42     		cmp	r4, r5
+ 291 003e EADB     		blt	.L26
+ 292              	.LVL29:
+ 293              	.L20:
+ 294 0040 38BD     		pop	{r3, r4, r5, pc}
+ 295              	.L29:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 9
+
+
+ 296 0042 00BF     		.align	2
+ 297              	.L28:
+ 298 0044 00000000 		.word	writeBuffer
+ 299 0048 00000000 		.word	.LC0
+ 300 004c 0C000000 		.word	.LC1
+ 301              	.LBE4:
+ 302              	.LBE3:
+ 303              		.cfi_endproc
+ 304              	.LFE69:
+ 305              		.size	RPi_IF_handleData, .-RPi_IF_handleData
+ 306              		.comm	writeBuffer,256,4
+ 307              		.comm	readBuffer,256,4
+ 308              		.global	timer_run_out
+ 309              		.comm	n,4,4
+ 310              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 311              		.align	2
+ 312              	.LC0:
+ 313 0000 456E6162 		.ascii	"Enable\015\012\000"
+ 313      6C650D0A 
+ 313      00
+ 314 0009 000000   		.space	3
+ 315              	.LC1:
+ 316 000c 44697361 		.ascii	"Disable\015\012\000"
+ 316      626C650D 
+ 316      0A00
+ 317              		.bss
+ 318              		.align	2
+ 319              		.type	timer_run_out, %object
+ 320              		.size	timer_run_out, 4
+ 321              	timer_run_out:
+ 322 0000 00000000 		.space	4
+ 323              		.text
+ 324              	.Letext0:
+ 325              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 326              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 327              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 328              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 329              		.file 6 "Generated_Source\\PSoC5/I2C.h"
+ 330              		.file 7 "Generated_Source\\PSoC5/Interrupt.h"
+ 331              		.file 8 "Generated_Source\\PSoC5/CyLib.h"
+ 332              		.file 9 "Balldispenser.h"
+ 333              		.file 10 "Generated_Source\\PSoC5/UART.h"
+ 334              		.file 11 "CoinDetection.h"
+ 335              		.section	.debug_info,"",%progbits
+ 336              	.Ldebug_info0:
+ 337 0000 E4030000 		.4byte	0x3e4
+ 338 0004 0400     		.2byte	0x4
+ 339 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 340 000a 04       		.byte	0x4
+ 341 000b 01       		.uleb128 0x1
+ 342 000c 02010000 		.4byte	.LASF43
+ 343 0010 0C       		.byte	0xc
+ 344 0011 EB000000 		.4byte	.LASF44
+ 345 0015 48000000 		.4byte	.LASF45
+ 346 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 347 001d 00000000 		.4byte	0
+ 348 0021 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 10
+
+
+ 349 0025 02       		.uleb128 0x2
+ 350 0026 01       		.byte	0x1
+ 351 0027 06       		.byte	0x6
+ 352 0028 D8020000 		.4byte	.LASF0
+ 353 002c 03       		.uleb128 0x3
+ 354 002d 0E000000 		.4byte	.LASF4
+ 355 0031 02       		.byte	0x2
+ 356 0032 1D       		.byte	0x1d
+ 357 0033 37000000 		.4byte	0x37
+ 358 0037 02       		.uleb128 0x2
+ 359 0038 01       		.byte	0x1
+ 360 0039 08       		.byte	0x8
+ 361 003a F4000000 		.4byte	.LASF1
+ 362 003e 02       		.uleb128 0x2
+ 363 003f 02       		.byte	0x2
+ 364 0040 05       		.byte	0x5
+ 365 0041 8F020000 		.4byte	.LASF2
+ 366 0045 02       		.uleb128 0x2
+ 367 0046 02       		.byte	0x2
+ 368 0047 07       		.byte	0x7
+ 369 0048 A2010000 		.4byte	.LASF3
+ 370 004c 03       		.uleb128 0x3
+ 371 004d 22000000 		.4byte	.LASF5
+ 372 0051 02       		.byte	0x2
+ 373 0052 3F       		.byte	0x3f
+ 374 0053 57000000 		.4byte	0x57
+ 375 0057 02       		.uleb128 0x2
+ 376 0058 04       		.byte	0x4
+ 377 0059 05       		.byte	0x5
+ 378 005a B8020000 		.4byte	.LASF6
+ 379 005e 02       		.uleb128 0x2
+ 380 005f 04       		.byte	0x4
+ 381 0060 07       		.byte	0x7
+ 382 0061 90010000 		.4byte	.LASF7
+ 383 0065 02       		.uleb128 0x2
+ 384 0066 08       		.byte	0x8
+ 385 0067 05       		.byte	0x5
+ 386 0068 DD000000 		.4byte	.LASF8
+ 387 006c 02       		.uleb128 0x2
+ 388 006d 08       		.byte	0x8
+ 389 006e 07       		.byte	0x7
+ 390 006f 1C020000 		.4byte	.LASF9
+ 391 0073 04       		.uleb128 0x4
+ 392 0074 04       		.byte	0x4
+ 393 0075 05       		.byte	0x5
+ 394 0076 696E7400 		.ascii	"int\000"
+ 395 007a 02       		.uleb128 0x2
+ 396 007b 04       		.byte	0x4
+ 397 007c 07       		.byte	0x7
+ 398 007d 0F020000 		.4byte	.LASF10
+ 399 0081 03       		.uleb128 0x3
+ 400 0082 33020000 		.4byte	.LASF11
+ 401 0086 03       		.byte	0x3
+ 402 0087 18       		.byte	0x18
+ 403 0088 2C000000 		.4byte	0x2c
+ 404 008c 03       		.uleb128 0x3
+ 405 008d 45020000 		.4byte	.LASF12
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 11
+
+
+ 406 0091 03       		.byte	0x3
+ 407 0092 2C       		.byte	0x2c
+ 408 0093 4C000000 		.4byte	0x4c
+ 409 0097 05       		.uleb128 0x5
+ 410 0098 99020000 		.4byte	.LASF13
+ 411 009c 04       		.byte	0x4
+ 412 009d E401     		.2byte	0x1e4
+ 413 009f 37000000 		.4byte	0x37
+ 414 00a3 05       		.uleb128 0x5
+ 415 00a4 08020000 		.4byte	.LASF14
+ 416 00a8 04       		.byte	0x4
+ 417 00a9 E601     		.2byte	0x1e6
+ 418 00ab 5E000000 		.4byte	0x5e
+ 419 00af 02       		.uleb128 0x2
+ 420 00b0 04       		.byte	0x4
+ 421 00b1 04       		.byte	0x4
+ 422 00b2 D7000000 		.4byte	.LASF15
+ 423 00b6 02       		.uleb128 0x2
+ 424 00b7 08       		.byte	0x8
+ 425 00b8 04       		.byte	0x4
+ 426 00b9 D2010000 		.4byte	.LASF16
+ 427 00bd 02       		.uleb128 0x2
+ 428 00be 01       		.byte	0x1
+ 429 00bf 08       		.byte	0x8
+ 430 00c0 74020000 		.4byte	.LASF17
+ 431 00c4 05       		.uleb128 0x5
+ 432 00c5 08000000 		.4byte	.LASF18
+ 433 00c9 04       		.byte	0x4
+ 434 00ca 9002     		.2byte	0x290
+ 435 00cc D0000000 		.4byte	0xd0
+ 436 00d0 06       		.uleb128 0x6
+ 437 00d1 A3000000 		.4byte	0xa3
+ 438 00d5 02       		.uleb128 0x2
+ 439 00d6 08       		.byte	0x8
+ 440 00d7 04       		.byte	0x4
+ 441 00d8 CC020000 		.4byte	.LASF19
+ 442 00dc 02       		.uleb128 0x2
+ 443 00dd 04       		.byte	0x4
+ 444 00de 07       		.byte	0x7
+ 445 00df 4D020000 		.4byte	.LASF20
+ 446 00e3 07       		.uleb128 0x7
+ 447 00e4 13030000 		.4byte	.LASF21
+ 448 00e8 01       		.byte	0x1
+ 449 00e9 3A       		.byte	0x3a
+ 450 00ea 00000000 		.4byte	.LFB65
+ 451 00ee 18000000 		.4byte	.LFE65-.LFB65
+ 452 00f2 01       		.uleb128 0x1
+ 453 00f3 9C       		.byte	0x9c
+ 454 00f4 10010000 		.4byte	0x110
+ 455 00f8 08       		.uleb128 0x8
+ 456 00f9 00000000 		.4byte	.LBB2
+ 457 00fd 10000000 		.4byte	.LBE2-.LBB2
+ 458 0101 09       		.uleb128 0x9
+ 459 0102 6900     		.ascii	"i\000"
+ 460 0104 01       		.byte	0x1
+ 461 0105 3C       		.byte	0x3c
+ 462 0106 73000000 		.4byte	0x73
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 12
+
+
+ 463 010a 00000000 		.4byte	.LLST0
+ 464 010e 00       		.byte	0
+ 465 010f 00       		.byte	0
+ 466 0110 07       		.uleb128 0x7
+ 467 0111 68020000 		.4byte	.LASF22
+ 468 0115 01       		.byte	0x1
+ 469 0116 1F       		.byte	0x1f
+ 470 0117 00000000 		.4byte	.LFB64
+ 471 011b 30000000 		.4byte	.LFE64-.LFB64
+ 472 011f 01       		.uleb128 0x1
+ 473 0120 9C       		.byte	0x9c
+ 474 0121 72010000 		.4byte	0x172
+ 475 0125 0A       		.uleb128 0xa
+ 476 0126 06000000 		.4byte	.LVL3
+ 477 012a 63030000 		.4byte	0x363
+ 478 012e 0B       		.uleb128 0xb
+ 479 012f 14000000 		.4byte	.LVL4
+ 480 0133 6E030000 		.4byte	0x36e
+ 481 0137 4B010000 		.4byte	0x14b
+ 482 013b 0C       		.uleb128 0xc
+ 483 013c 01       		.uleb128 0x1
+ 484 013d 50       		.byte	0x50
+ 485 013e 05       		.uleb128 0x5
+ 486 013f 03       		.byte	0x3
+ 487 0140 00000000 		.4byte	readBuffer
+ 488 0144 0C       		.uleb128 0xc
+ 489 0145 01       		.uleb128 0x1
+ 490 0146 51       		.byte	0x51
+ 491 0147 02       		.uleb128 0x2
+ 492 0148 09       		.byte	0x9
+ 493 0149 FF       		.byte	0xff
+ 494 014a 00       		.byte	0
+ 495 014b 0B       		.uleb128 0xb
+ 496 014c 1C000000 		.4byte	.LVL5
+ 497 0150 79030000 		.4byte	0x379
+ 498 0154 68010000 		.4byte	0x168
+ 499 0158 0C       		.uleb128 0xc
+ 500 0159 01       		.uleb128 0x1
+ 501 015a 50       		.byte	0x50
+ 502 015b 05       		.uleb128 0x5
+ 503 015c 03       		.byte	0x3
+ 504 015d 00000000 		.4byte	writeBuffer
+ 505 0161 0C       		.uleb128 0xc
+ 506 0162 01       		.uleb128 0x1
+ 507 0163 51       		.byte	0x51
+ 508 0164 02       		.uleb128 0x2
+ 509 0165 09       		.byte	0x9
+ 510 0166 FF       		.byte	0xff
+ 511 0167 00       		.byte	0
+ 512 0168 0A       		.uleb128 0xa
+ 513 0169 20000000 		.4byte	.LVL6
+ 514 016d E3000000 		.4byte	0xe3
+ 515 0171 00       		.byte	0
+ 516 0172 0D       		.uleb128 0xd
+ 517 0173 3B020000 		.4byte	.LASF46
+ 518 0177 01       		.byte	0x1
+ 519 0178 65       		.byte	0x65
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 13
+
+
+ 520 0179 00000000 		.4byte	.LFB68
+ 521 017d 28000000 		.4byte	.LFE68-.LFB68
+ 522 0181 01       		.uleb128 0x1
+ 523 0182 9C       		.byte	0x9c
+ 524 0183 DE010000 		.4byte	0x1de
+ 525 0187 0E       		.uleb128 0xe
+ 526 0188 00000000 		.4byte	.LASF47
+ 527 018c 01       		.byte	0x1
+ 528 018d 65       		.byte	0x65
+ 529 018e 73000000 		.4byte	0x73
+ 530 0192 1F000000 		.4byte	.LLST1
+ 531 0196 0A       		.uleb128 0xa
+ 532 0197 08000000 		.4byte	.LVL8
+ 533 019b E3000000 		.4byte	0xe3
+ 534 019f 0A       		.uleb128 0xa
+ 535 01a0 10000000 		.4byte	.LVL9
+ 536 01a4 84030000 		.4byte	0x384
+ 537 01a8 0B       		.uleb128 0xb
+ 538 01a9 16000000 		.4byte	.LVL10
+ 539 01ad 8F030000 		.4byte	0x38f
+ 540 01b1 BB010000 		.4byte	0x1bb
+ 541 01b5 0C       		.uleb128 0xc
+ 542 01b6 01       		.uleb128 0x1
+ 543 01b7 50       		.byte	0x50
+ 544 01b8 01       		.uleb128 0x1
+ 545 01b9 30       		.byte	0x30
+ 546 01ba 00       		.byte	0
+ 547 01bb 0B       		.uleb128 0xb
+ 548 01bc 1C000000 		.4byte	.LVL11
+ 549 01c0 9A030000 		.4byte	0x39a
+ 550 01c4 CE010000 		.4byte	0x1ce
+ 551 01c8 0C       		.uleb128 0xc
+ 552 01c9 01       		.uleb128 0x1
+ 553 01ca 50       		.byte	0x50
+ 554 01cb 01       		.uleb128 0x1
+ 555 01cc 31       		.byte	0x31
+ 556 01cd 00       		.byte	0
+ 557 01ce 0F       		.uleb128 0xf
+ 558 01cf 22000000 		.4byte	.LVL12
+ 559 01d3 8F030000 		.4byte	0x38f
+ 560 01d7 0C       		.uleb128 0xc
+ 561 01d8 01       		.uleb128 0x1
+ 562 01d9 50       		.byte	0x50
+ 563 01da 01       		.uleb128 0x1
+ 564 01db 31       		.byte	0x31
+ 565 01dc 00       		.byte	0
+ 566 01dd 00       		.byte	0
+ 567 01de 07       		.uleb128 0x7
+ 568 01df C2010000 		.4byte	.LASF23
+ 569 01e3 01       		.byte	0x1
+ 570 01e4 58       		.byte	0x58
+ 571 01e5 00000000 		.4byte	.LFB67
+ 572 01e9 22000000 		.4byte	.LFE67-.LFB67
+ 573 01ed 01       		.uleb128 0x1
+ 574 01ee 9C       		.byte	0x9c
+ 575 01ef 29020000 		.4byte	0x229
+ 576 01f3 0A       		.uleb128 0xa
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 14
+
+
+ 577 01f4 06000000 		.4byte	.LVL14
+ 578 01f8 A5030000 		.4byte	0x3a5
+ 579 01fc 0B       		.uleb128 0xb
+ 580 01fd 10000000 		.4byte	.LVL15
+ 581 0201 72010000 		.4byte	0x172
+ 582 0205 0F020000 		.4byte	0x20f
+ 583 0209 0C       		.uleb128 0xc
+ 584 020a 01       		.uleb128 0x1
+ 585 020b 50       		.byte	0x50
+ 586 020c 01       		.uleb128 0x1
+ 587 020d 4F       		.byte	0x4f
+ 588 020e 00       		.byte	0
+ 589 020f 0A       		.uleb128 0xa
+ 590 0210 16000000 		.4byte	.LVL16
+ 591 0214 A5030000 		.4byte	0x3a5
+ 592 0218 0F       		.uleb128 0xf
+ 593 0219 20000000 		.4byte	.LVL17
+ 594 021d 72010000 		.4byte	0x172
+ 595 0221 0C       		.uleb128 0xc
+ 596 0222 01       		.uleb128 0x1
+ 597 0223 50       		.byte	0x50
+ 598 0224 02       		.uleb128 0x2
+ 599 0225 08       		.byte	0x8
+ 600 0226 20       		.byte	0x20
+ 601 0227 00       		.byte	0
+ 602 0228 00       		.byte	0
+ 603 0229 07       		.uleb128 0x7
+ 604 022a CA000000 		.4byte	.LASF24
+ 605 022e 01       		.byte	0x1
+ 606 022f 52       		.byte	0x52
+ 607 0230 00000000 		.4byte	.LFB66
+ 608 0234 0E000000 		.4byte	.LFE66-.LFB66
+ 609 0238 01       		.uleb128 0x1
+ 610 0239 9C       		.byte	0x9c
+ 611 023a 5B020000 		.4byte	0x25b
+ 612 023e 0B       		.uleb128 0xb
+ 613 023f 08000000 		.4byte	.LVL18
+ 614 0243 72010000 		.4byte	0x172
+ 615 0247 51020000 		.4byte	0x251
+ 616 024b 0C       		.uleb128 0xc
+ 617 024c 01       		.uleb128 0x1
+ 618 024d 50       		.byte	0x50
+ 619 024e 01       		.uleb128 0x1
+ 620 024f 4E       		.byte	0x4e
+ 621 0250 00       		.byte	0
+ 622 0251 0A       		.uleb128 0xa
+ 623 0252 0C000000 		.4byte	.LVL19
+ 624 0256 DE010000 		.4byte	0x1de
+ 625 025a 00       		.byte	0
+ 626 025b 07       		.uleb128 0x7
+ 627 025c 56020000 		.4byte	.LASF25
+ 628 0260 01       		.byte	0x1
+ 629 0261 7F       		.byte	0x7f
+ 630 0262 00000000 		.4byte	.LFB69
+ 631 0266 50000000 		.4byte	.LFE69-.LFB69
+ 632 026a 01       		.uleb128 0x1
+ 633 026b 9C       		.byte	0x9c
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 15
+
+
+ 634 026c FB020000 		.4byte	0x2fb
+ 635 0270 10       		.uleb128 0x10
+ 636 0271 0C000000 		.4byte	.LBB3
+ 637 0275 44000000 		.4byte	.LBE3-.LBB3
+ 638 0279 F1020000 		.4byte	0x2f1
+ 639 027d 11       		.uleb128 0x11
+ 640 027e 18000000 		.4byte	.LASF26
+ 641 0282 01       		.byte	0x1
+ 642 0283 84       		.byte	0x84
+ 643 0284 73000000 		.4byte	0x73
+ 644 0288 4B000000 		.4byte	.LLST2
+ 645 028c 10       		.uleb128 0x10
+ 646 028d 12000000 		.4byte	.LBB4
+ 647 0291 3E000000 		.4byte	.LBE4-.LBB4
+ 648 0295 E7020000 		.4byte	0x2e7
+ 649 0299 09       		.uleb128 0x9
+ 650 029a 6900     		.ascii	"i\000"
+ 651 029c 01       		.byte	0x1
+ 652 029d 85       		.byte	0x85
+ 653 029e 73000000 		.4byte	0x73
+ 654 02a2 69000000 		.4byte	.LLST3
+ 655 02a6 0B       		.uleb128 0xb
+ 656 02a7 2A000000 		.4byte	.LVL24
+ 657 02ab B0030000 		.4byte	0x3b0
+ 658 02af BD020000 		.4byte	0x2bd
+ 659 02b3 0C       		.uleb128 0xc
+ 660 02b4 01       		.uleb128 0x1
+ 661 02b5 50       		.byte	0x50
+ 662 02b6 05       		.uleb128 0x5
+ 663 02b7 03       		.byte	0x3
+ 664 02b8 00000000 		.4byte	.LC0
+ 665 02bc 00       		.byte	0
+ 666 02bd 0A       		.uleb128 0xa
+ 667 02be 2E000000 		.4byte	.LVL25
+ 668 02c2 BB030000 		.4byte	0x3bb
+ 669 02c6 0B       		.uleb128 0xb
+ 670 02c7 36000000 		.4byte	.LVL26
+ 671 02cb B0030000 		.4byte	0x3b0
+ 672 02cf DD020000 		.4byte	0x2dd
+ 673 02d3 0C       		.uleb128 0xc
+ 674 02d4 01       		.uleb128 0x1
+ 675 02d5 50       		.byte	0x50
+ 676 02d6 05       		.uleb128 0x5
+ 677 02d7 03       		.byte	0x3
+ 678 02d8 0C000000 		.4byte	.LC1
+ 679 02dc 00       		.byte	0
+ 680 02dd 0A       		.uleb128 0xa
+ 681 02de 3A000000 		.4byte	.LVL27
+ 682 02e2 C6030000 		.4byte	0x3c6
+ 683 02e6 00       		.byte	0
+ 684 02e7 0A       		.uleb128 0xa
+ 685 02e8 10000000 		.4byte	.LVL21
+ 686 02ec D1030000 		.4byte	0x3d1
+ 687 02f0 00       		.byte	0
+ 688 02f1 0A       		.uleb128 0xa
+ 689 02f2 06000000 		.4byte	.LVL20
+ 690 02f6 DC030000 		.4byte	0x3dc
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 16
+
+
+ 691 02fa 00       		.byte	0
+ 692 02fb 12       		.uleb128 0x12
+ 693 02fc B5010000 		.4byte	.LASF27
+ 694 0300 05       		.byte	0x5
+ 695 0301 1207     		.2byte	0x712
+ 696 0303 07030000 		.4byte	0x307
+ 697 0307 06       		.uleb128 0x6
+ 698 0308 8C000000 		.4byte	0x8c
+ 699 030c 13       		.uleb128 0x13
+ 700 030d 6E00     		.ascii	"n\000"
+ 701 030f 01       		.byte	0x1
+ 702 0310 09       		.byte	0x9
+ 703 0311 73000000 		.4byte	0x73
+ 704 0315 05       		.uleb128 0x5
+ 705 0316 03       		.byte	0x3
+ 706 0317 00000000 		.4byte	n
+ 707 031b 14       		.uleb128 0x14
+ 708 031c D9010000 		.4byte	.LASF28
+ 709 0320 01       		.byte	0x1
+ 710 0321 0A       		.byte	0xa
+ 711 0322 2C030000 		.4byte	0x32c
+ 712 0326 05       		.uleb128 0x5
+ 713 0327 03       		.byte	0x3
+ 714 0328 00000000 		.4byte	timer_run_out
+ 715 032c 06       		.uleb128 0x6
+ 716 032d 73000000 		.4byte	0x73
+ 717 0331 15       		.uleb128 0x15
+ 718 0332 81000000 		.4byte	0x81
+ 719 0336 41030000 		.4byte	0x341
+ 720 033a 16       		.uleb128 0x16
+ 721 033b DC000000 		.4byte	0xdc
+ 722 033f FF       		.byte	0xff
+ 723 0340 00       		.byte	0
+ 724 0341 14       		.uleb128 0x14
+ 725 0342 C1020000 		.4byte	.LASF29
+ 726 0346 01       		.byte	0x1
+ 727 0347 0D       		.byte	0xd
+ 728 0348 31030000 		.4byte	0x331
+ 729 034c 05       		.uleb128 0x5
+ 730 034d 03       		.byte	0x3
+ 731 034e 00000000 		.4byte	readBuffer
+ 732 0352 14       		.uleb128 0x14
+ 733 0353 2C000000 		.4byte	.LASF30
+ 734 0357 01       		.byte	0x1
+ 735 0358 0E       		.byte	0xe
+ 736 0359 31030000 		.4byte	0x331
+ 737 035d 05       		.uleb128 0x5
+ 738 035e 03       		.byte	0x3
+ 739 035f 00000000 		.4byte	writeBuffer
+ 740 0363 17       		.uleb128 0x17
+ 741 0364 C0000000 		.4byte	.LASF31
+ 742 0368 C0000000 		.4byte	.LASF31
+ 743 036c 06       		.byte	0x6
+ 744 036d 93       		.byte	0x93
+ 745 036e 17       		.uleb128 0x17
+ 746 036f E4020000 		.4byte	.LASF32
+ 747 0373 E4020000 		.4byte	.LASF32
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 17
+
+
+ 748 0377 06       		.byte	0x6
+ 749 0378 C5       		.byte	0xc5
+ 750 0379 17       		.uleb128 0x17
+ 751 037a 79020000 		.4byte	.LASF33
+ 752 037e 79020000 		.4byte	.LASF33
+ 753 0382 06       		.byte	0x6
+ 754 0383 C7       		.byte	0xc7
+ 755 0384 17       		.uleb128 0x17
+ 756 0385 2B030000 		.4byte	.LASF34
+ 757 0389 2B030000 		.4byte	.LASF34
+ 758 038d 06       		.byte	0x6
+ 759 038e CB       		.byte	0xcb
+ 760 038f 17       		.uleb128 0x17
+ 761 0390 E7010000 		.4byte	.LASF35
+ 762 0394 E7010000 		.4byte	.LASF35
+ 763 0398 07       		.byte	0x7
+ 764 0399 26       		.byte	0x26
+ 765 039a 17       		.uleb128 0x17
+ 766 039b 23030000 		.4byte	.LASF36
+ 767 039f 23030000 		.4byte	.LASF36
+ 768 03a3 08       		.byte	0x8
+ 769 03a4 76       		.byte	0x76
+ 770 03a5 17       		.uleb128 0x17
+ 771 03a6 08030000 		.4byte	.LASF37
+ 772 03aa 08030000 		.4byte	.LASF37
+ 773 03ae 09       		.byte	0x9
+ 774 03af 0E       		.byte	0xe
+ 775 03b0 17       		.uleb128 0x17
+ 776 03b1 F9020000 		.4byte	.LASF38
+ 777 03b5 F9020000 		.4byte	.LASF38
+ 778 03b9 0A       		.byte	0xa
+ 779 03ba 8B       		.byte	0x8b
+ 780 03bb 17       		.uleb128 0x17
+ 781 03bc 38000000 		.4byte	.LASF39
+ 782 03c0 38000000 		.4byte	.LASF39
+ 783 03c4 0B       		.byte	0xb
+ 784 03c5 14       		.byte	0x14
+ 785 03c6 17       		.uleb128 0x17
+ 786 03c7 F7010000 		.4byte	.LASF40
+ 787 03cb F7010000 		.4byte	.LASF40
+ 788 03cf 0B       		.byte	0xb
+ 789 03d0 12       		.byte	0x12
+ 790 03d1 17       		.uleb128 0x17
+ 791 03d2 9F020000 		.4byte	.LASF41
+ 792 03d6 9F020000 		.4byte	.LASF41
+ 793 03da 06       		.byte	0x6
+ 794 03db CA       		.byte	0xca
+ 795 03dc 17       		.uleb128 0x17
+ 796 03dd A6000000 		.4byte	.LASF42
+ 797 03e1 A6000000 		.4byte	.LASF42
+ 798 03e5 06       		.byte	0x6
+ 799 03e6 C0       		.byte	0xc0
+ 800 03e7 00       		.byte	0
+ 801              		.section	.debug_abbrev,"",%progbits
+ 802              	.Ldebug_abbrev0:
+ 803 0000 01       		.uleb128 0x1
+ 804 0001 11       		.uleb128 0x11
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 18
+
+
+ 805 0002 01       		.byte	0x1
+ 806 0003 25       		.uleb128 0x25
+ 807 0004 0E       		.uleb128 0xe
+ 808 0005 13       		.uleb128 0x13
+ 809 0006 0B       		.uleb128 0xb
+ 810 0007 03       		.uleb128 0x3
+ 811 0008 0E       		.uleb128 0xe
+ 812 0009 1B       		.uleb128 0x1b
+ 813 000a 0E       		.uleb128 0xe
+ 814 000b 55       		.uleb128 0x55
+ 815 000c 17       		.uleb128 0x17
+ 816 000d 11       		.uleb128 0x11
+ 817 000e 01       		.uleb128 0x1
+ 818 000f 10       		.uleb128 0x10
+ 819 0010 17       		.uleb128 0x17
+ 820 0011 00       		.byte	0
+ 821 0012 00       		.byte	0
+ 822 0013 02       		.uleb128 0x2
+ 823 0014 24       		.uleb128 0x24
+ 824 0015 00       		.byte	0
+ 825 0016 0B       		.uleb128 0xb
+ 826 0017 0B       		.uleb128 0xb
+ 827 0018 3E       		.uleb128 0x3e
+ 828 0019 0B       		.uleb128 0xb
+ 829 001a 03       		.uleb128 0x3
+ 830 001b 0E       		.uleb128 0xe
+ 831 001c 00       		.byte	0
+ 832 001d 00       		.byte	0
+ 833 001e 03       		.uleb128 0x3
+ 834 001f 16       		.uleb128 0x16
+ 835 0020 00       		.byte	0
+ 836 0021 03       		.uleb128 0x3
+ 837 0022 0E       		.uleb128 0xe
+ 838 0023 3A       		.uleb128 0x3a
+ 839 0024 0B       		.uleb128 0xb
+ 840 0025 3B       		.uleb128 0x3b
+ 841 0026 0B       		.uleb128 0xb
+ 842 0027 49       		.uleb128 0x49
+ 843 0028 13       		.uleb128 0x13
+ 844 0029 00       		.byte	0
+ 845 002a 00       		.byte	0
+ 846 002b 04       		.uleb128 0x4
+ 847 002c 24       		.uleb128 0x24
+ 848 002d 00       		.byte	0
+ 849 002e 0B       		.uleb128 0xb
+ 850 002f 0B       		.uleb128 0xb
+ 851 0030 3E       		.uleb128 0x3e
+ 852 0031 0B       		.uleb128 0xb
+ 853 0032 03       		.uleb128 0x3
+ 854 0033 08       		.uleb128 0x8
+ 855 0034 00       		.byte	0
+ 856 0035 00       		.byte	0
+ 857 0036 05       		.uleb128 0x5
+ 858 0037 16       		.uleb128 0x16
+ 859 0038 00       		.byte	0
+ 860 0039 03       		.uleb128 0x3
+ 861 003a 0E       		.uleb128 0xe
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 19
+
+
+ 862 003b 3A       		.uleb128 0x3a
+ 863 003c 0B       		.uleb128 0xb
+ 864 003d 3B       		.uleb128 0x3b
+ 865 003e 05       		.uleb128 0x5
+ 866 003f 49       		.uleb128 0x49
+ 867 0040 13       		.uleb128 0x13
+ 868 0041 00       		.byte	0
+ 869 0042 00       		.byte	0
+ 870 0043 06       		.uleb128 0x6
+ 871 0044 35       		.uleb128 0x35
+ 872 0045 00       		.byte	0
+ 873 0046 49       		.uleb128 0x49
+ 874 0047 13       		.uleb128 0x13
+ 875 0048 00       		.byte	0
+ 876 0049 00       		.byte	0
+ 877 004a 07       		.uleb128 0x7
+ 878 004b 2E       		.uleb128 0x2e
+ 879 004c 01       		.byte	0x1
+ 880 004d 3F       		.uleb128 0x3f
+ 881 004e 19       		.uleb128 0x19
+ 882 004f 03       		.uleb128 0x3
+ 883 0050 0E       		.uleb128 0xe
+ 884 0051 3A       		.uleb128 0x3a
+ 885 0052 0B       		.uleb128 0xb
+ 886 0053 3B       		.uleb128 0x3b
+ 887 0054 0B       		.uleb128 0xb
+ 888 0055 11       		.uleb128 0x11
+ 889 0056 01       		.uleb128 0x1
+ 890 0057 12       		.uleb128 0x12
+ 891 0058 06       		.uleb128 0x6
+ 892 0059 40       		.uleb128 0x40
+ 893 005a 18       		.uleb128 0x18
+ 894 005b 9742     		.uleb128 0x2117
+ 895 005d 19       		.uleb128 0x19
+ 896 005e 01       		.uleb128 0x1
+ 897 005f 13       		.uleb128 0x13
+ 898 0060 00       		.byte	0
+ 899 0061 00       		.byte	0
+ 900 0062 08       		.uleb128 0x8
+ 901 0063 0B       		.uleb128 0xb
+ 902 0064 01       		.byte	0x1
+ 903 0065 11       		.uleb128 0x11
+ 904 0066 01       		.uleb128 0x1
+ 905 0067 12       		.uleb128 0x12
+ 906 0068 06       		.uleb128 0x6
+ 907 0069 00       		.byte	0
+ 908 006a 00       		.byte	0
+ 909 006b 09       		.uleb128 0x9
+ 910 006c 34       		.uleb128 0x34
+ 911 006d 00       		.byte	0
+ 912 006e 03       		.uleb128 0x3
+ 913 006f 08       		.uleb128 0x8
+ 914 0070 3A       		.uleb128 0x3a
+ 915 0071 0B       		.uleb128 0xb
+ 916 0072 3B       		.uleb128 0x3b
+ 917 0073 0B       		.uleb128 0xb
+ 918 0074 49       		.uleb128 0x49
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 20
+
+
+ 919 0075 13       		.uleb128 0x13
+ 920 0076 02       		.uleb128 0x2
+ 921 0077 17       		.uleb128 0x17
+ 922 0078 00       		.byte	0
+ 923 0079 00       		.byte	0
+ 924 007a 0A       		.uleb128 0xa
+ 925 007b 898201   		.uleb128 0x4109
+ 926 007e 00       		.byte	0
+ 927 007f 11       		.uleb128 0x11
+ 928 0080 01       		.uleb128 0x1
+ 929 0081 31       		.uleb128 0x31
+ 930 0082 13       		.uleb128 0x13
+ 931 0083 00       		.byte	0
+ 932 0084 00       		.byte	0
+ 933 0085 0B       		.uleb128 0xb
+ 934 0086 898201   		.uleb128 0x4109
+ 935 0089 01       		.byte	0x1
+ 936 008a 11       		.uleb128 0x11
+ 937 008b 01       		.uleb128 0x1
+ 938 008c 31       		.uleb128 0x31
+ 939 008d 13       		.uleb128 0x13
+ 940 008e 01       		.uleb128 0x1
+ 941 008f 13       		.uleb128 0x13
+ 942 0090 00       		.byte	0
+ 943 0091 00       		.byte	0
+ 944 0092 0C       		.uleb128 0xc
+ 945 0093 8A8201   		.uleb128 0x410a
+ 946 0096 00       		.byte	0
+ 947 0097 02       		.uleb128 0x2
+ 948 0098 18       		.uleb128 0x18
+ 949 0099 9142     		.uleb128 0x2111
+ 950 009b 18       		.uleb128 0x18
+ 951 009c 00       		.byte	0
+ 952 009d 00       		.byte	0
+ 953 009e 0D       		.uleb128 0xd
+ 954 009f 2E       		.uleb128 0x2e
+ 955 00a0 01       		.byte	0x1
+ 956 00a1 3F       		.uleb128 0x3f
+ 957 00a2 19       		.uleb128 0x19
+ 958 00a3 03       		.uleb128 0x3
+ 959 00a4 0E       		.uleb128 0xe
+ 960 00a5 3A       		.uleb128 0x3a
+ 961 00a6 0B       		.uleb128 0xb
+ 962 00a7 3B       		.uleb128 0x3b
+ 963 00a8 0B       		.uleb128 0xb
+ 964 00a9 27       		.uleb128 0x27
+ 965 00aa 19       		.uleb128 0x19
+ 966 00ab 11       		.uleb128 0x11
+ 967 00ac 01       		.uleb128 0x1
+ 968 00ad 12       		.uleb128 0x12
+ 969 00ae 06       		.uleb128 0x6
+ 970 00af 40       		.uleb128 0x40
+ 971 00b0 18       		.uleb128 0x18
+ 972 00b1 9742     		.uleb128 0x2117
+ 973 00b3 19       		.uleb128 0x19
+ 974 00b4 01       		.uleb128 0x1
+ 975 00b5 13       		.uleb128 0x13
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 21
+
+
+ 976 00b6 00       		.byte	0
+ 977 00b7 00       		.byte	0
+ 978 00b8 0E       		.uleb128 0xe
+ 979 00b9 05       		.uleb128 0x5
+ 980 00ba 00       		.byte	0
+ 981 00bb 03       		.uleb128 0x3
+ 982 00bc 0E       		.uleb128 0xe
+ 983 00bd 3A       		.uleb128 0x3a
+ 984 00be 0B       		.uleb128 0xb
+ 985 00bf 3B       		.uleb128 0x3b
+ 986 00c0 0B       		.uleb128 0xb
+ 987 00c1 49       		.uleb128 0x49
+ 988 00c2 13       		.uleb128 0x13
+ 989 00c3 02       		.uleb128 0x2
+ 990 00c4 17       		.uleb128 0x17
+ 991 00c5 00       		.byte	0
+ 992 00c6 00       		.byte	0
+ 993 00c7 0F       		.uleb128 0xf
+ 994 00c8 898201   		.uleb128 0x4109
+ 995 00cb 01       		.byte	0x1
+ 996 00cc 11       		.uleb128 0x11
+ 997 00cd 01       		.uleb128 0x1
+ 998 00ce 31       		.uleb128 0x31
+ 999 00cf 13       		.uleb128 0x13
+ 1000 00d0 00       		.byte	0
+ 1001 00d1 00       		.byte	0
+ 1002 00d2 10       		.uleb128 0x10
+ 1003 00d3 0B       		.uleb128 0xb
+ 1004 00d4 01       		.byte	0x1
+ 1005 00d5 11       		.uleb128 0x11
+ 1006 00d6 01       		.uleb128 0x1
+ 1007 00d7 12       		.uleb128 0x12
+ 1008 00d8 06       		.uleb128 0x6
+ 1009 00d9 01       		.uleb128 0x1
+ 1010 00da 13       		.uleb128 0x13
+ 1011 00db 00       		.byte	0
+ 1012 00dc 00       		.byte	0
+ 1013 00dd 11       		.uleb128 0x11
+ 1014 00de 34       		.uleb128 0x34
+ 1015 00df 00       		.byte	0
+ 1016 00e0 03       		.uleb128 0x3
+ 1017 00e1 0E       		.uleb128 0xe
+ 1018 00e2 3A       		.uleb128 0x3a
+ 1019 00e3 0B       		.uleb128 0xb
+ 1020 00e4 3B       		.uleb128 0x3b
+ 1021 00e5 0B       		.uleb128 0xb
+ 1022 00e6 49       		.uleb128 0x49
+ 1023 00e7 13       		.uleb128 0x13
+ 1024 00e8 02       		.uleb128 0x2
+ 1025 00e9 17       		.uleb128 0x17
+ 1026 00ea 00       		.byte	0
+ 1027 00eb 00       		.byte	0
+ 1028 00ec 12       		.uleb128 0x12
+ 1029 00ed 34       		.uleb128 0x34
+ 1030 00ee 00       		.byte	0
+ 1031 00ef 03       		.uleb128 0x3
+ 1032 00f0 0E       		.uleb128 0xe
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 22
+
+
+ 1033 00f1 3A       		.uleb128 0x3a
+ 1034 00f2 0B       		.uleb128 0xb
+ 1035 00f3 3B       		.uleb128 0x3b
+ 1036 00f4 05       		.uleb128 0x5
+ 1037 00f5 49       		.uleb128 0x49
+ 1038 00f6 13       		.uleb128 0x13
+ 1039 00f7 3F       		.uleb128 0x3f
+ 1040 00f8 19       		.uleb128 0x19
+ 1041 00f9 3C       		.uleb128 0x3c
+ 1042 00fa 19       		.uleb128 0x19
+ 1043 00fb 00       		.byte	0
+ 1044 00fc 00       		.byte	0
+ 1045 00fd 13       		.uleb128 0x13
+ 1046 00fe 34       		.uleb128 0x34
+ 1047 00ff 00       		.byte	0
+ 1048 0100 03       		.uleb128 0x3
+ 1049 0101 08       		.uleb128 0x8
+ 1050 0102 3A       		.uleb128 0x3a
+ 1051 0103 0B       		.uleb128 0xb
+ 1052 0104 3B       		.uleb128 0x3b
+ 1053 0105 0B       		.uleb128 0xb
+ 1054 0106 49       		.uleb128 0x49
+ 1055 0107 13       		.uleb128 0x13
+ 1056 0108 3F       		.uleb128 0x3f
+ 1057 0109 19       		.uleb128 0x19
+ 1058 010a 02       		.uleb128 0x2
+ 1059 010b 18       		.uleb128 0x18
+ 1060 010c 00       		.byte	0
+ 1061 010d 00       		.byte	0
+ 1062 010e 14       		.uleb128 0x14
+ 1063 010f 34       		.uleb128 0x34
+ 1064 0110 00       		.byte	0
+ 1065 0111 03       		.uleb128 0x3
+ 1066 0112 0E       		.uleb128 0xe
+ 1067 0113 3A       		.uleb128 0x3a
+ 1068 0114 0B       		.uleb128 0xb
+ 1069 0115 3B       		.uleb128 0x3b
+ 1070 0116 0B       		.uleb128 0xb
+ 1071 0117 49       		.uleb128 0x49
+ 1072 0118 13       		.uleb128 0x13
+ 1073 0119 3F       		.uleb128 0x3f
+ 1074 011a 19       		.uleb128 0x19
+ 1075 011b 02       		.uleb128 0x2
+ 1076 011c 18       		.uleb128 0x18
+ 1077 011d 00       		.byte	0
+ 1078 011e 00       		.byte	0
+ 1079 011f 15       		.uleb128 0x15
+ 1080 0120 01       		.uleb128 0x1
+ 1081 0121 01       		.byte	0x1
+ 1082 0122 49       		.uleb128 0x49
+ 1083 0123 13       		.uleb128 0x13
+ 1084 0124 01       		.uleb128 0x1
+ 1085 0125 13       		.uleb128 0x13
+ 1086 0126 00       		.byte	0
+ 1087 0127 00       		.byte	0
+ 1088 0128 16       		.uleb128 0x16
+ 1089 0129 21       		.uleb128 0x21
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 23
+
+
+ 1090 012a 00       		.byte	0
+ 1091 012b 49       		.uleb128 0x49
+ 1092 012c 13       		.uleb128 0x13
+ 1093 012d 2F       		.uleb128 0x2f
+ 1094 012e 0B       		.uleb128 0xb
+ 1095 012f 00       		.byte	0
+ 1096 0130 00       		.byte	0
+ 1097 0131 17       		.uleb128 0x17
+ 1098 0132 2E       		.uleb128 0x2e
+ 1099 0133 00       		.byte	0
+ 1100 0134 3F       		.uleb128 0x3f
+ 1101 0135 19       		.uleb128 0x19
+ 1102 0136 3C       		.uleb128 0x3c
+ 1103 0137 19       		.uleb128 0x19
+ 1104 0138 6E       		.uleb128 0x6e
+ 1105 0139 0E       		.uleb128 0xe
+ 1106 013a 03       		.uleb128 0x3
+ 1107 013b 0E       		.uleb128 0xe
+ 1108 013c 3A       		.uleb128 0x3a
+ 1109 013d 0B       		.uleb128 0xb
+ 1110 013e 3B       		.uleb128 0x3b
+ 1111 013f 0B       		.uleb128 0xb
+ 1112 0140 00       		.byte	0
+ 1113 0141 00       		.byte	0
+ 1114 0142 00       		.byte	0
+ 1115              		.section	.debug_loc,"",%progbits
+ 1116              	.Ldebug_loc0:
+ 1117              	.LLST0:
+ 1118 0000 00000000 		.4byte	.LVL0
+ 1119 0004 04000000 		.4byte	.LVL1
+ 1120 0008 0200     		.2byte	0x2
+ 1121 000a 30       		.byte	0x30
+ 1122 000b 9F       		.byte	0x9f
+ 1123 000c 04000000 		.4byte	.LVL1
+ 1124 0010 18000000 		.4byte	.LFE65
+ 1125 0014 0100     		.2byte	0x1
+ 1126 0016 53       		.byte	0x53
+ 1127 0017 00000000 		.4byte	0
+ 1128 001b 00000000 		.4byte	0
+ 1129              	.LLST1:
+ 1130 001f 00000000 		.4byte	.LVL7
+ 1131 0023 07000000 		.4byte	.LVL8-1
+ 1132 0027 0100     		.2byte	0x1
+ 1133 0029 50       		.byte	0x50
+ 1134 002a 07000000 		.4byte	.LVL8-1
+ 1135 002e 24000000 		.4byte	.LVL13
+ 1136 0032 0100     		.2byte	0x1
+ 1137 0034 54       		.byte	0x54
+ 1138 0035 24000000 		.4byte	.LVL13
+ 1139 0039 28000000 		.4byte	.LFE68
+ 1140 003d 0400     		.2byte	0x4
+ 1141 003f F3       		.byte	0xf3
+ 1142 0040 01       		.uleb128 0x1
+ 1143 0041 50       		.byte	0x50
+ 1144 0042 9F       		.byte	0x9f
+ 1145 0043 00000000 		.4byte	0
+ 1146 0047 00000000 		.4byte	0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 24
+
+
+ 1147              	.LLST2:
+ 1148 004b 12000000 		.4byte	.LVL22
+ 1149 004f 16000000 		.4byte	.LVL23
+ 1150 0053 0100     		.2byte	0x1
+ 1151 0055 50       		.byte	0x50
+ 1152 0056 16000000 		.4byte	.LVL23
+ 1153 005a 40000000 		.4byte	.LVL29
+ 1154 005e 0100     		.2byte	0x1
+ 1155 0060 55       		.byte	0x55
+ 1156 0061 00000000 		.4byte	0
+ 1157 0065 00000000 		.4byte	0
+ 1158              	.LLST3:
+ 1159 0069 12000000 		.4byte	.LVL22
+ 1160 006d 16000000 		.4byte	.LVL23
+ 1161 0071 0200     		.2byte	0x2
+ 1162 0073 30       		.byte	0x30
+ 1163 0074 9F       		.byte	0x9f
+ 1164 0075 16000000 		.4byte	.LVL23
+ 1165 0079 40000000 		.4byte	.LVL29
+ 1166 007d 0100     		.2byte	0x1
+ 1167 007f 54       		.byte	0x54
+ 1168 0080 00000000 		.4byte	0
+ 1169 0084 00000000 		.4byte	0
+ 1170              		.section	.debug_aranges,"",%progbits
+ 1171 0000 44000000 		.4byte	0x44
+ 1172 0004 0200     		.2byte	0x2
+ 1173 0006 00000000 		.4byte	.Ldebug_info0
+ 1174 000a 04       		.byte	0x4
+ 1175 000b 00       		.byte	0
+ 1176 000c 0000     		.2byte	0
+ 1177 000e 0000     		.2byte	0
+ 1178 0010 00000000 		.4byte	.LFB65
+ 1179 0014 18000000 		.4byte	.LFE65-.LFB65
+ 1180 0018 00000000 		.4byte	.LFB64
+ 1181 001c 30000000 		.4byte	.LFE64-.LFB64
+ 1182 0020 00000000 		.4byte	.LFB68
+ 1183 0024 28000000 		.4byte	.LFE68-.LFB68
+ 1184 0028 00000000 		.4byte	.LFB67
+ 1185 002c 22000000 		.4byte	.LFE67-.LFB67
+ 1186 0030 00000000 		.4byte	.LFB66
+ 1187 0034 0E000000 		.4byte	.LFE66-.LFB66
+ 1188 0038 00000000 		.4byte	.LFB69
+ 1189 003c 50000000 		.4byte	.LFE69-.LFB69
+ 1190 0040 00000000 		.4byte	0
+ 1191 0044 00000000 		.4byte	0
+ 1192              		.section	.debug_ranges,"",%progbits
+ 1193              	.Ldebug_ranges0:
+ 1194 0000 00000000 		.4byte	.LFB65
+ 1195 0004 18000000 		.4byte	.LFE65
+ 1196 0008 00000000 		.4byte	.LFB64
+ 1197 000c 30000000 		.4byte	.LFE64
+ 1198 0010 00000000 		.4byte	.LFB68
+ 1199 0014 28000000 		.4byte	.LFE68
+ 1200 0018 00000000 		.4byte	.LFB67
+ 1201 001c 22000000 		.4byte	.LFE67
+ 1202 0020 00000000 		.4byte	.LFB66
+ 1203 0024 0E000000 		.4byte	.LFE66
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 25
+
+
+ 1204 0028 00000000 		.4byte	.LFB69
+ 1205 002c 50000000 		.4byte	.LFE69
+ 1206 0030 00000000 		.4byte	0
+ 1207 0034 00000000 		.4byte	0
+ 1208              		.section	.debug_line,"",%progbits
+ 1209              	.Ldebug_line0:
+ 1210 0000 3F020000 		.section	.debug_str,"MS",%progbits,1
+ 1210      0200A101 
+ 1210      00000201 
+ 1210      FB0E0D00 
+ 1210      01010101 
+ 1211              	.LASF47:
+ 1212 0000 6D657373 		.ascii	"message\000"
+ 1212      61676500 
+ 1213              	.LASF18:
+ 1214 0008 72656733 		.ascii	"reg32\000"
+ 1214      3200
+ 1215              	.LASF4:
+ 1216 000e 5F5F7569 		.ascii	"__uint8_t\000"
+ 1216      6E74385F 
+ 1216      7400
+ 1217              	.LASF26:
+ 1218 0018 77726974 		.ascii	"writeSize\000"
+ 1218      6553697A 
+ 1218      6500
+ 1219              	.LASF5:
+ 1220 0022 5F5F696E 		.ascii	"__int32_t\000"
+ 1220      7433325F 
+ 1220      7400
+ 1221              	.LASF30:
+ 1222 002c 77726974 		.ascii	"writeBuffer\000"
+ 1222      65427566 
+ 1222      66657200 
+ 1223              	.LASF39:
+ 1224 0038 656E6162 		.ascii	"enableDispenser\000"
+ 1224      6C654469 
+ 1224      7370656E 
+ 1224      73657200 
+ 1225              	.LASF45:
+ 1226 0048 5C5C766D 		.ascii	"\\\\vmware-host\\Shared Folders\\Documents\\BallDis"
+ 1226      77617265 
+ 1226      2D686F73 
+ 1226      745C5368 
+ 1226      61726564 
+ 1227 0076 70417070 		.ascii	"pApp\\Workspace12\\Bolddispenser_CoinMaster.cydsn\000"
+ 1227      5C576F72 
+ 1227      6B737061 
+ 1227      63653132 
+ 1227      5C426F6C 
+ 1228              	.LASF42:
+ 1229 00a6 4932435F 		.ascii	"I2C_SlaveClearWriteStatus\000"
+ 1229      536C6176 
+ 1229      65436C65 
+ 1229      61725772 
+ 1229      69746553 
+ 1230              	.LASF31:
+ 1231 00c0 4932435F 		.ascii	"I2C_Start\000"
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 26
+
+
+ 1231      53746172 
+ 1231      7400
+ 1232              	.LASF24:
+ 1233 00ca 636F696E 		.ascii	"coinInserted\000"
+ 1233      496E7365 
+ 1233      72746564 
+ 1233      00
+ 1234              	.LASF15:
+ 1235 00d7 666C6F61 		.ascii	"float\000"
+ 1235      7400
+ 1236              	.LASF8:
+ 1237 00dd 6C6F6E67 		.ascii	"long long int\000"
+ 1237      206C6F6E 
+ 1237      6720696E 
+ 1237      7400
+ 1238              	.LASF44:
+ 1239 00eb 5250695F 		.ascii	"RPi_IF.c\000"
+ 1239      49462E63 
+ 1239      00
+ 1240              	.LASF1:
+ 1241 00f4 756E7369 		.ascii	"unsigned char\000"
+ 1241      676E6564 
+ 1241      20636861 
+ 1241      7200
+ 1242              	.LASF43:
+ 1243 0102 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1243      43313120 
+ 1243      352E342E 
+ 1243      31203230 
+ 1243      31363036 
+ 1244 0135 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1244      20726576 
+ 1244      6973696F 
+ 1244      6E203233 
+ 1244      37373135 
+ 1245 0168 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1245      66756E63 
+ 1245      74696F6E 
+ 1245      2D736563 
+ 1245      74696F6E 
+ 1246              	.LASF7:
+ 1247 0190 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1247      20756E73 
+ 1247      69676E65 
+ 1247      6420696E 
+ 1247      7400
+ 1248              	.LASF3:
+ 1249 01a2 73686F72 		.ascii	"short unsigned int\000"
+ 1249      7420756E 
+ 1249      7369676E 
+ 1249      65642069 
+ 1249      6E7400
+ 1250              	.LASF27:
+ 1251 01b5 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1251      52784275 
+ 1251      66666572 
+ 1251      00
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 27
+
+
+ 1252              	.LASF23:
+ 1253 01c2 64697370 		.ascii	"dispenserStatus\000"
+ 1253      656E7365 
+ 1253      72537461 
+ 1253      74757300 
+ 1254              	.LASF16:
+ 1255 01d2 646F7562 		.ascii	"double\000"
+ 1255      6C6500
+ 1256              	.LASF28:
+ 1257 01d9 74696D65 		.ascii	"timer_run_out\000"
+ 1257      725F7275 
+ 1257      6E5F6F75 
+ 1257      7400
+ 1258              	.LASF35:
+ 1259 01e7 496E7465 		.ascii	"Interrupt_Write\000"
+ 1259      72727570 
+ 1259      745F5772 
+ 1259      69746500 
+ 1260              	.LASF40:
+ 1261 01f7 64697361 		.ascii	"disableDispenser\000"
+ 1261      626C6544 
+ 1261      69737065 
+ 1261      6E736572 
+ 1261      00
+ 1262              	.LASF14:
+ 1263 0208 75696E74 		.ascii	"uint32\000"
+ 1263      333200
+ 1264              	.LASF10:
+ 1265 020f 756E7369 		.ascii	"unsigned int\000"
+ 1265      676E6564 
+ 1265      20696E74 
+ 1265      00
+ 1266              	.LASF9:
+ 1267 021c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1267      206C6F6E 
+ 1267      6720756E 
+ 1267      7369676E 
+ 1267      65642069 
+ 1268              	.LASF11:
+ 1269 0233 75696E74 		.ascii	"uint8_t\000"
+ 1269      385F7400 
+ 1270              	.LASF46:
+ 1271 023b 53656E64 		.ascii	"SendToRPi\000"
+ 1271      546F5250 
+ 1271      6900
+ 1272              	.LASF12:
+ 1273 0245 696E7433 		.ascii	"int32_t\000"
+ 1273      325F7400 
+ 1274              	.LASF20:
+ 1275 024d 73697A65 		.ascii	"sizetype\000"
+ 1275      74797065 
+ 1275      00
+ 1276              	.LASF25:
+ 1277 0256 5250695F 		.ascii	"RPi_IF_handleData\000"
+ 1277      49465F68 
+ 1277      616E646C 
+ 1277      65446174 
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 28
+
+
+ 1277      6100
+ 1278              	.LASF22:
+ 1279 0268 5250495F 		.ascii	"RPI_IF_init\000"
+ 1279      49465F69 
+ 1279      6E697400 
+ 1280              	.LASF17:
+ 1281 0274 63686172 		.ascii	"char\000"
+ 1281      00
+ 1282              	.LASF33:
+ 1283 0279 4932435F 		.ascii	"I2C_SlaveInitWriteBuf\000"
+ 1283      536C6176 
+ 1283      65496E69 
+ 1283      74577269 
+ 1283      74654275 
+ 1284              	.LASF2:
+ 1285 028f 73686F72 		.ascii	"short int\000"
+ 1285      7420696E 
+ 1285      7400
+ 1286              	.LASF13:
+ 1287 0299 75696E74 		.ascii	"uint8\000"
+ 1287      3800
+ 1288              	.LASF41:
+ 1289 029f 4932435F 		.ascii	"I2C_SlaveGetWriteBufSize\000"
+ 1289      536C6176 
+ 1289      65476574 
+ 1289      57726974 
+ 1289      65427566 
+ 1290              	.LASF6:
+ 1291 02b8 6C6F6E67 		.ascii	"long int\000"
+ 1291      20696E74 
+ 1291      00
+ 1292              	.LASF29:
+ 1293 02c1 72656164 		.ascii	"readBuffer\000"
+ 1293      42756666 
+ 1293      657200
+ 1294              	.LASF19:
+ 1295 02cc 6C6F6E67 		.ascii	"long double\000"
+ 1295      20646F75 
+ 1295      626C6500 
+ 1296              	.LASF0:
+ 1297 02d8 7369676E 		.ascii	"signed char\000"
+ 1297      65642063 
+ 1297      68617200 
+ 1298              	.LASF32:
+ 1299 02e4 4932435F 		.ascii	"I2C_SlaveInitReadBuf\000"
+ 1299      536C6176 
+ 1299      65496E69 
+ 1299      74526561 
+ 1299      64427566 
+ 1300              	.LASF38:
+ 1301 02f9 55415254 		.ascii	"UART_PutString\000"
+ 1301      5F507574 
+ 1301      53747269 
+ 1301      6E6700
+ 1302              	.LASF37:
+ 1303 0308 636F756E 		.ascii	"countBalls\000"
+ 1303      7442616C 
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccK9fanM.s 			page 29
+
+
+ 1303      6C7300
+ 1304              	.LASF21:
+ 1305 0313 72657365 		.ascii	"resetReadBuffer\000"
+ 1305      74526561 
+ 1305      64427566 
+ 1305      66657200 
+ 1306              	.LASF36:
+ 1307 0323 43794465 		.ascii	"CyDelay\000"
+ 1307      6C617900 
+ 1308              	.LASF34:
+ 1309 032b 4932435F 		.ascii	"I2C_SlaveClearReadBuf\000"
+ 1309      536C6176 
+ 1309      65436C65 
+ 1309      61725265 
+ 1309      61644275 
+ 1310              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

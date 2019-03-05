@@ -1,0 +1,1348 @@
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"Balldispenser.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.initBallDispenser,"ax",%progbits
+  20              		.align	2
+  21              		.global	initBallDispenser
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	initBallDispenser, %function
+  25              	initBallDispenser:
+  26              	.LFB64:
+  27              		.file 1 "Balldispenser.c"
+   1:Balldispenser.c **** #include "Balldispenser.h"
+   2:Balldispenser.c **** 
+   3:Balldispenser.c **** #define NUMBER_OF_BALLS 2
+   4:Balldispenser.c **** 
+   5:Balldispenser.c **** static uint8 ball_count;
+   6:Balldispenser.c **** static uint16 V_Sample;
+   7:Balldispenser.c **** 
+   8:Balldispenser.c **** /*******************************************************************************
+   9:Balldispenser.c **** * Function Name: initBallDispenser
+  10:Balldispenser.c **** ********************************************************************************
+  11:Balldispenser.c **** *
+  12:Balldispenser.c **** * Summary:     
+  13:Balldispenser.c **** *
+  14:Balldispenser.c **** * Parameters:
+  15:Balldispenser.c **** *  None.
+  16:Balldispenser.c **** *
+  17:Balldispenser.c **** * Return:
+  18:Balldispenser.c **** *  None.
+  19:Balldispenser.c **** *
+  20:Balldispenser.c **** *******************************************************************************/
+  21:Balldispenser.c **** void initBallDispenser()
+  22:Balldispenser.c **** {
+  28              		.loc 1 22 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 2
+
+
+  23:Balldispenser.c ****     PWM_1_Start();
+  36              		.loc 1 23 0
+  37 0002 FFF7FEFF 		bl	PWM_1_Start
+  38              	.LVL0:
+  24:Balldispenser.c ****     Sample_Hold_1_Start();
+  39              		.loc 1 24 0
+  40 0006 FFF7FEFF 		bl	Sample_Hold_1_Start
+  41              	.LVL1:
+  25:Balldispenser.c ****     ADC_DelSig_1_Start();
+  42              		.loc 1 25 0
+  43 000a FFF7FEFF 		bl	ADC_DelSig_1_Start
+  44              	.LVL2:
+  45 000e 08BD     		pop	{r3, pc}
+  46              		.cfi_endproc
+  47              	.LFE64:
+  48              		.size	initBallDispenser, .-initBallDispenser
+  49              		.section	.text.DispenseBalls,"ax",%progbits
+  50              		.align	2
+  51              		.global	DispenseBalls
+  52              		.thumb
+  53              		.thumb_func
+  54              		.type	DispenseBalls, %function
+  55              	DispenseBalls:
+  56              	.LFB65:
+  26:Balldispenser.c **** }
+  27:Balldispenser.c **** 
+  28:Balldispenser.c **** void DispenseBalls()
+  29:Balldispenser.c **** {
+  57              		.loc 1 29 0
+  58              		.cfi_startproc
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+  61 0000 10B5     		push	{r4, lr}
+  62              		.cfi_def_cfa_offset 8
+  63              		.cfi_offset 4, -8
+  64              		.cfi_offset 14, -4
+  65              	.LVL3:
+  30:Balldispenser.c ****     uint8 count = 0;
+  66              		.loc 1 30 0
+  67 0002 0022     		movs	r2, #0
+  31:Balldispenser.c ****     while(count++<(NUMBER_OF_BALLS))
+  68              		.loc 1 31 0
+  69 0004 10E0     		b	.L4
+  70              	.LVL4:
+  71              	.L5:
+  32:Balldispenser.c ****     {
+  33:Balldispenser.c ****     UART_PutString("Ball Dispensing\r\n");
+  72              		.loc 1 33 0
+  73 0006 0B48     		ldr	r0, .L7
+  74 0008 FFF7FEFF 		bl	UART_PutString
+  75              	.LVL5:
+  34:Balldispenser.c ****     Rotate1802();
+  76              		.loc 1 34 0
+  77 000c FFF7FEFF 		bl	Rotate1802
+  78              	.LVL6:
+  35:Balldispenser.c ****     CyDelay(200);
+  79              		.loc 1 35 0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 3
+
+
+  80 0010 C820     		movs	r0, #200
+  81 0012 FFF7FEFF 		bl	CyDelay
+  82              	.LVL7:
+  36:Balldispenser.c ****     revRotate1802();
+  83              		.loc 1 36 0
+  84 0016 FFF7FEFF 		bl	revRotate1802
+  85              	.LVL8:
+  37:Balldispenser.c ****     CyDelay(200);
+  86              		.loc 1 37 0
+  87 001a C820     		movs	r0, #200
+  88 001c FFF7FEFF 		bl	CyDelay
+  89              	.LVL9:
+  38:Balldispenser.c ****     UART_PutString("Ball Dispensed\r\n");
+  90              		.loc 1 38 0
+  91 0020 0548     		ldr	r0, .L7+4
+  92 0022 FFF7FEFF 		bl	UART_PutString
+  93              	.LVL10:
+  31:Balldispenser.c ****     {
+  94              		.loc 1 31 0
+  95 0026 2246     		mov	r2, r4
+  96              	.LVL11:
+  97              	.L4:
+  98 0028 531C     		adds	r3, r2, #1
+  99 002a DCB2     		uxtb	r4, r3
+ 100              	.LVL12:
+ 101 002c 012A     		cmp	r2, #1
+ 102 002e EAD9     		bls	.L5
+  39:Balldispenser.c ****     }
+  40:Balldispenser.c **** }
+ 103              		.loc 1 40 0
+ 104 0030 10BD     		pop	{r4, pc}
+ 105              	.LVL13:
+ 106              	.L8:
+ 107 0032 00BF     		.align	2
+ 108              	.L7:
+ 109 0034 00000000 		.word	.LC0
+ 110 0038 14000000 		.word	.LC1
+ 111              		.cfi_endproc
+ 112              	.LFE65:
+ 113              		.size	DispenseBalls, .-DispenseBalls
+ 114              		.section	.text.UpdateStatusLEDS,"ax",%progbits
+ 115              		.align	2
+ 116              		.global	UpdateStatusLEDS
+ 117              		.thumb
+ 118              		.thumb_func
+ 119              		.type	UpdateStatusLEDS, %function
+ 120              	UpdateStatusLEDS:
+ 121              	.LFB67:
+  41:Balldispenser.c **** 
+  42:Balldispenser.c **** int countBalls()
+  43:Balldispenser.c **** {
+  44:Balldispenser.c ****     ADC_DelSig_1_StartConvert();
+  45:Balldispenser.c ****     V_Sample = ADC_DelSig_1_GetResult16();
+  46:Balldispenser.c ****     if(V_Sample>1 && V_Sample<400)
+  47:Balldispenser.c ****     {
+  48:Balldispenser.c ****         ball_count = 4;
+  49:Balldispenser.c ****         UpdateStatusLEDS();
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 4
+
+
+  50:Balldispenser.c ****         return ball_count;
+  51:Balldispenser.c ****     }
+  52:Balldispenser.c ****     else if(V_Sample>30000 && V_Sample<40000)
+  53:Balldispenser.c ****     {
+  54:Balldispenser.c ****         ball_count = 3;
+  55:Balldispenser.c ****         UpdateStatusLEDS();
+  56:Balldispenser.c ****         return ball_count;
+  57:Balldispenser.c ****     }
+  58:Balldispenser.c ****     else if(V_Sample>15000 && V_Sample<30000)
+  59:Balldispenser.c ****     {
+  60:Balldispenser.c ****         ball_count = 2;
+  61:Balldispenser.c ****         UpdateStatusLEDS();
+  62:Balldispenser.c ****         return ball_count;
+  63:Balldispenser.c ****     }
+  64:Balldispenser.c ****     else if(V_Sample>1000 && V_Sample<15000)
+  65:Balldispenser.c ****     {
+  66:Balldispenser.c ****         ball_count = 1;
+  67:Balldispenser.c ****         UpdateStatusLEDS();
+  68:Balldispenser.c ****         return ball_count;
+  69:Balldispenser.c ****     }
+  70:Balldispenser.c ****     else 
+  71:Balldispenser.c ****     {
+  72:Balldispenser.c ****         return ball_count;
+  73:Balldispenser.c ****     }
+  74:Balldispenser.c **** }
+  75:Balldispenser.c **** 
+  76:Balldispenser.c **** void UpdateStatusLEDS()
+  77:Balldispenser.c **** {
+ 122              		.loc 1 77 0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126 0000 08B5     		push	{r3, lr}
+ 127              		.cfi_def_cfa_offset 8
+ 128              		.cfi_offset 3, -8
+ 129              		.cfi_offset 14, -4
+  78:Balldispenser.c ****     if(ball_count==4){
+ 130              		.loc 1 78 0
+ 131 0002 0D4B     		ldr	r3, .L14
+ 132 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 133 0006 042B     		cmp	r3, #4
+ 134 0008 06D1     		bne	.L10
+  79:Balldispenser.c ****         pin_full_Write(1); 
+ 135              		.loc 1 79 0
+ 136 000a 0120     		movs	r0, #1
+ 137 000c FFF7FEFF 		bl	pin_full_Write
+ 138              	.LVL14:
+  80:Balldispenser.c ****         pin_empty_Write(0);
+ 139              		.loc 1 80 0
+ 140 0010 0020     		movs	r0, #0
+ 141 0012 FFF7FEFF 		bl	pin_empty_Write
+ 142              	.LVL15:
+ 143 0016 08BD     		pop	{r3, pc}
+ 144              	.L10:
+  81:Balldispenser.c ****     }
+  82:Balldispenser.c ****     else if(ball_count<3)
+ 145              		.loc 1 82 0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 5
+
+
+ 146 0018 022B     		cmp	r3, #2
+ 147 001a 06D8     		bhi	.L12
+  83:Balldispenser.c ****     {
+  84:Balldispenser.c ****         pin_full_Write(0); 
+ 148              		.loc 1 84 0
+ 149 001c 0020     		movs	r0, #0
+ 150 001e FFF7FEFF 		bl	pin_full_Write
+ 151              	.LVL16:
+  85:Balldispenser.c ****         pin_empty_Write(1);
+ 152              		.loc 1 85 0
+ 153 0022 0120     		movs	r0, #1
+ 154 0024 FFF7FEFF 		bl	pin_empty_Write
+ 155              	.LVL17:
+ 156 0028 08BD     		pop	{r3, pc}
+ 157              	.L12:
+  86:Balldispenser.c ****     }
+  87:Balldispenser.c ****     else 
+  88:Balldispenser.c ****     {
+  89:Balldispenser.c ****         pin_empty_Write(0);
+ 158              		.loc 1 89 0
+ 159 002a 0020     		movs	r0, #0
+ 160 002c FFF7FEFF 		bl	pin_empty_Write
+ 161              	.LVL18:
+  90:Balldispenser.c ****         pin_full_Write(0);
+ 162              		.loc 1 90 0
+ 163 0030 0020     		movs	r0, #0
+ 164 0032 FFF7FEFF 		bl	pin_full_Write
+ 165              	.LVL19:
+ 166 0036 08BD     		pop	{r3, pc}
+ 167              	.L15:
+ 168              		.align	2
+ 169              	.L14:
+ 170 0038 00000000 		.word	.LANCHOR0
+ 171              		.cfi_endproc
+ 172              	.LFE67:
+ 173              		.size	UpdateStatusLEDS, .-UpdateStatusLEDS
+ 174              		.section	.text.countBalls,"ax",%progbits
+ 175              		.align	2
+ 176              		.global	countBalls
+ 177              		.thumb
+ 178              		.thumb_func
+ 179              		.type	countBalls, %function
+ 180              	countBalls:
+ 181              	.LFB66:
+  43:Balldispenser.c ****     ADC_DelSig_1_StartConvert();
+ 182              		.loc 1 43 0
+ 183              		.cfi_startproc
+ 184              		@ args = 0, pretend = 0, frame = 0
+ 185              		@ frame_needed = 0, uses_anonymous_args = 0
+ 186 0000 10B5     		push	{r4, lr}
+ 187              		.cfi_def_cfa_offset 8
+ 188              		.cfi_offset 4, -8
+ 189              		.cfi_offset 14, -4
+  44:Balldispenser.c ****     V_Sample = ADC_DelSig_1_GetResult16();
+ 190              		.loc 1 44 0
+ 191 0002 FFF7FEFF 		bl	ADC_DelSig_1_StartConvert
+ 192              	.LVL20:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 6
+
+
+  45:Balldispenser.c ****     if(V_Sample>1 && V_Sample<400)
+ 193              		.loc 1 45 0
+ 194 0006 FFF7FEFF 		bl	ADC_DelSig_1_GetResult16
+ 195              	.LVL21:
+ 196 000a 80B2     		uxth	r0, r0
+  46:Balldispenser.c ****     {
+ 197              		.loc 1 46 0
+ 198 000c 831E     		subs	r3, r0, #2
+ 199 000e 9BB2     		uxth	r3, r3
+ 200 0010 B3F5C77F 		cmp	r3, #398
+ 201 0014 06D2     		bcs	.L17
+  48:Balldispenser.c ****         UpdateStatusLEDS();
+ 202              		.loc 1 48 0
+ 203 0016 1B4C     		ldr	r4, .L23
+ 204 0018 0423     		movs	r3, #4
+ 205 001a 2370     		strb	r3, [r4]
+  49:Balldispenser.c ****         return ball_count;
+ 206              		.loc 1 49 0
+ 207 001c FFF7FEFF 		bl	UpdateStatusLEDS
+ 208              	.LVL22:
+  50:Balldispenser.c ****     }
+ 209              		.loc 1 50 0
+ 210 0020 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 211 0022 10BD     		pop	{r4, pc}
+ 212              	.L17:
+  52:Balldispenser.c ****     {
+ 213              		.loc 1 52 0
+ 214 0024 A0F5EA43 		sub	r3, r0, #29952
+ 215 0028 313B     		subs	r3, r3, #49
+ 216 002a 9BB2     		uxth	r3, r3
+ 217 002c 42F20E72 		movw	r2, #9998
+ 218 0030 9342     		cmp	r3, r2
+ 219 0032 06D8     		bhi	.L19
+  54:Balldispenser.c ****         UpdateStatusLEDS();
+ 220              		.loc 1 54 0
+ 221 0034 134C     		ldr	r4, .L23
+ 222 0036 0323     		movs	r3, #3
+ 223 0038 2370     		strb	r3, [r4]
+  55:Balldispenser.c ****         return ball_count;
+ 224              		.loc 1 55 0
+ 225 003a FFF7FEFF 		bl	UpdateStatusLEDS
+ 226              	.LVL23:
+  56:Balldispenser.c ****     }
+ 227              		.loc 1 56 0
+ 228 003e 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 229 0040 10BD     		pop	{r4, pc}
+ 230              	.L19:
+  58:Balldispenser.c ****     {
+ 231              		.loc 1 58 0
+ 232 0042 A0F56A53 		sub	r3, r0, #14976
+ 233 0046 193B     		subs	r3, r3, #25
+ 234 0048 9BB2     		uxth	r3, r3
+ 235 004a 43F69622 		movw	r2, #14998
+ 236 004e 9342     		cmp	r3, r2
+ 237 0050 06D8     		bhi	.L20
+  60:Balldispenser.c ****         UpdateStatusLEDS();
+ 238              		.loc 1 60 0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 7
+
+
+ 239 0052 0C4C     		ldr	r4, .L23
+ 240 0054 0223     		movs	r3, #2
+ 241 0056 2370     		strb	r3, [r4]
+  61:Balldispenser.c ****         return ball_count;
+ 242              		.loc 1 61 0
+ 243 0058 FFF7FEFF 		bl	UpdateStatusLEDS
+ 244              	.LVL24:
+  62:Balldispenser.c ****     }
+ 245              		.loc 1 62 0
+ 246 005c 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 247 005e 10BD     		pop	{r4, pc}
+ 248              	.L20:
+  64:Balldispenser.c ****     {
+ 249              		.loc 1 64 0
+ 250 0060 A0F2E930 		subw	r0, r0, #1001
+ 251 0064 80B2     		uxth	r0, r0
+ 252 0066 43F2AE63 		movw	r3, #13998
+ 253 006a 9842     		cmp	r0, r3
+ 254 006c 06D8     		bhi	.L21
+  66:Balldispenser.c ****         UpdateStatusLEDS();
+ 255              		.loc 1 66 0
+ 256 006e 054C     		ldr	r4, .L23
+ 257 0070 0123     		movs	r3, #1
+ 258 0072 2370     		strb	r3, [r4]
+  67:Balldispenser.c ****         return ball_count;
+ 259              		.loc 1 67 0
+ 260 0074 FFF7FEFF 		bl	UpdateStatusLEDS
+ 261              	.LVL25:
+  68:Balldispenser.c ****     }
+ 262              		.loc 1 68 0
+ 263 0078 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 264 007a 10BD     		pop	{r4, pc}
+ 265              	.L21:
+  72:Balldispenser.c ****     }
+ 266              		.loc 1 72 0
+ 267 007c 014B     		ldr	r3, .L23
+ 268 007e 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+  74:Balldispenser.c **** 
+ 269              		.loc 1 74 0
+ 270 0080 10BD     		pop	{r4, pc}
+ 271              	.L24:
+ 272 0082 00BF     		.align	2
+ 273              	.L23:
+ 274 0084 00000000 		.word	.LANCHOR0
+ 275              		.cfi_endproc
+ 276              	.LFE66:
+ 277              		.size	countBalls, .-countBalls
+ 278              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 279              		.align	2
+ 280              	.LC0:
+ 281 0000 42616C6C 		.ascii	"Ball Dispensing\015\012\000"
+ 281      20446973 
+ 281      70656E73 
+ 281      696E670D 
+ 281      0A00
+ 282 0012 0000     		.space	2
+ 283              	.LC1:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 8
+
+
+ 284 0014 42616C6C 		.ascii	"Ball Dispensed\015\012\000"
+ 284      20446973 
+ 284      70656E73 
+ 284      65640D0A 
+ 284      00
+ 285              		.bss
+ 286              		.set	.LANCHOR0,. + 0
+ 287              		.type	ball_count, %object
+ 288              		.size	ball_count, 1
+ 289              	ball_count:
+ 290 0000 00       		.space	1
+ 291              		.text
+ 292              	.Letext0:
+ 293              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 294              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 295              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 296              		.file 5 "Generated_Source\\PSoC5/PWM_1.h"
+ 297              		.file 6 "Generated_Source\\PSoC5/Sample_Hold_1.h"
+ 298              		.file 7 "Generated_Source\\PSoC5/ADC_DelSig_1.h"
+ 299              		.file 8 "Generated_Source\\PSoC5/UART.h"
+ 300              		.file 9 "MotorControl.h"
+ 301              		.file 10 "Generated_Source\\PSoC5/CyLib.h"
+ 302              		.file 11 "Generated_Source\\PSoC5/pin_full.h"
+ 303              		.file 12 "Generated_Source\\PSoC5/pin_empty.h"
+ 304              		.file 13 "Generated_Source\\PSoC5/core_cm3.h"
+ 305              		.section	.debug_info,"",%progbits
+ 306              	.Ldebug_info0:
+ 307 0000 ED020000 		.4byte	0x2ed
+ 308 0004 0400     		.2byte	0x4
+ 309 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 310 000a 04       		.byte	0x4
+ 311 000b 01       		.uleb128 0x1
+ 312 000c 9E000000 		.4byte	.LASF34
+ 313 0010 0C       		.byte	0xc
+ 314 0011 73010000 		.4byte	.LASF35
+ 315 0015 0A000000 		.4byte	.LASF36
+ 316 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 317 001d 00000000 		.4byte	0
+ 318 0021 00000000 		.4byte	.Ldebug_line0
+ 319 0025 02       		.uleb128 0x2
+ 320 0026 01       		.byte	0x1
+ 321 0027 06       		.byte	0x6
+ 322 0028 8D020000 		.4byte	.LASF0
+ 323 002c 02       		.uleb128 0x2
+ 324 002d 01       		.byte	0x1
+ 325 002e 08       		.byte	0x8
+ 326 002f 90000000 		.4byte	.LASF1
+ 327 0033 02       		.uleb128 0x2
+ 328 0034 02       		.byte	0x2
+ 329 0035 05       		.byte	0x5
+ 330 0036 3A020000 		.4byte	.LASF2
+ 331 003a 02       		.uleb128 0x2
+ 332 003b 02       		.byte	0x2
+ 333 003c 07       		.byte	0x7
+ 334 003d 68000000 		.4byte	.LASF3
+ 335 0041 03       		.uleb128 0x3
+ 336 0042 00000000 		.4byte	.LASF9
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 9
+
+
+ 337 0046 02       		.byte	0x2
+ 338 0047 3F       		.byte	0x3f
+ 339 0048 4C000000 		.4byte	0x4c
+ 340 004c 02       		.uleb128 0x2
+ 341 004d 04       		.byte	0x4
+ 342 004e 05       		.byte	0x5
+ 343 004f 5E020000 		.4byte	.LASF4
+ 344 0053 02       		.uleb128 0x2
+ 345 0054 04       		.byte	0x4
+ 346 0055 07       		.byte	0x7
+ 347 0056 3A010000 		.4byte	.LASF5
+ 348 005a 02       		.uleb128 0x2
+ 349 005b 08       		.byte	0x8
+ 350 005c 05       		.byte	0x5
+ 351 005d 21020000 		.4byte	.LASF6
+ 352 0061 02       		.uleb128 0x2
+ 353 0062 08       		.byte	0x8
+ 354 0063 07       		.byte	0x7
+ 355 0064 D5010000 		.4byte	.LASF7
+ 356 0068 04       		.uleb128 0x4
+ 357 0069 04       		.byte	0x4
+ 358 006a 05       		.byte	0x5
+ 359 006b 696E7400 		.ascii	"int\000"
+ 360 006f 02       		.uleb128 0x2
+ 361 0070 04       		.byte	0x4
+ 362 0071 07       		.byte	0x7
+ 363 0072 BD010000 		.4byte	.LASF8
+ 364 0076 03       		.uleb128 0x3
+ 365 0077 FC010000 		.4byte	.LASF10
+ 366 007b 03       		.byte	0x3
+ 367 007c 2C       		.byte	0x2c
+ 368 007d 41000000 		.4byte	0x41
+ 369 0081 05       		.uleb128 0x5
+ 370 0082 8A000000 		.4byte	.LASF11
+ 371 0086 04       		.byte	0x4
+ 372 0087 E401     		.2byte	0x1e4
+ 373 0089 2C000000 		.4byte	0x2c
+ 374 008d 05       		.uleb128 0x5
+ 375 008e 6C010000 		.4byte	.LASF12
+ 376 0092 04       		.byte	0x4
+ 377 0093 E501     		.2byte	0x1e5
+ 378 0095 3A000000 		.4byte	0x3a
+ 379 0099 02       		.uleb128 0x2
+ 380 009a 04       		.byte	0x4
+ 381 009b 04       		.byte	0x4
+ 382 009c 7B000000 		.4byte	.LASF13
+ 383 00a0 02       		.uleb128 0x2
+ 384 00a1 08       		.byte	0x8
+ 385 00a2 04       		.byte	0x4
+ 386 00a3 65010000 		.4byte	.LASF14
+ 387 00a7 02       		.uleb128 0x2
+ 388 00a8 01       		.byte	0x1
+ 389 00a9 08       		.byte	0x8
+ 390 00aa 2F020000 		.4byte	.LASF15
+ 391 00ae 02       		.uleb128 0x2
+ 392 00af 08       		.byte	0x8
+ 393 00b0 04       		.byte	0x4
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 10
+
+
+ 394 00b1 81020000 		.4byte	.LASF16
+ 395 00b5 02       		.uleb128 0x2
+ 396 00b6 04       		.byte	0x4
+ 397 00b7 07       		.byte	0x7
+ 398 00b8 18020000 		.4byte	.LASF17
+ 399 00bc 06       		.uleb128 0x6
+ 400 00bd C4020000 		.4byte	.LASF18
+ 401 00c1 01       		.byte	0x1
+ 402 00c2 15       		.byte	0x15
+ 403 00c3 00000000 		.4byte	.LFB64
+ 404 00c7 10000000 		.4byte	.LFE64-.LFB64
+ 405 00cb 01       		.uleb128 0x1
+ 406 00cc 9C       		.byte	0x9c
+ 407 00cd ED000000 		.4byte	0xed
+ 408 00d1 07       		.uleb128 0x7
+ 409 00d2 06000000 		.4byte	.LVL0
+ 410 00d6 77020000 		.4byte	0x277
+ 411 00da 07       		.uleb128 0x7
+ 412 00db 0A000000 		.4byte	.LVL1
+ 413 00df 82020000 		.4byte	0x282
+ 414 00e3 07       		.uleb128 0x7
+ 415 00e4 0E000000 		.4byte	.LVL2
+ 416 00e8 8D020000 		.4byte	0x28d
+ 417 00ec 00       		.byte	0
+ 418 00ed 06       		.uleb128 0x6
+ 419 00ee 83010000 		.4byte	.LASF19
+ 420 00f2 01       		.byte	0x1
+ 421 00f3 1C       		.byte	0x1c
+ 422 00f4 00000000 		.4byte	.LFB65
+ 423 00f8 3C000000 		.4byte	.LFE65-.LFB65
+ 424 00fc 01       		.uleb128 0x1
+ 425 00fd 9C       		.byte	0x9c
+ 426 00fe 76010000 		.4byte	0x176
+ 427 0102 08       		.uleb128 0x8
+ 428 0103 34020000 		.4byte	.LASF21
+ 429 0107 01       		.byte	0x1
+ 430 0108 1E       		.byte	0x1e
+ 431 0109 81000000 		.4byte	0x81
+ 432 010d 00000000 		.4byte	.LLST0
+ 433 0111 09       		.uleb128 0x9
+ 434 0112 0C000000 		.4byte	.LVL5
+ 435 0116 98020000 		.4byte	0x298
+ 436 011a 28010000 		.4byte	0x128
+ 437 011e 0A       		.uleb128 0xa
+ 438 011f 01       		.uleb128 0x1
+ 439 0120 50       		.byte	0x50
+ 440 0121 05       		.uleb128 0x5
+ 441 0122 03       		.byte	0x3
+ 442 0123 00000000 		.4byte	.LC0
+ 443 0127 00       		.byte	0
+ 444 0128 07       		.uleb128 0x7
+ 445 0129 10000000 		.4byte	.LVL6
+ 446 012d A3020000 		.4byte	0x2a3
+ 447 0131 09       		.uleb128 0x9
+ 448 0132 16000000 		.4byte	.LVL7
+ 449 0136 AE020000 		.4byte	0x2ae
+ 450 013a 45010000 		.4byte	0x145
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 11
+
+
+ 451 013e 0A       		.uleb128 0xa
+ 452 013f 01       		.uleb128 0x1
+ 453 0140 50       		.byte	0x50
+ 454 0141 02       		.uleb128 0x2
+ 455 0142 08       		.byte	0x8
+ 456 0143 C8       		.byte	0xc8
+ 457 0144 00       		.byte	0
+ 458 0145 07       		.uleb128 0x7
+ 459 0146 1A000000 		.4byte	.LVL8
+ 460 014a B9020000 		.4byte	0x2b9
+ 461 014e 09       		.uleb128 0x9
+ 462 014f 20000000 		.4byte	.LVL9
+ 463 0153 AE020000 		.4byte	0x2ae
+ 464 0157 62010000 		.4byte	0x162
+ 465 015b 0A       		.uleb128 0xa
+ 466 015c 01       		.uleb128 0x1
+ 467 015d 50       		.byte	0x50
+ 468 015e 02       		.uleb128 0x2
+ 469 015f 08       		.byte	0x8
+ 470 0160 C8       		.byte	0xc8
+ 471 0161 00       		.byte	0
+ 472 0162 0B       		.uleb128 0xb
+ 473 0163 26000000 		.4byte	.LVL10
+ 474 0167 98020000 		.4byte	0x298
+ 475 016b 0A       		.uleb128 0xa
+ 476 016c 01       		.uleb128 0x1
+ 477 016d 50       		.byte	0x50
+ 478 016e 05       		.uleb128 0x5
+ 479 016f 03       		.byte	0x3
+ 480 0170 14000000 		.4byte	.LC1
+ 481 0174 00       		.byte	0
+ 482 0175 00       		.byte	0
+ 483 0176 06       		.uleb128 0x6
+ 484 0177 99020000 		.4byte	.LASF20
+ 485 017b 01       		.byte	0x1
+ 486 017c 4C       		.byte	0x4c
+ 487 017d 00000000 		.4byte	.LFB67
+ 488 0181 3C000000 		.4byte	.LFE67-.LFB67
+ 489 0185 01       		.uleb128 0x1
+ 490 0186 9C       		.byte	0x9c
+ 491 0187 FA010000 		.4byte	0x1fa
+ 492 018b 09       		.uleb128 0x9
+ 493 018c 10000000 		.4byte	.LVL14
+ 494 0190 C4020000 		.4byte	0x2c4
+ 495 0194 9E010000 		.4byte	0x19e
+ 496 0198 0A       		.uleb128 0xa
+ 497 0199 01       		.uleb128 0x1
+ 498 019a 50       		.byte	0x50
+ 499 019b 01       		.uleb128 0x1
+ 500 019c 31       		.byte	0x31
+ 501 019d 00       		.byte	0
+ 502 019e 09       		.uleb128 0x9
+ 503 019f 16000000 		.4byte	.LVL15
+ 504 01a3 CF020000 		.4byte	0x2cf
+ 505 01a7 B1010000 		.4byte	0x1b1
+ 506 01ab 0A       		.uleb128 0xa
+ 507 01ac 01       		.uleb128 0x1
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 12
+
+
+ 508 01ad 50       		.byte	0x50
+ 509 01ae 01       		.uleb128 0x1
+ 510 01af 30       		.byte	0x30
+ 511 01b0 00       		.byte	0
+ 512 01b1 09       		.uleb128 0x9
+ 513 01b2 22000000 		.4byte	.LVL16
+ 514 01b6 C4020000 		.4byte	0x2c4
+ 515 01ba C4010000 		.4byte	0x1c4
+ 516 01be 0A       		.uleb128 0xa
+ 517 01bf 01       		.uleb128 0x1
+ 518 01c0 50       		.byte	0x50
+ 519 01c1 01       		.uleb128 0x1
+ 520 01c2 30       		.byte	0x30
+ 521 01c3 00       		.byte	0
+ 522 01c4 09       		.uleb128 0x9
+ 523 01c5 28000000 		.4byte	.LVL17
+ 524 01c9 CF020000 		.4byte	0x2cf
+ 525 01cd D7010000 		.4byte	0x1d7
+ 526 01d1 0A       		.uleb128 0xa
+ 527 01d2 01       		.uleb128 0x1
+ 528 01d3 50       		.byte	0x50
+ 529 01d4 01       		.uleb128 0x1
+ 530 01d5 31       		.byte	0x31
+ 531 01d6 00       		.byte	0
+ 532 01d7 09       		.uleb128 0x9
+ 533 01d8 30000000 		.4byte	.LVL18
+ 534 01dc CF020000 		.4byte	0x2cf
+ 535 01e0 EA010000 		.4byte	0x1ea
+ 536 01e4 0A       		.uleb128 0xa
+ 537 01e5 01       		.uleb128 0x1
+ 538 01e6 50       		.byte	0x50
+ 539 01e7 01       		.uleb128 0x1
+ 540 01e8 30       		.byte	0x30
+ 541 01e9 00       		.byte	0
+ 542 01ea 0B       		.uleb128 0xb
+ 543 01eb 36000000 		.4byte	.LVL19
+ 544 01ef C4020000 		.4byte	0x2c4
+ 545 01f3 0A       		.uleb128 0xa
+ 546 01f4 01       		.uleb128 0x1
+ 547 01f5 50       		.byte	0x50
+ 548 01f6 01       		.uleb128 0x1
+ 549 01f7 30       		.byte	0x30
+ 550 01f8 00       		.byte	0
+ 551 01f9 00       		.byte	0
+ 552 01fa 0C       		.uleb128 0xc
+ 553 01fb B9020000 		.4byte	.LASF37
+ 554 01ff 01       		.byte	0x1
+ 555 0200 2A       		.byte	0x2a
+ 556 0201 68000000 		.4byte	0x68
+ 557 0205 00000000 		.4byte	.LFB66
+ 558 0209 88000000 		.4byte	.LFE66-.LFB66
+ 559 020d 01       		.uleb128 0x1
+ 560 020e 9C       		.byte	0x9c
+ 561 020f 4A020000 		.4byte	0x24a
+ 562 0213 07       		.uleb128 0x7
+ 563 0214 06000000 		.4byte	.LVL20
+ 564 0218 DA020000 		.4byte	0x2da
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 13
+
+
+ 565 021c 07       		.uleb128 0x7
+ 566 021d 0A000000 		.4byte	.LVL21
+ 567 0221 E5020000 		.4byte	0x2e5
+ 568 0225 07       		.uleb128 0x7
+ 569 0226 20000000 		.4byte	.LVL22
+ 570 022a 76010000 		.4byte	0x176
+ 571 022e 07       		.uleb128 0x7
+ 572 022f 3E000000 		.4byte	.LVL23
+ 573 0233 76010000 		.4byte	0x176
+ 574 0237 07       		.uleb128 0x7
+ 575 0238 5C000000 		.4byte	.LVL24
+ 576 023c 76010000 		.4byte	0x176
+ 577 0240 07       		.uleb128 0x7
+ 578 0241 78000000 		.4byte	.LVL25
+ 579 0245 76010000 		.4byte	0x176
+ 580 0249 00       		.byte	0
+ 581 024a 0D       		.uleb128 0xd
+ 582 024b 53020000 		.4byte	.LASF22
+ 583 024f 01       		.byte	0x1
+ 584 0250 05       		.byte	0x5
+ 585 0251 81000000 		.4byte	0x81
+ 586 0255 05       		.uleb128 0x5
+ 587 0256 03       		.byte	0x3
+ 588 0257 00000000 		.4byte	ball_count
+ 589 025b 0E       		.uleb128 0xe
+ 590 025c 81000000 		.4byte	.LASF38
+ 591 0260 01       		.byte	0x1
+ 592 0261 06       		.byte	0x6
+ 593 0262 8D000000 		.4byte	0x8d
+ 594 0266 0F       		.uleb128 0xf
+ 595 0267 58010000 		.4byte	.LASF39
+ 596 026b 0D       		.byte	0xd
+ 597 026c 1207     		.2byte	0x712
+ 598 026e 72020000 		.4byte	0x272
+ 599 0272 10       		.uleb128 0x10
+ 600 0273 76000000 		.4byte	0x76
+ 601 0277 11       		.uleb128 0x11
+ 602 0278 4C010000 		.4byte	.LASF23
+ 603 027c 4C010000 		.4byte	.LASF23
+ 604 0280 05       		.byte	0x5
+ 605 0281 92       		.byte	0x92
+ 606 0282 11       		.uleb128 0x11
+ 607 0283 04020000 		.4byte	.LASF24
+ 608 0287 04020000 		.4byte	.LASF24
+ 609 028b 06       		.byte	0x6
+ 610 028c 40       		.byte	0x40
+ 611 028d 11       		.uleb128 0x11
+ 612 028e AA010000 		.4byte	.LASF25
+ 613 0292 AA010000 		.4byte	.LASF25
+ 614 0296 07       		.byte	0x7
+ 615 0297 3A       		.byte	0x3a
+ 616 0298 11       		.uleb128 0x11
+ 617 0299 AA020000 		.4byte	.LASF26
+ 618 029d AA020000 		.4byte	.LASF26
+ 619 02a1 08       		.byte	0x8
+ 620 02a2 8B       		.byte	0x8b
+ 621 02a3 11       		.uleb128 0x11
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 14
+
+
+ 622 02a4 CA010000 		.4byte	.LASF27
+ 623 02a8 CA010000 		.4byte	.LASF27
+ 624 02ac 09       		.byte	0x9
+ 625 02ad 20       		.byte	0x20
+ 626 02ae 11       		.uleb128 0x11
+ 627 02af D6020000 		.4byte	.LASF28
+ 628 02b3 D6020000 		.4byte	.LASF28
+ 629 02b7 0A       		.byte	0xa
+ 630 02b8 76       		.byte	0x76
+ 631 02b9 11       		.uleb128 0x11
+ 632 02ba 2C010000 		.4byte	.LASF29
+ 633 02be 2C010000 		.4byte	.LASF29
+ 634 02c2 09       		.byte	0x9
+ 635 02c3 24       		.byte	0x24
+ 636 02c4 11       		.uleb128 0x11
+ 637 02c5 44020000 		.4byte	.LASF30
+ 638 02c9 44020000 		.4byte	.LASF30
+ 639 02cd 0B       		.byte	0xb
+ 640 02ce 26       		.byte	0x26
+ 641 02cf 11       		.uleb128 0x11
+ 642 02d0 EC010000 		.4byte	.LASF31
+ 643 02d4 EC010000 		.4byte	.LASF31
+ 644 02d8 0C       		.byte	0xc
+ 645 02d9 26       		.byte	0x26
+ 646 02da 11       		.uleb128 0x11
+ 647 02db 67020000 		.4byte	.LASF32
+ 648 02df 67020000 		.4byte	.LASF32
+ 649 02e3 07       		.byte	0x7
+ 650 02e4 3D       		.byte	0x3d
+ 651 02e5 11       		.uleb128 0x11
+ 652 02e6 91010000 		.4byte	.LASF33
+ 653 02ea 91010000 		.4byte	.LASF33
+ 654 02ee 07       		.byte	0x7
+ 655 02ef 41       		.byte	0x41
+ 656 02f0 00       		.byte	0
+ 657              		.section	.debug_abbrev,"",%progbits
+ 658              	.Ldebug_abbrev0:
+ 659 0000 01       		.uleb128 0x1
+ 660 0001 11       		.uleb128 0x11
+ 661 0002 01       		.byte	0x1
+ 662 0003 25       		.uleb128 0x25
+ 663 0004 0E       		.uleb128 0xe
+ 664 0005 13       		.uleb128 0x13
+ 665 0006 0B       		.uleb128 0xb
+ 666 0007 03       		.uleb128 0x3
+ 667 0008 0E       		.uleb128 0xe
+ 668 0009 1B       		.uleb128 0x1b
+ 669 000a 0E       		.uleb128 0xe
+ 670 000b 55       		.uleb128 0x55
+ 671 000c 17       		.uleb128 0x17
+ 672 000d 11       		.uleb128 0x11
+ 673 000e 01       		.uleb128 0x1
+ 674 000f 10       		.uleb128 0x10
+ 675 0010 17       		.uleb128 0x17
+ 676 0011 00       		.byte	0
+ 677 0012 00       		.byte	0
+ 678 0013 02       		.uleb128 0x2
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 15
+
+
+ 679 0014 24       		.uleb128 0x24
+ 680 0015 00       		.byte	0
+ 681 0016 0B       		.uleb128 0xb
+ 682 0017 0B       		.uleb128 0xb
+ 683 0018 3E       		.uleb128 0x3e
+ 684 0019 0B       		.uleb128 0xb
+ 685 001a 03       		.uleb128 0x3
+ 686 001b 0E       		.uleb128 0xe
+ 687 001c 00       		.byte	0
+ 688 001d 00       		.byte	0
+ 689 001e 03       		.uleb128 0x3
+ 690 001f 16       		.uleb128 0x16
+ 691 0020 00       		.byte	0
+ 692 0021 03       		.uleb128 0x3
+ 693 0022 0E       		.uleb128 0xe
+ 694 0023 3A       		.uleb128 0x3a
+ 695 0024 0B       		.uleb128 0xb
+ 696 0025 3B       		.uleb128 0x3b
+ 697 0026 0B       		.uleb128 0xb
+ 698 0027 49       		.uleb128 0x49
+ 699 0028 13       		.uleb128 0x13
+ 700 0029 00       		.byte	0
+ 701 002a 00       		.byte	0
+ 702 002b 04       		.uleb128 0x4
+ 703 002c 24       		.uleb128 0x24
+ 704 002d 00       		.byte	0
+ 705 002e 0B       		.uleb128 0xb
+ 706 002f 0B       		.uleb128 0xb
+ 707 0030 3E       		.uleb128 0x3e
+ 708 0031 0B       		.uleb128 0xb
+ 709 0032 03       		.uleb128 0x3
+ 710 0033 08       		.uleb128 0x8
+ 711 0034 00       		.byte	0
+ 712 0035 00       		.byte	0
+ 713 0036 05       		.uleb128 0x5
+ 714 0037 16       		.uleb128 0x16
+ 715 0038 00       		.byte	0
+ 716 0039 03       		.uleb128 0x3
+ 717 003a 0E       		.uleb128 0xe
+ 718 003b 3A       		.uleb128 0x3a
+ 719 003c 0B       		.uleb128 0xb
+ 720 003d 3B       		.uleb128 0x3b
+ 721 003e 05       		.uleb128 0x5
+ 722 003f 49       		.uleb128 0x49
+ 723 0040 13       		.uleb128 0x13
+ 724 0041 00       		.byte	0
+ 725 0042 00       		.byte	0
+ 726 0043 06       		.uleb128 0x6
+ 727 0044 2E       		.uleb128 0x2e
+ 728 0045 01       		.byte	0x1
+ 729 0046 3F       		.uleb128 0x3f
+ 730 0047 19       		.uleb128 0x19
+ 731 0048 03       		.uleb128 0x3
+ 732 0049 0E       		.uleb128 0xe
+ 733 004a 3A       		.uleb128 0x3a
+ 734 004b 0B       		.uleb128 0xb
+ 735 004c 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 16
+
+
+ 736 004d 0B       		.uleb128 0xb
+ 737 004e 11       		.uleb128 0x11
+ 738 004f 01       		.uleb128 0x1
+ 739 0050 12       		.uleb128 0x12
+ 740 0051 06       		.uleb128 0x6
+ 741 0052 40       		.uleb128 0x40
+ 742 0053 18       		.uleb128 0x18
+ 743 0054 9742     		.uleb128 0x2117
+ 744 0056 19       		.uleb128 0x19
+ 745 0057 01       		.uleb128 0x1
+ 746 0058 13       		.uleb128 0x13
+ 747 0059 00       		.byte	0
+ 748 005a 00       		.byte	0
+ 749 005b 07       		.uleb128 0x7
+ 750 005c 898201   		.uleb128 0x4109
+ 751 005f 00       		.byte	0
+ 752 0060 11       		.uleb128 0x11
+ 753 0061 01       		.uleb128 0x1
+ 754 0062 31       		.uleb128 0x31
+ 755 0063 13       		.uleb128 0x13
+ 756 0064 00       		.byte	0
+ 757 0065 00       		.byte	0
+ 758 0066 08       		.uleb128 0x8
+ 759 0067 34       		.uleb128 0x34
+ 760 0068 00       		.byte	0
+ 761 0069 03       		.uleb128 0x3
+ 762 006a 0E       		.uleb128 0xe
+ 763 006b 3A       		.uleb128 0x3a
+ 764 006c 0B       		.uleb128 0xb
+ 765 006d 3B       		.uleb128 0x3b
+ 766 006e 0B       		.uleb128 0xb
+ 767 006f 49       		.uleb128 0x49
+ 768 0070 13       		.uleb128 0x13
+ 769 0071 02       		.uleb128 0x2
+ 770 0072 17       		.uleb128 0x17
+ 771 0073 00       		.byte	0
+ 772 0074 00       		.byte	0
+ 773 0075 09       		.uleb128 0x9
+ 774 0076 898201   		.uleb128 0x4109
+ 775 0079 01       		.byte	0x1
+ 776 007a 11       		.uleb128 0x11
+ 777 007b 01       		.uleb128 0x1
+ 778 007c 31       		.uleb128 0x31
+ 779 007d 13       		.uleb128 0x13
+ 780 007e 01       		.uleb128 0x1
+ 781 007f 13       		.uleb128 0x13
+ 782 0080 00       		.byte	0
+ 783 0081 00       		.byte	0
+ 784 0082 0A       		.uleb128 0xa
+ 785 0083 8A8201   		.uleb128 0x410a
+ 786 0086 00       		.byte	0
+ 787 0087 02       		.uleb128 0x2
+ 788 0088 18       		.uleb128 0x18
+ 789 0089 9142     		.uleb128 0x2111
+ 790 008b 18       		.uleb128 0x18
+ 791 008c 00       		.byte	0
+ 792 008d 00       		.byte	0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 17
+
+
+ 793 008e 0B       		.uleb128 0xb
+ 794 008f 898201   		.uleb128 0x4109
+ 795 0092 01       		.byte	0x1
+ 796 0093 11       		.uleb128 0x11
+ 797 0094 01       		.uleb128 0x1
+ 798 0095 31       		.uleb128 0x31
+ 799 0096 13       		.uleb128 0x13
+ 800 0097 00       		.byte	0
+ 801 0098 00       		.byte	0
+ 802 0099 0C       		.uleb128 0xc
+ 803 009a 2E       		.uleb128 0x2e
+ 804 009b 01       		.byte	0x1
+ 805 009c 3F       		.uleb128 0x3f
+ 806 009d 19       		.uleb128 0x19
+ 807 009e 03       		.uleb128 0x3
+ 808 009f 0E       		.uleb128 0xe
+ 809 00a0 3A       		.uleb128 0x3a
+ 810 00a1 0B       		.uleb128 0xb
+ 811 00a2 3B       		.uleb128 0x3b
+ 812 00a3 0B       		.uleb128 0xb
+ 813 00a4 49       		.uleb128 0x49
+ 814 00a5 13       		.uleb128 0x13
+ 815 00a6 11       		.uleb128 0x11
+ 816 00a7 01       		.uleb128 0x1
+ 817 00a8 12       		.uleb128 0x12
+ 818 00a9 06       		.uleb128 0x6
+ 819 00aa 40       		.uleb128 0x40
+ 820 00ab 18       		.uleb128 0x18
+ 821 00ac 9742     		.uleb128 0x2117
+ 822 00ae 19       		.uleb128 0x19
+ 823 00af 01       		.uleb128 0x1
+ 824 00b0 13       		.uleb128 0x13
+ 825 00b1 00       		.byte	0
+ 826 00b2 00       		.byte	0
+ 827 00b3 0D       		.uleb128 0xd
+ 828 00b4 34       		.uleb128 0x34
+ 829 00b5 00       		.byte	0
+ 830 00b6 03       		.uleb128 0x3
+ 831 00b7 0E       		.uleb128 0xe
+ 832 00b8 3A       		.uleb128 0x3a
+ 833 00b9 0B       		.uleb128 0xb
+ 834 00ba 3B       		.uleb128 0x3b
+ 835 00bb 0B       		.uleb128 0xb
+ 836 00bc 49       		.uleb128 0x49
+ 837 00bd 13       		.uleb128 0x13
+ 838 00be 02       		.uleb128 0x2
+ 839 00bf 18       		.uleb128 0x18
+ 840 00c0 00       		.byte	0
+ 841 00c1 00       		.byte	0
+ 842 00c2 0E       		.uleb128 0xe
+ 843 00c3 34       		.uleb128 0x34
+ 844 00c4 00       		.byte	0
+ 845 00c5 03       		.uleb128 0x3
+ 846 00c6 0E       		.uleb128 0xe
+ 847 00c7 3A       		.uleb128 0x3a
+ 848 00c8 0B       		.uleb128 0xb
+ 849 00c9 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 18
+
+
+ 850 00ca 0B       		.uleb128 0xb
+ 851 00cb 49       		.uleb128 0x49
+ 852 00cc 13       		.uleb128 0x13
+ 853 00cd 00       		.byte	0
+ 854 00ce 00       		.byte	0
+ 855 00cf 0F       		.uleb128 0xf
+ 856 00d0 34       		.uleb128 0x34
+ 857 00d1 00       		.byte	0
+ 858 00d2 03       		.uleb128 0x3
+ 859 00d3 0E       		.uleb128 0xe
+ 860 00d4 3A       		.uleb128 0x3a
+ 861 00d5 0B       		.uleb128 0xb
+ 862 00d6 3B       		.uleb128 0x3b
+ 863 00d7 05       		.uleb128 0x5
+ 864 00d8 49       		.uleb128 0x49
+ 865 00d9 13       		.uleb128 0x13
+ 866 00da 3F       		.uleb128 0x3f
+ 867 00db 19       		.uleb128 0x19
+ 868 00dc 3C       		.uleb128 0x3c
+ 869 00dd 19       		.uleb128 0x19
+ 870 00de 00       		.byte	0
+ 871 00df 00       		.byte	0
+ 872 00e0 10       		.uleb128 0x10
+ 873 00e1 35       		.uleb128 0x35
+ 874 00e2 00       		.byte	0
+ 875 00e3 49       		.uleb128 0x49
+ 876 00e4 13       		.uleb128 0x13
+ 877 00e5 00       		.byte	0
+ 878 00e6 00       		.byte	0
+ 879 00e7 11       		.uleb128 0x11
+ 880 00e8 2E       		.uleb128 0x2e
+ 881 00e9 00       		.byte	0
+ 882 00ea 3F       		.uleb128 0x3f
+ 883 00eb 19       		.uleb128 0x19
+ 884 00ec 3C       		.uleb128 0x3c
+ 885 00ed 19       		.uleb128 0x19
+ 886 00ee 6E       		.uleb128 0x6e
+ 887 00ef 0E       		.uleb128 0xe
+ 888 00f0 03       		.uleb128 0x3
+ 889 00f1 0E       		.uleb128 0xe
+ 890 00f2 3A       		.uleb128 0x3a
+ 891 00f3 0B       		.uleb128 0xb
+ 892 00f4 3B       		.uleb128 0x3b
+ 893 00f5 0B       		.uleb128 0xb
+ 894 00f6 00       		.byte	0
+ 895 00f7 00       		.byte	0
+ 896 00f8 00       		.byte	0
+ 897              		.section	.debug_loc,"",%progbits
+ 898              	.Ldebug_loc0:
+ 899              	.LLST0:
+ 900 0000 02000000 		.4byte	.LVL3
+ 901 0004 06000000 		.4byte	.LVL4
+ 902 0008 0200     		.2byte	0x2
+ 903 000a 30       		.byte	0x30
+ 904 000b 9F       		.byte	0x9f
+ 905 000c 06000000 		.4byte	.LVL4
+ 906 0010 28000000 		.4byte	.LVL11
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 19
+
+
+ 907 0014 0100     		.2byte	0x1
+ 908 0016 54       		.byte	0x54
+ 909 0017 28000000 		.4byte	.LVL11
+ 910 001b 2C000000 		.4byte	.LVL12
+ 911 001f 0100     		.2byte	0x1
+ 912 0021 52       		.byte	0x52
+ 913 0022 2C000000 		.4byte	.LVL12
+ 914 0026 32000000 		.4byte	.LVL13
+ 915 002a 0100     		.2byte	0x1
+ 916 002c 54       		.byte	0x54
+ 917 002d 32000000 		.4byte	.LVL13
+ 918 0031 3C000000 		.4byte	.LFE65
+ 919 0035 0100     		.2byte	0x1
+ 920 0037 53       		.byte	0x53
+ 921 0038 00000000 		.4byte	0
+ 922 003c 00000000 		.4byte	0
+ 923              		.section	.debug_aranges,"",%progbits
+ 924 0000 34000000 		.4byte	0x34
+ 925 0004 0200     		.2byte	0x2
+ 926 0006 00000000 		.4byte	.Ldebug_info0
+ 927 000a 04       		.byte	0x4
+ 928 000b 00       		.byte	0
+ 929 000c 0000     		.2byte	0
+ 930 000e 0000     		.2byte	0
+ 931 0010 00000000 		.4byte	.LFB64
+ 932 0014 10000000 		.4byte	.LFE64-.LFB64
+ 933 0018 00000000 		.4byte	.LFB65
+ 934 001c 3C000000 		.4byte	.LFE65-.LFB65
+ 935 0020 00000000 		.4byte	.LFB67
+ 936 0024 3C000000 		.4byte	.LFE67-.LFB67
+ 937 0028 00000000 		.4byte	.LFB66
+ 938 002c 88000000 		.4byte	.LFE66-.LFB66
+ 939 0030 00000000 		.4byte	0
+ 940 0034 00000000 		.4byte	0
+ 941              		.section	.debug_ranges,"",%progbits
+ 942              	.Ldebug_ranges0:
+ 943 0000 00000000 		.4byte	.LFB64
+ 944 0004 10000000 		.4byte	.LFE64
+ 945 0008 00000000 		.4byte	.LFB65
+ 946 000c 3C000000 		.4byte	.LFE65
+ 947 0010 00000000 		.4byte	.LFB67
+ 948 0014 3C000000 		.4byte	.LFE67
+ 949 0018 00000000 		.4byte	.LFB66
+ 950 001c 88000000 		.4byte	.LFE66
+ 951 0020 00000000 		.4byte	0
+ 952 0024 00000000 		.4byte	0
+ 953              		.section	.debug_line,"",%progbits
+ 954              	.Ldebug_line0:
+ 955 0000 39020000 		.section	.debug_str,"MS",%progbits,1
+ 955      0200C901 
+ 955      00000201 
+ 955      FB0E0D00 
+ 955      01010101 
+ 956              	.LASF9:
+ 957 0000 5F5F696E 		.ascii	"__int32_t\000"
+ 957      7433325F 
+ 957      7400
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 20
+
+
+ 958              	.LASF36:
+ 959 000a 5C5C766D 		.ascii	"\\\\vmware-host\\Shared Folders\\Documents\\BallDis"
+ 959      77617265 
+ 959      2D686F73 
+ 959      745C5368 
+ 959      61726564 
+ 960 0038 70417070 		.ascii	"pApp\\Workspace12\\Bolddispenser_CoinMaster.cydsn\000"
+ 960      5C576F72 
+ 960      6B737061 
+ 960      63653132 
+ 960      5C426F6C 
+ 961              	.LASF3:
+ 962 0068 73686F72 		.ascii	"short unsigned int\000"
+ 962      7420756E 
+ 962      7369676E 
+ 962      65642069 
+ 962      6E7400
+ 963              	.LASF13:
+ 964 007b 666C6F61 		.ascii	"float\000"
+ 964      7400
+ 965              	.LASF38:
+ 966 0081 565F5361 		.ascii	"V_Sample\000"
+ 966      6D706C65 
+ 966      00
+ 967              	.LASF11:
+ 968 008a 75696E74 		.ascii	"uint8\000"
+ 968      3800
+ 969              	.LASF1:
+ 970 0090 756E7369 		.ascii	"unsigned char\000"
+ 970      676E6564 
+ 970      20636861 
+ 970      7200
+ 971              	.LASF34:
+ 972 009e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 972      43313120 
+ 972      352E342E 
+ 972      31203230 
+ 972      31363036 
+ 973 00d1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 973      20726576 
+ 973      6973696F 
+ 973      6E203233 
+ 973      37373135 
+ 974 0104 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 974      66756E63 
+ 974      74696F6E 
+ 974      2D736563 
+ 974      74696F6E 
+ 975              	.LASF29:
+ 976 012c 72657652 		.ascii	"revRotate1802\000"
+ 976      6F746174 
+ 976      65313830 
+ 976      3200
+ 977              	.LASF5:
+ 978 013a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 978      20756E73 
+ 978      69676E65 
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 21
+
+
+ 978      6420696E 
+ 978      7400
+ 979              	.LASF23:
+ 980 014c 50574D5F 		.ascii	"PWM_1_Start\000"
+ 980      315F5374 
+ 980      61727400 
+ 981              	.LASF39:
+ 982 0158 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 982      52784275 
+ 982      66666572 
+ 982      00
+ 983              	.LASF14:
+ 984 0165 646F7562 		.ascii	"double\000"
+ 984      6C6500
+ 985              	.LASF12:
+ 986 016c 75696E74 		.ascii	"uint16\000"
+ 986      313600
+ 987              	.LASF35:
+ 988 0173 42616C6C 		.ascii	"Balldispenser.c\000"
+ 988      64697370 
+ 988      656E7365 
+ 988      722E6300 
+ 989              	.LASF19:
+ 990 0183 44697370 		.ascii	"DispenseBalls\000"
+ 990      656E7365 
+ 990      42616C6C 
+ 990      7300
+ 991              	.LASF33:
+ 992 0191 4144435F 		.ascii	"ADC_DelSig_1_GetResult16\000"
+ 992      44656C53 
+ 992      69675F31 
+ 992      5F476574 
+ 992      52657375 
+ 993              	.LASF25:
+ 994 01aa 4144435F 		.ascii	"ADC_DelSig_1_Start\000"
+ 994      44656C53 
+ 994      69675F31 
+ 994      5F537461 
+ 994      727400
+ 995              	.LASF8:
+ 996 01bd 756E7369 		.ascii	"unsigned int\000"
+ 996      676E6564 
+ 996      20696E74 
+ 996      00
+ 997              	.LASF27:
+ 998 01ca 526F7461 		.ascii	"Rotate1802\000"
+ 998      74653138 
+ 998      303200
+ 999              	.LASF7:
+ 1000 01d5 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1000      206C6F6E 
+ 1000      6720756E 
+ 1000      7369676E 
+ 1000      65642069 
+ 1001              	.LASF31:
+ 1002 01ec 70696E5F 		.ascii	"pin_empty_Write\000"
+ 1002      656D7074 
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 22
+
+
+ 1002      795F5772 
+ 1002      69746500 
+ 1003              	.LASF10:
+ 1004 01fc 696E7433 		.ascii	"int32_t\000"
+ 1004      325F7400 
+ 1005              	.LASF24:
+ 1006 0204 53616D70 		.ascii	"Sample_Hold_1_Start\000"
+ 1006      6C655F48 
+ 1006      6F6C645F 
+ 1006      315F5374 
+ 1006      61727400 
+ 1007              	.LASF17:
+ 1008 0218 73697A65 		.ascii	"sizetype\000"
+ 1008      74797065 
+ 1008      00
+ 1009              	.LASF6:
+ 1010 0221 6C6F6E67 		.ascii	"long long int\000"
+ 1010      206C6F6E 
+ 1010      6720696E 
+ 1010      7400
+ 1011              	.LASF15:
+ 1012 022f 63686172 		.ascii	"char\000"
+ 1012      00
+ 1013              	.LASF21:
+ 1014 0234 636F756E 		.ascii	"count\000"
+ 1014      7400
+ 1015              	.LASF2:
+ 1016 023a 73686F72 		.ascii	"short int\000"
+ 1016      7420696E 
+ 1016      7400
+ 1017              	.LASF30:
+ 1018 0244 70696E5F 		.ascii	"pin_full_Write\000"
+ 1018      66756C6C 
+ 1018      5F577269 
+ 1018      746500
+ 1019              	.LASF22:
+ 1020 0253 62616C6C 		.ascii	"ball_count\000"
+ 1020      5F636F75 
+ 1020      6E7400
+ 1021              	.LASF4:
+ 1022 025e 6C6F6E67 		.ascii	"long int\000"
+ 1022      20696E74 
+ 1022      00
+ 1023              	.LASF32:
+ 1024 0267 4144435F 		.ascii	"ADC_DelSig_1_StartConvert\000"
+ 1024      44656C53 
+ 1024      69675F31 
+ 1024      5F537461 
+ 1024      7274436F 
+ 1025              	.LASF16:
+ 1026 0281 6C6F6E67 		.ascii	"long double\000"
+ 1026      20646F75 
+ 1026      626C6500 
+ 1027              	.LASF0:
+ 1028 028d 7369676E 		.ascii	"signed char\000"
+ 1028      65642063 
+ 1028      68617200 
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccYdjPbr.s 			page 23
+
+
+ 1029              	.LASF20:
+ 1030 0299 55706461 		.ascii	"UpdateStatusLEDS\000"
+ 1030      74655374 
+ 1030      61747573 
+ 1030      4C454453 
+ 1030      00
+ 1031              	.LASF26:
+ 1032 02aa 55415254 		.ascii	"UART_PutString\000"
+ 1032      5F507574 
+ 1032      53747269 
+ 1032      6E6700
+ 1033              	.LASF37:
+ 1034 02b9 636F756E 		.ascii	"countBalls\000"
+ 1034      7442616C 
+ 1034      6C7300
+ 1035              	.LASF18:
+ 1036 02c4 696E6974 		.ascii	"initBallDispenser\000"
+ 1036      42616C6C 
+ 1036      44697370 
+ 1036      656E7365 
+ 1036      7200
+ 1037              	.LASF28:
+ 1038 02d6 43794465 		.ascii	"CyDelay\000"
+ 1038      6C617900 
+ 1039              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

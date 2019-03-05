@@ -1,0 +1,6 @@
+\\vmware-host\Shared Folders\Documents\BallDispApp\Workspace12\Bolddispenser_CoinMaster.cydsn\Bolddispenser_CoinMaster.cyprj|c79cb5b5-405b-4d27-8fb6-d633ce7f3033
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|b7b66214-1c95-422e-a9ee-74124da4442c
+\\vmware-host\Shared Folders\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|61b9732a-fbbc-4f77-9124-8135a6f3d202
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|6f564098-6c50-4eb4-8a46-3acf2f259a33
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|ba1d9b22-21ef-463f-8ba9-240707eeca73
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|9a1cce2d-bd2a-4d44-8df4-0ae020938e41

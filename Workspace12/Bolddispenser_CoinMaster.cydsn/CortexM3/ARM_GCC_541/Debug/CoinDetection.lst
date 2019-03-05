@@ -1,0 +1,1306 @@
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"CoinDetection.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ISR_detection_handler,"ax",%progbits
+  20              		.align	2
+  21              		.global	ISR_detection_handler
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	ISR_detection_handler, %function
+  25              	ISR_detection_handler:
+  26              	.LFB66:
+  27              		.file 1 "CoinDetection.c"
+   1:CoinDetection.c **** #include "CoinDetection.h"
+   2:CoinDetection.c **** #define ISRENABLEDELAY 50
+   3:CoinDetection.c **** 
+   4:CoinDetection.c **** bool dispencerEnabled = true;
+   5:CoinDetection.c **** 
+   6:CoinDetection.c **** /*******************************************************************************
+   7:CoinDetection.c **** * Function Name: handleCoinDetection
+   8:CoinDetection.c **** ********************************************************************************
+   9:CoinDetection.c **** *
+  10:CoinDetection.c **** * Summary:    This function is called from the controller function,
+  11:CoinDetection.c **** *             it sends a message to the game controller that a coin has been
+  12:CoinDetection.c **** *             detected then checks if the dispencer is enabled and calls the
+  13:CoinDetection.c **** *             appropriate function. Finnaly it reenables the detection ISR to 
+  14:CoinDetection.c **** *             make the system ready for a new coin.
+  15:CoinDetection.c **** *
+  16:CoinDetection.c **** * Parameters:
+  17:CoinDetection.c **** *  None.
+  18:CoinDetection.c **** *
+  19:CoinDetection.c **** * Return:
+  20:CoinDetection.c **** *  None.
+  21:CoinDetection.c **** *
+  22:CoinDetection.c **** *******************************************************************************/
+  23:CoinDetection.c **** void handleCoinDetection()
+  24:CoinDetection.c **** {
+  25:CoinDetection.c ****     if(dispencerEnabled)
+  26:CoinDetection.c ****     {
+  27:CoinDetection.c ****         acceptCoin();
+  28:CoinDetection.c ****     }
+  29:CoinDetection.c ****     else
+  30:CoinDetection.c ****     {
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 2
+
+
+  31:CoinDetection.c ****         rejectCoin();
+  32:CoinDetection.c ****     }
+  33:CoinDetection.c **** };
+  34:CoinDetection.c **** 
+  35:CoinDetection.c **** 
+  36:CoinDetection.c **** 
+  37:CoinDetection.c **** /*******************************************************************************
+  38:CoinDetection.c **** * Function Name: initCoinDetector
+  39:CoinDetection.c **** ********************************************************************************
+  40:CoinDetection.c **** *
+  41:CoinDetection.c **** * Summary:    This function initialises the detection ISR.
+  42:CoinDetection.c **** *
+  43:CoinDetection.c **** * Parameters:
+  44:CoinDetection.c **** *  None.
+  45:CoinDetection.c **** *
+  46:CoinDetection.c **** * Return:
+  47:CoinDetection.c **** *  None.
+  48:CoinDetection.c **** *
+  49:CoinDetection.c **** *******************************************************************************/
+  50:CoinDetection.c **** void initCoinDetector()
+  51:CoinDetection.c **** {
+  52:CoinDetection.c ****     isr_detection_StartEx(ISR_detection_handler);
+  53:CoinDetection.c **** };
+  54:CoinDetection.c **** 
+  55:CoinDetection.c **** 
+  56:CoinDetection.c **** 
+  57:CoinDetection.c **** /*******************************************************************************
+  58:CoinDetection.c **** * Function Name: CY_ISR
+  59:CoinDetection.c **** ********************************************************************************
+  60:CoinDetection.c **** *
+  61:CoinDetection.c **** * Summary:    This function is the default ISR handeler for the detection ISR.
+  62:CoinDetection.c ****               It disables the ISR to prevent multiple coin detections then calls
+  63:CoinDetection.c ****               the handleCoinDetection function. 
+  64:CoinDetection.c **** *
+  65:CoinDetection.c **** * Parameters:
+  66:CoinDetection.c **** *  ISR_detection_handler spesifies which interrupt to handle
+  67:CoinDetection.c **** *
+  68:CoinDetection.c **** *******************************************************************************/
+  69:CoinDetection.c **** CY_ISR(ISR_detection_handler)
+  70:CoinDetection.c **** {
+  28              		.loc 1 70 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  71:CoinDetection.c ****     isr_detection_Disable();
+  36              		.loc 1 71 0
+  37 0002 FFF7FEFF 		bl	isr_detection_Disable
+  38              	.LVL0:
+  72:CoinDetection.c ****     UART_PutString("DetectionISR\r\n");
+  39              		.loc 1 72 0
+  40 0006 0348     		ldr	r0, .L3
+  41 0008 FFF7FEFF 		bl	UART_PutString
+  42              	.LVL1:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 3
+
+
+  73:CoinDetection.c ****     coinInserted();
+  43              		.loc 1 73 0
+  44 000c FFF7FEFF 		bl	coinInserted
+  45              	.LVL2:
+  46 0010 08BD     		pop	{r3, pc}
+  47              	.L4:
+  48 0012 00BF     		.align	2
+  49              	.L3:
+  50 0014 00000000 		.word	.LC0
+  51              		.cfi_endproc
+  52              	.LFE66:
+  53              		.size	ISR_detection_handler, .-ISR_detection_handler
+  54              		.section	.text.initCoinDetector,"ax",%progbits
+  55              		.align	2
+  56              		.global	initCoinDetector
+  57              		.thumb
+  58              		.thumb_func
+  59              		.type	initCoinDetector, %function
+  60              	initCoinDetector:
+  61              	.LFB65:
+  51:CoinDetection.c ****     isr_detection_StartEx(ISR_detection_handler);
+  62              		.loc 1 51 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66 0000 08B5     		push	{r3, lr}
+  67              		.cfi_def_cfa_offset 8
+  68              		.cfi_offset 3, -8
+  69              		.cfi_offset 14, -4
+  52:CoinDetection.c **** };
+  70              		.loc 1 52 0
+  71 0002 0248     		ldr	r0, .L7
+  72 0004 FFF7FEFF 		bl	isr_detection_StartEx
+  73              	.LVL3:
+  74 0008 08BD     		pop	{r3, pc}
+  75              	.L8:
+  76 000a 00BF     		.align	2
+  77              	.L7:
+  78 000c 00000000 		.word	ISR_detection_handler
+  79              		.cfi_endproc
+  80              	.LFE65:
+  81              		.size	initCoinDetector, .-initCoinDetector
+  82              		.section	.text.rejectCoin,"ax",%progbits
+  83              		.align	2
+  84              		.global	rejectCoin
+  85              		.thumb
+  86              		.thumb_func
+  87              		.type	rejectCoin, %function
+  88              	rejectCoin:
+  89              	.LFB67:
+  74:CoinDetection.c **** }
+  75:CoinDetection.c **** 
+  76:CoinDetection.c **** 
+  77:CoinDetection.c **** 
+  78:CoinDetection.c **** /*******************************************************************************
+  79:CoinDetection.c **** * Function Name: rejectCoin
+  80:CoinDetection.c **** ********************************************************************************
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 4
+
+
+  81:CoinDetection.c **** *
+  82:CoinDetection.c **** * Summary:    This function is responcible for coin rejection, it calles the 
+  83:CoinDetection.c ****               motor control functions required to reject a coin from the system.
+  84:CoinDetection.c **** *
+  85:CoinDetection.c **** * Parameters:
+  86:CoinDetection.c **** *  None.
+  87:CoinDetection.c **** *
+  88:CoinDetection.c **** * Return:
+  89:CoinDetection.c **** *  None.
+  90:CoinDetection.c **** *
+  91:CoinDetection.c **** *******************************************************************************/
+  92:CoinDetection.c **** void rejectCoin()
+  93:CoinDetection.c **** {
+  90              		.loc 1 93 0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94 0000 08B5     		push	{r3, lr}
+  95              		.cfi_def_cfa_offset 8
+  96              		.cfi_offset 3, -8
+  97              		.cfi_offset 14, -4
+  94:CoinDetection.c ****     Rotate90();
+  98              		.loc 1 94 0
+  99 0002 FFF7FEFF 		bl	Rotate90
+ 100              	.LVL4:
+  95:CoinDetection.c ****     revRotate90();
+ 101              		.loc 1 95 0
+ 102 0006 FFF7FEFF 		bl	revRotate90
+ 103              	.LVL5:
+ 104 000a 08BD     		pop	{r3, pc}
+ 105              		.cfi_endproc
+ 106              	.LFE67:
+ 107              		.size	rejectCoin, .-rejectCoin
+ 108              		.section	.text.acceptCoin,"ax",%progbits
+ 109              		.align	2
+ 110              		.global	acceptCoin
+ 111              		.thumb
+ 112              		.thumb_func
+ 113              		.type	acceptCoin, %function
+ 114              	acceptCoin:
+ 115              	.LFB68:
+  96:CoinDetection.c **** };
+  97:CoinDetection.c **** 
+  98:CoinDetection.c **** 
+  99:CoinDetection.c **** 
+ 100:CoinDetection.c **** /*******************************************************************************
+ 101:CoinDetection.c **** * Function Name: acceptCoin
+ 102:CoinDetection.c **** ********************************************************************************
+ 103:CoinDetection.c **** *
+ 104:CoinDetection.c **** * Summary:    This function is responcible for accepting a coin into the system, 
+ 105:CoinDetection.c ****               it calles the motor control functions required to accept a coin
+ 106:CoinDetection.c ****               then reenables the detection ISR to make the system ready for a 
+ 107:CoinDetection.c ****               new coin.
+ 108:CoinDetection.c **** *
+ 109:CoinDetection.c **** * Parameters:
+ 110:CoinDetection.c **** *  None.
+ 111:CoinDetection.c **** *
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 5
+
+
+ 112:CoinDetection.c **** * Return:
+ 113:CoinDetection.c **** *  None.
+ 114:CoinDetection.c **** *
+ 115:CoinDetection.c **** *******************************************************************************/
+ 116:CoinDetection.c **** void acceptCoin()
+ 117:CoinDetection.c **** {
+ 116              		.loc 1 117 0
+ 117              		.cfi_startproc
+ 118              		@ args = 0, pretend = 0, frame = 0
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120 0000 08B5     		push	{r3, lr}
+ 121              		.cfi_def_cfa_offset 8
+ 122              		.cfi_offset 3, -8
+ 123              		.cfi_offset 14, -4
+ 118:CoinDetection.c ****     revRotate90();
+ 124              		.loc 1 118 0
+ 125 0002 FFF7FEFF 		bl	revRotate90
+ 126              	.LVL6:
+ 119:CoinDetection.c ****     Rotate90();
+ 127              		.loc 1 119 0
+ 128 0006 FFF7FEFF 		bl	Rotate90
+ 129              	.LVL7:
+ 130 000a 08BD     		pop	{r3, pc}
+ 131              		.cfi_endproc
+ 132              	.LFE68:
+ 133              		.size	acceptCoin, .-acceptCoin
+ 134              		.section	.text.handleCoinDetection,"ax",%progbits
+ 135              		.align	2
+ 136              		.global	handleCoinDetection
+ 137              		.thumb
+ 138              		.thumb_func
+ 139              		.type	handleCoinDetection, %function
+ 140              	handleCoinDetection:
+ 141              	.LFB64:
+  24:CoinDetection.c ****     if(dispencerEnabled)
+ 142              		.loc 1 24 0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 0
+ 145              		@ frame_needed = 0, uses_anonymous_args = 0
+ 146 0000 08B5     		push	{r3, lr}
+ 147              		.cfi_def_cfa_offset 8
+ 148              		.cfi_offset 3, -8
+ 149              		.cfi_offset 14, -4
+  25:CoinDetection.c ****     {
+ 150              		.loc 1 25 0
+ 151 0002 044B     		ldr	r3, .L17
+ 152 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 153 0006 13B1     		cbz	r3, .L14
+  27:CoinDetection.c ****     }
+ 154              		.loc 1 27 0
+ 155 0008 FFF7FEFF 		bl	acceptCoin
+ 156              	.LVL8:
+ 157 000c 08BD     		pop	{r3, pc}
+ 158              	.L14:
+  31:CoinDetection.c ****     }
+ 159              		.loc 1 31 0
+ 160 000e FFF7FEFF 		bl	rejectCoin
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 6
+
+
+ 161              	.LVL9:
+ 162 0012 08BD     		pop	{r3, pc}
+ 163              	.L18:
+ 164              		.align	2
+ 165              	.L17:
+ 166 0014 00000000 		.word	.LANCHOR0
+ 167              		.cfi_endproc
+ 168              	.LFE64:
+ 169              		.size	handleCoinDetection, .-handleCoinDetection
+ 170              		.section	.text.disableDispenser,"ax",%progbits
+ 171              		.align	2
+ 172              		.global	disableDispenser
+ 173              		.thumb
+ 174              		.thumb_func
+ 175              		.type	disableDispenser, %function
+ 176              	disableDispenser:
+ 177              	.LFB69:
+ 120:CoinDetection.c **** };
+ 121:CoinDetection.c **** 
+ 122:CoinDetection.c **** 
+ 123:CoinDetection.c **** 
+ 124:CoinDetection.c **** /*******************************************************************************
+ 125:CoinDetection.c **** * Function Name: disableDispencer
+ 126:CoinDetection.c **** ********************************************************************************
+ 127:CoinDetection.c **** *
+ 128:CoinDetection.c **** * Summary:    This function disables the dispenser, this function is called from
+ 129:CoinDetection.c ****               the I2C handler when it recives a message from the game controller 
+ 130:CoinDetection.c ****               that the game is active.
+ 131:CoinDetection.c **** *
+ 132:CoinDetection.c **** * Parameters:
+ 133:CoinDetection.c **** *  None.
+ 134:CoinDetection.c **** *
+ 135:CoinDetection.c **** * Return:
+ 136:CoinDetection.c **** *  None.
+ 137:CoinDetection.c **** *
+ 138:CoinDetection.c **** *******************************************************************************/
+ 139:CoinDetection.c **** void disableDispenser()
+ 140:CoinDetection.c **** {
+ 178              		.loc 1 140 0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182 0000 08B5     		push	{r3, lr}
+ 183              		.cfi_def_cfa_offset 8
+ 184              		.cfi_offset 3, -8
+ 185              		.cfi_offset 14, -4
+ 141:CoinDetection.c ****     dispencerEnabled = false;
+ 186              		.loc 1 141 0
+ 187 0002 0022     		movs	r2, #0
+ 188 0004 024B     		ldr	r3, .L21
+ 189 0006 1A70     		strb	r2, [r3]
+ 142:CoinDetection.c ****     UART_PutString("Coinmaster 2000 disabled\r\n");
+ 190              		.loc 1 142 0
+ 191 0008 0248     		ldr	r0, .L21+4
+ 192 000a FFF7FEFF 		bl	UART_PutString
+ 193              	.LVL10:
+ 194 000e 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 7
+
+
+ 195              	.L22:
+ 196              		.align	2
+ 197              	.L21:
+ 198 0010 00000000 		.word	.LANCHOR0
+ 199 0014 10000000 		.word	.LC1
+ 200              		.cfi_endproc
+ 201              	.LFE69:
+ 202              		.size	disableDispenser, .-disableDispenser
+ 203              		.section	.text.enableDispenser,"ax",%progbits
+ 204              		.align	2
+ 205              		.global	enableDispenser
+ 206              		.thumb
+ 207              		.thumb_func
+ 208              		.type	enableDispenser, %function
+ 209              	enableDispenser:
+ 210              	.LFB70:
+ 143:CoinDetection.c **** };
+ 144:CoinDetection.c **** 
+ 145:CoinDetection.c **** 
+ 146:CoinDetection.c **** 
+ 147:CoinDetection.c **** /*******************************************************************************
+ 148:CoinDetection.c **** * Function Name: enableDispencer
+ 149:CoinDetection.c **** ********************************************************************************
+ 150:CoinDetection.c **** *
+ 151:CoinDetection.c **** * Summary:    This function enables the dispenser, this function is called from
+ 152:CoinDetection.c ****               the I2C handler when it recives a message from the game controller 
+ 153:CoinDetection.c ****               that the game is idle.
+ 154:CoinDetection.c **** *
+ 155:CoinDetection.c **** * Parameters:
+ 156:CoinDetection.c **** *  None.
+ 157:CoinDetection.c **** *
+ 158:CoinDetection.c **** * Return:
+ 159:CoinDetection.c **** *  None.
+ 160:CoinDetection.c **** *
+ 161:CoinDetection.c **** *******************************************************************************/
+ 162:CoinDetection.c **** void enableDispenser()
+ 163:CoinDetection.c **** {
+ 211              		.loc 1 163 0
+ 212              		.cfi_startproc
+ 213              		@ args = 0, pretend = 0, frame = 0
+ 214              		@ frame_needed = 0, uses_anonymous_args = 0
+ 215 0000 08B5     		push	{r3, lr}
+ 216              		.cfi_def_cfa_offset 8
+ 217              		.cfi_offset 3, -8
+ 218              		.cfi_offset 14, -4
+ 164:CoinDetection.c ****     dispencerEnabled = true;
+ 219              		.loc 1 164 0
+ 220 0002 0122     		movs	r2, #1
+ 221 0004 024B     		ldr	r3, .L25
+ 222 0006 1A70     		strb	r2, [r3]
+ 165:CoinDetection.c ****     UART_PutString("Coinmaster 2000 enabled\r\n");
+ 223              		.loc 1 165 0
+ 224 0008 0248     		ldr	r0, .L25+4
+ 225 000a FFF7FEFF 		bl	UART_PutString
+ 226              	.LVL11:
+ 227 000e 08BD     		pop	{r3, pc}
+ 228              	.L26:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 8
+
+
+ 229              		.align	2
+ 230              	.L25:
+ 231 0010 00000000 		.word	.LANCHOR0
+ 232 0014 2C000000 		.word	.LC2
+ 233              		.cfi_endproc
+ 234              	.LFE70:
+ 235              		.size	enableDispenser, .-enableDispenser
+ 236              		.section	.text.resetDetectionISR,"ax",%progbits
+ 237              		.align	2
+ 238              		.global	resetDetectionISR
+ 239              		.thumb
+ 240              		.thumb_func
+ 241              		.type	resetDetectionISR, %function
+ 242              	resetDetectionISR:
+ 243              	.LFB71:
+ 166:CoinDetection.c **** };
+ 167:CoinDetection.c **** 
+ 168:CoinDetection.c **** 
+ 169:CoinDetection.c **** 
+ 170:CoinDetection.c **** /*******************************************************************************
+ 171:CoinDetection.c **** * Function Name: resetDetectionISR
+ 172:CoinDetection.c **** ********************************************************************************
+ 173:CoinDetection.c **** *
+ 174:CoinDetection.c **** * Summary:    Clears the interrupt and reenables the detection ISR.
+ 175:CoinDetection.c **** *
+ 176:CoinDetection.c **** * Parameters:
+ 177:CoinDetection.c **** *  None.
+ 178:CoinDetection.c **** *
+ 179:CoinDetection.c **** * Return:
+ 180:CoinDetection.c **** *  None.
+ 181:CoinDetection.c **** *
+ 182:CoinDetection.c **** *******************************************************************************/
+ 183:CoinDetection.c **** void resetDetectionISR()
+ 184:CoinDetection.c **** {
+ 244              		.loc 1 184 0
+ 245              		.cfi_startproc
+ 246              		@ args = 0, pretend = 0, frame = 0
+ 247              		@ frame_needed = 0, uses_anonymous_args = 0
+ 248 0000 08B5     		push	{r3, lr}
+ 249              		.cfi_def_cfa_offset 8
+ 250              		.cfi_offset 3, -8
+ 251              		.cfi_offset 14, -4
+ 185:CoinDetection.c ****     isr_detection_Enable();
+ 252              		.loc 1 185 0
+ 253 0002 FFF7FEFF 		bl	isr_detection_Enable
+ 254              	.LVL12:
+ 186:CoinDetection.c ****     isr_detection_ClearPending();
+ 255              		.loc 1 186 0
+ 256 0006 FFF7FEFF 		bl	isr_detection_ClearPending
+ 257              	.LVL13:
+ 258 000a 08BD     		pop	{r3, pc}
+ 259              		.cfi_endproc
+ 260              	.LFE71:
+ 261              		.size	resetDetectionISR, .-resetDetectionISR
+ 262              		.global	dispencerEnabled
+ 263              		.data
+ 264              		.set	.LANCHOR0,. + 0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 9
+
+
+ 265              		.type	dispencerEnabled, %object
+ 266              		.size	dispencerEnabled, 1
+ 267              	dispencerEnabled:
+ 268 0000 01       		.byte	1
+ 269              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 270              		.align	2
+ 271              	.LC0:
+ 272 0000 44657465 		.ascii	"DetectionISR\015\012\000"
+ 272      6374696F 
+ 272      6E495352 
+ 272      0D0A00
+ 273 000f 00       		.space	1
+ 274              	.LC1:
+ 275 0010 436F696E 		.ascii	"Coinmaster 2000 disabled\015\012\000"
+ 275      6D617374 
+ 275      65722032 
+ 275      30303020 
+ 275      64697361 
+ 276 002b 00       		.space	1
+ 277              	.LC2:
+ 278 002c 436F696E 		.ascii	"Coinmaster 2000 enabled\015\012\000"
+ 278      6D617374 
+ 278      65722032 
+ 278      30303020 
+ 278      656E6162 
+ 279              		.text
+ 280              	.Letext0:
+ 281              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 282              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 283              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 284              		.file 5 "Generated_Source\\PSoC5/isr_detection.h"
+ 285              		.file 6 "Generated_Source\\PSoC5/UART.h"
+ 286              		.file 7 "controller.h"
+ 287              		.file 8 "MotorControl.h"
+ 288              		.section	.debug_info,"",%progbits
+ 289              	.Ldebug_info0:
+ 290 0000 7C020000 		.4byte	0x27c
+ 291 0004 0400     		.2byte	0x4
+ 292 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 293 000a 04       		.byte	0x4
+ 294 000b 01       		.uleb128 0x1
+ 295 000c ED000000 		.4byte	.LASF34
+ 296 0010 0C       		.byte	0xc
+ 297 0011 86020000 		.4byte	.LASF35
+ 298 0015 81000000 		.4byte	.LASF36
+ 299 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 300 001d 00000000 		.4byte	0
+ 301 0021 00000000 		.4byte	.Ldebug_line0
+ 302 0025 02       		.uleb128 0x2
+ 303 0026 01       		.byte	0x1
+ 304 0027 06       		.byte	0x6
+ 305 0028 B2020000 		.4byte	.LASF0
+ 306 002c 02       		.uleb128 0x2
+ 307 002d 01       		.byte	0x1
+ 308 002e 08       		.byte	0x8
+ 309 002f DF000000 		.4byte	.LASF1
+ 310 0033 02       		.uleb128 0x2
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 10
+
+
+ 311 0034 02       		.byte	0x2
+ 312 0035 05       		.byte	0x5
+ 313 0036 7C020000 		.4byte	.LASF2
+ 314 003a 02       		.uleb128 0x2
+ 315 003b 02       		.byte	0x2
+ 316 003c 07       		.byte	0x7
+ 317 003d 8D010000 		.4byte	.LASF3
+ 318 0041 03       		.uleb128 0x3
+ 319 0042 3C000000 		.4byte	.LASF9
+ 320 0046 02       		.byte	0x2
+ 321 0047 3F       		.byte	0x3f
+ 322 0048 4C000000 		.4byte	0x4c
+ 323 004c 02       		.uleb128 0x2
+ 324 004d 04       		.byte	0x4
+ 325 004e 05       		.byte	0x5
+ 326 004f 46000000 		.4byte	.LASF4
+ 327 0053 02       		.uleb128 0x2
+ 328 0054 04       		.byte	0x4
+ 329 0055 07       		.byte	0x7
+ 330 0056 7B010000 		.4byte	.LASF5
+ 331 005a 02       		.uleb128 0x2
+ 332 005b 08       		.byte	0x8
+ 333 005c 05       		.byte	0x5
+ 334 005d 69020000 		.4byte	.LASF6
+ 335 0061 02       		.uleb128 0x2
+ 336 0062 08       		.byte	0x8
+ 337 0063 07       		.byte	0x7
+ 338 0064 2B020000 		.4byte	.LASF7
+ 339 0068 04       		.uleb128 0x4
+ 340 0069 04       		.byte	0x4
+ 341 006a 05       		.byte	0x5
+ 342 006b 696E7400 		.ascii	"int\000"
+ 343 006f 02       		.uleb128 0x2
+ 344 0070 04       		.byte	0x4
+ 345 0071 07       		.byte	0x7
+ 346 0072 1E020000 		.4byte	.LASF8
+ 347 0076 03       		.uleb128 0x3
+ 348 0077 58020000 		.4byte	.LASF10
+ 349 007b 03       		.byte	0x3
+ 350 007c 2C       		.byte	0x2c
+ 351 007d 41000000 		.4byte	0x41
+ 352 0081 02       		.uleb128 0x2
+ 353 0082 04       		.byte	0x4
+ 354 0083 04       		.byte	0x4
+ 355 0084 7B000000 		.4byte	.LASF11
+ 356 0088 02       		.uleb128 0x2
+ 357 0089 08       		.byte	0x8
+ 358 008a 04       		.byte	0x4
+ 359 008b BE010000 		.4byte	.LASF12
+ 360 008f 02       		.uleb128 0x2
+ 361 0090 01       		.byte	0x1
+ 362 0091 08       		.byte	0x8
+ 363 0092 77020000 		.4byte	.LASF13
+ 364 0096 02       		.uleb128 0x2
+ 365 0097 08       		.byte	0x8
+ 366 0098 04       		.byte	0x4
+ 367 0099 A6020000 		.4byte	.LASF14
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 11
+
+
+ 368 009d 02       		.uleb128 0x2
+ 369 009e 04       		.byte	0x4
+ 370 009f 07       		.byte	0x7
+ 371 00a0 60020000 		.4byte	.LASF15
+ 372 00a4 05       		.uleb128 0x5
+ 373 00a5 26000000 		.4byte	.LASF37
+ 374 00a9 01       		.byte	0x1
+ 375 00aa 45       		.byte	0x45
+ 376 00ab 00000000 		.4byte	.LFB66
+ 377 00af 18000000 		.4byte	.LFE66-.LFB66
+ 378 00b3 01       		.uleb128 0x1
+ 379 00b4 9C       		.byte	0x9c
+ 380 00b5 E3000000 		.4byte	0xe3
+ 381 00b9 06       		.uleb128 0x6
+ 382 00ba 06000000 		.4byte	.LVL0
+ 383 00be 27020000 		.4byte	0x227
+ 384 00c2 07       		.uleb128 0x7
+ 385 00c3 0C000000 		.4byte	.LVL1
+ 386 00c7 32020000 		.4byte	0x232
+ 387 00cb D9000000 		.4byte	0xd9
+ 388 00cf 08       		.uleb128 0x8
+ 389 00d0 01       		.uleb128 0x1
+ 390 00d1 50       		.byte	0x50
+ 391 00d2 05       		.uleb128 0x5
+ 392 00d3 03       		.byte	0x3
+ 393 00d4 00000000 		.4byte	.LC0
+ 394 00d8 00       		.byte	0
+ 395 00d9 06       		.uleb128 0x6
+ 396 00da 10000000 		.4byte	.LVL2
+ 397 00de 3D020000 		.4byte	0x23d
+ 398 00e2 00       		.byte	0
+ 399 00e3 09       		.uleb128 0x9
+ 400 00e4 A0010000 		.4byte	.LASF16
+ 401 00e8 01       		.byte	0x1
+ 402 00e9 32       		.byte	0x32
+ 403 00ea 00000000 		.4byte	.LFB65
+ 404 00ee 10000000 		.4byte	.LFE65-.LFB65
+ 405 00f2 01       		.uleb128 0x1
+ 406 00f3 9C       		.byte	0x9c
+ 407 00f4 0C010000 		.4byte	0x10c
+ 408 00f8 0A       		.uleb128 0xa
+ 409 00f9 08000000 		.4byte	.LVL3
+ 410 00fd 48020000 		.4byte	0x248
+ 411 0101 08       		.uleb128 0x8
+ 412 0102 01       		.uleb128 0x1
+ 413 0103 50       		.byte	0x50
+ 414 0104 05       		.uleb128 0x5
+ 415 0105 03       		.byte	0x3
+ 416 0106 00000000 		.4byte	ISR_detection_handler
+ 417 010a 00       		.byte	0
+ 418 010b 00       		.byte	0
+ 419 010c 09       		.uleb128 0x9
+ 420 010d 70000000 		.4byte	.LASF17
+ 421 0111 01       		.byte	0x1
+ 422 0112 5C       		.byte	0x5c
+ 423 0113 00000000 		.4byte	.LFB67
+ 424 0117 0C000000 		.4byte	.LFE67-.LFB67
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 12
+
+
+ 425 011b 01       		.uleb128 0x1
+ 426 011c 9C       		.byte	0x9c
+ 427 011d 34010000 		.4byte	0x134
+ 428 0121 06       		.uleb128 0x6
+ 429 0122 06000000 		.4byte	.LVL4
+ 430 0126 53020000 		.4byte	0x253
+ 431 012a 06       		.uleb128 0x6
+ 432 012b 0A000000 		.4byte	.LVL5
+ 433 012f 5E020000 		.4byte	0x25e
+ 434 0133 00       		.byte	0
+ 435 0134 09       		.uleb128 0x9
+ 436 0135 58000000 		.4byte	.LASF18
+ 437 0139 01       		.byte	0x1
+ 438 013a 74       		.byte	0x74
+ 439 013b 00000000 		.4byte	.LFB68
+ 440 013f 0C000000 		.4byte	.LFE68-.LFB68
+ 441 0143 01       		.uleb128 0x1
+ 442 0144 9C       		.byte	0x9c
+ 443 0145 5C010000 		.4byte	0x15c
+ 444 0149 06       		.uleb128 0x6
+ 445 014a 06000000 		.4byte	.LVL6
+ 446 014e 5E020000 		.4byte	0x25e
+ 447 0152 06       		.uleb128 0x6
+ 448 0153 0A000000 		.4byte	.LVL7
+ 449 0157 53020000 		.4byte	0x253
+ 450 015b 00       		.byte	0
+ 451 015c 09       		.uleb128 0x9
+ 452 015d F8010000 		.4byte	.LASF19
+ 453 0161 01       		.byte	0x1
+ 454 0162 17       		.byte	0x17
+ 455 0163 00000000 		.4byte	.LFB64
+ 456 0167 18000000 		.4byte	.LFE64-.LFB64
+ 457 016b 01       		.uleb128 0x1
+ 458 016c 9C       		.byte	0x9c
+ 459 016d 84010000 		.4byte	0x184
+ 460 0171 06       		.uleb128 0x6
+ 461 0172 0C000000 		.4byte	.LVL8
+ 462 0176 34010000 		.4byte	0x134
+ 463 017a 06       		.uleb128 0x6
+ 464 017b 12000000 		.4byte	.LVL9
+ 465 017f 0C010000 		.4byte	0x10c
+ 466 0183 00       		.byte	0
+ 467 0184 09       		.uleb128 0x9
+ 468 0185 D1010000 		.4byte	.LASF20
+ 469 0189 01       		.byte	0x1
+ 470 018a 8B       		.byte	0x8b
+ 471 018b 00000000 		.4byte	.LFB69
+ 472 018f 18000000 		.4byte	.LFE69-.LFB69
+ 473 0193 01       		.uleb128 0x1
+ 474 0194 9C       		.byte	0x9c
+ 475 0195 AD010000 		.4byte	0x1ad
+ 476 0199 0A       		.uleb128 0xa
+ 477 019a 0E000000 		.4byte	.LVL10
+ 478 019e 32020000 		.4byte	0x232
+ 479 01a2 08       		.uleb128 0x8
+ 480 01a3 01       		.uleb128 0x1
+ 481 01a4 50       		.byte	0x50
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 13
+
+
+ 482 01a5 05       		.uleb128 0x5
+ 483 01a6 03       		.byte	0x3
+ 484 01a7 10000000 		.4byte	.LC1
+ 485 01ab 00       		.byte	0
+ 486 01ac 00       		.byte	0
+ 487 01ad 09       		.uleb128 0x9
+ 488 01ae 96020000 		.4byte	.LASF21
+ 489 01b2 01       		.byte	0x1
+ 490 01b3 A2       		.byte	0xa2
+ 491 01b4 00000000 		.4byte	.LFB70
+ 492 01b8 18000000 		.4byte	.LFE70-.LFB70
+ 493 01bc 01       		.uleb128 0x1
+ 494 01bd 9C       		.byte	0x9c
+ 495 01be D6010000 		.4byte	0x1d6
+ 496 01c2 0A       		.uleb128 0xa
+ 497 01c3 0E000000 		.4byte	.LVL11
+ 498 01c7 32020000 		.4byte	0x232
+ 499 01cb 08       		.uleb128 0x8
+ 500 01cc 01       		.uleb128 0x1
+ 501 01cd 50       		.byte	0x50
+ 502 01ce 05       		.uleb128 0x5
+ 503 01cf 03       		.byte	0x3
+ 504 01d0 2C000000 		.4byte	.LC2
+ 505 01d4 00       		.byte	0
+ 506 01d5 00       		.byte	0
+ 507 01d6 09       		.uleb128 0x9
+ 508 01d7 0C020000 		.4byte	.LASF22
+ 509 01db 01       		.byte	0x1
+ 510 01dc B7       		.byte	0xb7
+ 511 01dd 00000000 		.4byte	.LFB71
+ 512 01e1 0C000000 		.4byte	.LFE71-.LFB71
+ 513 01e5 01       		.uleb128 0x1
+ 514 01e6 9C       		.byte	0x9c
+ 515 01e7 FE010000 		.4byte	0x1fe
+ 516 01eb 06       		.uleb128 0x6
+ 517 01ec 06000000 		.4byte	.LVL12
+ 518 01f0 69020000 		.4byte	0x269
+ 519 01f4 06       		.uleb128 0x6
+ 520 01f5 0A000000 		.4byte	.LVL13
+ 521 01f9 74020000 		.4byte	0x274
+ 522 01fd 00       		.byte	0
+ 523 01fe 0B       		.uleb128 0xb
+ 524 01ff B1010000 		.4byte	.LASF23
+ 525 0203 04       		.byte	0x4
+ 526 0204 1207     		.2byte	0x712
+ 527 0206 0A020000 		.4byte	0x20a
+ 528 020a 0C       		.uleb128 0xc
+ 529 020b 76000000 		.4byte	0x76
+ 530 020f 0D       		.uleb128 0xd
+ 531 0210 15000000 		.4byte	.LASF24
+ 532 0214 01       		.byte	0x1
+ 533 0215 04       		.byte	0x4
+ 534 0216 20020000 		.4byte	0x220
+ 535 021a 05       		.uleb128 0x5
+ 536 021b 03       		.byte	0x3
+ 537 021c 00000000 		.4byte	dispencerEnabled
+ 538 0220 02       		.uleb128 0x2
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 14
+
+
+ 539 0221 01       		.byte	0x1
+ 540 0222 02       		.byte	0x2
+ 541 0223 CD020000 		.4byte	.LASF25
+ 542 0227 0E       		.uleb128 0xe
+ 543 0228 42020000 		.4byte	.LASF26
+ 544 022c 42020000 		.4byte	.LASF26
+ 545 0230 05       		.byte	0x5
+ 546 0231 25       		.byte	0x25
+ 547 0232 0E       		.uleb128 0xe
+ 548 0233 BE020000 		.4byte	.LASF27
+ 549 0237 BE020000 		.4byte	.LASF27
+ 550 023b 06       		.byte	0x6
+ 551 023c 8B       		.byte	0x8b
+ 552 023d 0E       		.uleb128 0xe
+ 553 023e 63000000 		.4byte	.LASF28
+ 554 0242 63000000 		.4byte	.LASF28
+ 555 0246 07       		.byte	0x7
+ 556 0247 0F       		.byte	0xf
+ 557 0248 0E       		.uleb128 0xe
+ 558 0249 E2010000 		.4byte	.LASF29
+ 559 024d E2010000 		.4byte	.LASF29
+ 560 0251 05       		.byte	0x5
+ 561 0252 18       		.byte	0x18
+ 562 0253 0E       		.uleb128 0xe
+ 563 0254 4F000000 		.4byte	.LASF30
+ 564 0258 4F000000 		.4byte	.LASF30
+ 565 025c 08       		.byte	0x8
+ 566 025d 0E       		.byte	0xe
+ 567 025e 0E       		.uleb128 0xe
+ 568 025f C5010000 		.4byte	.LASF31
+ 569 0263 C5010000 		.4byte	.LASF31
+ 570 0267 08       		.byte	0x8
+ 571 0268 12       		.byte	0x12
+ 572 0269 0E       		.uleb128 0xe
+ 573 026a 00000000 		.4byte	.LASF32
+ 574 026e 00000000 		.4byte	.LASF32
+ 575 0272 05       		.byte	0x5
+ 576 0273 23       		.byte	0x23
+ 577 0274 0E       		.uleb128 0xe
+ 578 0275 D3020000 		.4byte	.LASF33
+ 579 0279 D3020000 		.4byte	.LASF33
+ 580 027d 05       		.byte	0x5
+ 581 027e 28       		.byte	0x28
+ 582 027f 00       		.byte	0
+ 583              		.section	.debug_abbrev,"",%progbits
+ 584              	.Ldebug_abbrev0:
+ 585 0000 01       		.uleb128 0x1
+ 586 0001 11       		.uleb128 0x11
+ 587 0002 01       		.byte	0x1
+ 588 0003 25       		.uleb128 0x25
+ 589 0004 0E       		.uleb128 0xe
+ 590 0005 13       		.uleb128 0x13
+ 591 0006 0B       		.uleb128 0xb
+ 592 0007 03       		.uleb128 0x3
+ 593 0008 0E       		.uleb128 0xe
+ 594 0009 1B       		.uleb128 0x1b
+ 595 000a 0E       		.uleb128 0xe
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 15
+
+
+ 596 000b 55       		.uleb128 0x55
+ 597 000c 17       		.uleb128 0x17
+ 598 000d 11       		.uleb128 0x11
+ 599 000e 01       		.uleb128 0x1
+ 600 000f 10       		.uleb128 0x10
+ 601 0010 17       		.uleb128 0x17
+ 602 0011 00       		.byte	0
+ 603 0012 00       		.byte	0
+ 604 0013 02       		.uleb128 0x2
+ 605 0014 24       		.uleb128 0x24
+ 606 0015 00       		.byte	0
+ 607 0016 0B       		.uleb128 0xb
+ 608 0017 0B       		.uleb128 0xb
+ 609 0018 3E       		.uleb128 0x3e
+ 610 0019 0B       		.uleb128 0xb
+ 611 001a 03       		.uleb128 0x3
+ 612 001b 0E       		.uleb128 0xe
+ 613 001c 00       		.byte	0
+ 614 001d 00       		.byte	0
+ 615 001e 03       		.uleb128 0x3
+ 616 001f 16       		.uleb128 0x16
+ 617 0020 00       		.byte	0
+ 618 0021 03       		.uleb128 0x3
+ 619 0022 0E       		.uleb128 0xe
+ 620 0023 3A       		.uleb128 0x3a
+ 621 0024 0B       		.uleb128 0xb
+ 622 0025 3B       		.uleb128 0x3b
+ 623 0026 0B       		.uleb128 0xb
+ 624 0027 49       		.uleb128 0x49
+ 625 0028 13       		.uleb128 0x13
+ 626 0029 00       		.byte	0
+ 627 002a 00       		.byte	0
+ 628 002b 04       		.uleb128 0x4
+ 629 002c 24       		.uleb128 0x24
+ 630 002d 00       		.byte	0
+ 631 002e 0B       		.uleb128 0xb
+ 632 002f 0B       		.uleb128 0xb
+ 633 0030 3E       		.uleb128 0x3e
+ 634 0031 0B       		.uleb128 0xb
+ 635 0032 03       		.uleb128 0x3
+ 636 0033 08       		.uleb128 0x8
+ 637 0034 00       		.byte	0
+ 638 0035 00       		.byte	0
+ 639 0036 05       		.uleb128 0x5
+ 640 0037 2E       		.uleb128 0x2e
+ 641 0038 01       		.byte	0x1
+ 642 0039 3F       		.uleb128 0x3f
+ 643 003a 19       		.uleb128 0x19
+ 644 003b 03       		.uleb128 0x3
+ 645 003c 0E       		.uleb128 0xe
+ 646 003d 3A       		.uleb128 0x3a
+ 647 003e 0B       		.uleb128 0xb
+ 648 003f 3B       		.uleb128 0x3b
+ 649 0040 0B       		.uleb128 0xb
+ 650 0041 27       		.uleb128 0x27
+ 651 0042 19       		.uleb128 0x19
+ 652 0043 11       		.uleb128 0x11
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 16
+
+
+ 653 0044 01       		.uleb128 0x1
+ 654 0045 12       		.uleb128 0x12
+ 655 0046 06       		.uleb128 0x6
+ 656 0047 40       		.uleb128 0x40
+ 657 0048 18       		.uleb128 0x18
+ 658 0049 9742     		.uleb128 0x2117
+ 659 004b 19       		.uleb128 0x19
+ 660 004c 01       		.uleb128 0x1
+ 661 004d 13       		.uleb128 0x13
+ 662 004e 00       		.byte	0
+ 663 004f 00       		.byte	0
+ 664 0050 06       		.uleb128 0x6
+ 665 0051 898201   		.uleb128 0x4109
+ 666 0054 00       		.byte	0
+ 667 0055 11       		.uleb128 0x11
+ 668 0056 01       		.uleb128 0x1
+ 669 0057 31       		.uleb128 0x31
+ 670 0058 13       		.uleb128 0x13
+ 671 0059 00       		.byte	0
+ 672 005a 00       		.byte	0
+ 673 005b 07       		.uleb128 0x7
+ 674 005c 898201   		.uleb128 0x4109
+ 675 005f 01       		.byte	0x1
+ 676 0060 11       		.uleb128 0x11
+ 677 0061 01       		.uleb128 0x1
+ 678 0062 31       		.uleb128 0x31
+ 679 0063 13       		.uleb128 0x13
+ 680 0064 01       		.uleb128 0x1
+ 681 0065 13       		.uleb128 0x13
+ 682 0066 00       		.byte	0
+ 683 0067 00       		.byte	0
+ 684 0068 08       		.uleb128 0x8
+ 685 0069 8A8201   		.uleb128 0x410a
+ 686 006c 00       		.byte	0
+ 687 006d 02       		.uleb128 0x2
+ 688 006e 18       		.uleb128 0x18
+ 689 006f 9142     		.uleb128 0x2111
+ 690 0071 18       		.uleb128 0x18
+ 691 0072 00       		.byte	0
+ 692 0073 00       		.byte	0
+ 693 0074 09       		.uleb128 0x9
+ 694 0075 2E       		.uleb128 0x2e
+ 695 0076 01       		.byte	0x1
+ 696 0077 3F       		.uleb128 0x3f
+ 697 0078 19       		.uleb128 0x19
+ 698 0079 03       		.uleb128 0x3
+ 699 007a 0E       		.uleb128 0xe
+ 700 007b 3A       		.uleb128 0x3a
+ 701 007c 0B       		.uleb128 0xb
+ 702 007d 3B       		.uleb128 0x3b
+ 703 007e 0B       		.uleb128 0xb
+ 704 007f 11       		.uleb128 0x11
+ 705 0080 01       		.uleb128 0x1
+ 706 0081 12       		.uleb128 0x12
+ 707 0082 06       		.uleb128 0x6
+ 708 0083 40       		.uleb128 0x40
+ 709 0084 18       		.uleb128 0x18
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 17
+
+
+ 710 0085 9742     		.uleb128 0x2117
+ 711 0087 19       		.uleb128 0x19
+ 712 0088 01       		.uleb128 0x1
+ 713 0089 13       		.uleb128 0x13
+ 714 008a 00       		.byte	0
+ 715 008b 00       		.byte	0
+ 716 008c 0A       		.uleb128 0xa
+ 717 008d 898201   		.uleb128 0x4109
+ 718 0090 01       		.byte	0x1
+ 719 0091 11       		.uleb128 0x11
+ 720 0092 01       		.uleb128 0x1
+ 721 0093 31       		.uleb128 0x31
+ 722 0094 13       		.uleb128 0x13
+ 723 0095 00       		.byte	0
+ 724 0096 00       		.byte	0
+ 725 0097 0B       		.uleb128 0xb
+ 726 0098 34       		.uleb128 0x34
+ 727 0099 00       		.byte	0
+ 728 009a 03       		.uleb128 0x3
+ 729 009b 0E       		.uleb128 0xe
+ 730 009c 3A       		.uleb128 0x3a
+ 731 009d 0B       		.uleb128 0xb
+ 732 009e 3B       		.uleb128 0x3b
+ 733 009f 05       		.uleb128 0x5
+ 734 00a0 49       		.uleb128 0x49
+ 735 00a1 13       		.uleb128 0x13
+ 736 00a2 3F       		.uleb128 0x3f
+ 737 00a3 19       		.uleb128 0x19
+ 738 00a4 3C       		.uleb128 0x3c
+ 739 00a5 19       		.uleb128 0x19
+ 740 00a6 00       		.byte	0
+ 741 00a7 00       		.byte	0
+ 742 00a8 0C       		.uleb128 0xc
+ 743 00a9 35       		.uleb128 0x35
+ 744 00aa 00       		.byte	0
+ 745 00ab 49       		.uleb128 0x49
+ 746 00ac 13       		.uleb128 0x13
+ 747 00ad 00       		.byte	0
+ 748 00ae 00       		.byte	0
+ 749 00af 0D       		.uleb128 0xd
+ 750 00b0 34       		.uleb128 0x34
+ 751 00b1 00       		.byte	0
+ 752 00b2 03       		.uleb128 0x3
+ 753 00b3 0E       		.uleb128 0xe
+ 754 00b4 3A       		.uleb128 0x3a
+ 755 00b5 0B       		.uleb128 0xb
+ 756 00b6 3B       		.uleb128 0x3b
+ 757 00b7 0B       		.uleb128 0xb
+ 758 00b8 49       		.uleb128 0x49
+ 759 00b9 13       		.uleb128 0x13
+ 760 00ba 3F       		.uleb128 0x3f
+ 761 00bb 19       		.uleb128 0x19
+ 762 00bc 02       		.uleb128 0x2
+ 763 00bd 18       		.uleb128 0x18
+ 764 00be 00       		.byte	0
+ 765 00bf 00       		.byte	0
+ 766 00c0 0E       		.uleb128 0xe
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 18
+
+
+ 767 00c1 2E       		.uleb128 0x2e
+ 768 00c2 00       		.byte	0
+ 769 00c3 3F       		.uleb128 0x3f
+ 770 00c4 19       		.uleb128 0x19
+ 771 00c5 3C       		.uleb128 0x3c
+ 772 00c6 19       		.uleb128 0x19
+ 773 00c7 6E       		.uleb128 0x6e
+ 774 00c8 0E       		.uleb128 0xe
+ 775 00c9 03       		.uleb128 0x3
+ 776 00ca 0E       		.uleb128 0xe
+ 777 00cb 3A       		.uleb128 0x3a
+ 778 00cc 0B       		.uleb128 0xb
+ 779 00cd 3B       		.uleb128 0x3b
+ 780 00ce 0B       		.uleb128 0xb
+ 781 00cf 00       		.byte	0
+ 782 00d0 00       		.byte	0
+ 783 00d1 00       		.byte	0
+ 784              		.section	.debug_aranges,"",%progbits
+ 785 0000 54000000 		.4byte	0x54
+ 786 0004 0200     		.2byte	0x2
+ 787 0006 00000000 		.4byte	.Ldebug_info0
+ 788 000a 04       		.byte	0x4
+ 789 000b 00       		.byte	0
+ 790 000c 0000     		.2byte	0
+ 791 000e 0000     		.2byte	0
+ 792 0010 00000000 		.4byte	.LFB66
+ 793 0014 18000000 		.4byte	.LFE66-.LFB66
+ 794 0018 00000000 		.4byte	.LFB65
+ 795 001c 10000000 		.4byte	.LFE65-.LFB65
+ 796 0020 00000000 		.4byte	.LFB67
+ 797 0024 0C000000 		.4byte	.LFE67-.LFB67
+ 798 0028 00000000 		.4byte	.LFB68
+ 799 002c 0C000000 		.4byte	.LFE68-.LFB68
+ 800 0030 00000000 		.4byte	.LFB64
+ 801 0034 18000000 		.4byte	.LFE64-.LFB64
+ 802 0038 00000000 		.4byte	.LFB69
+ 803 003c 18000000 		.4byte	.LFE69-.LFB69
+ 804 0040 00000000 		.4byte	.LFB70
+ 805 0044 18000000 		.4byte	.LFE70-.LFB70
+ 806 0048 00000000 		.4byte	.LFB71
+ 807 004c 0C000000 		.4byte	.LFE71-.LFB71
+ 808 0050 00000000 		.4byte	0
+ 809 0054 00000000 		.4byte	0
+ 810              		.section	.debug_ranges,"",%progbits
+ 811              	.Ldebug_ranges0:
+ 812 0000 00000000 		.4byte	.LFB66
+ 813 0004 18000000 		.4byte	.LFE66
+ 814 0008 00000000 		.4byte	.LFB65
+ 815 000c 10000000 		.4byte	.LFE65
+ 816 0010 00000000 		.4byte	.LFB67
+ 817 0014 0C000000 		.4byte	.LFE67
+ 818 0018 00000000 		.4byte	.LFB68
+ 819 001c 0C000000 		.4byte	.LFE68
+ 820 0020 00000000 		.4byte	.LFB64
+ 821 0024 18000000 		.4byte	.LFE64
+ 822 0028 00000000 		.4byte	.LFB69
+ 823 002c 18000000 		.4byte	.LFE69
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 19
+
+
+ 824 0030 00000000 		.4byte	.LFB70
+ 825 0034 18000000 		.4byte	.LFE70
+ 826 0038 00000000 		.4byte	.LFB71
+ 827 003c 0C000000 		.4byte	.LFE71
+ 828 0040 00000000 		.4byte	0
+ 829 0044 00000000 		.4byte	0
+ 830              		.section	.debug_line,"",%progbits
+ 831              	.Ldebug_line0:
+ 832 0000 1C020000 		.section	.debug_str,"MS",%progbits,1
+ 832      02008701 
+ 832      00000201 
+ 832      FB0E0D00 
+ 832      01010101 
+ 833              	.LASF32:
+ 834 0000 6973725F 		.ascii	"isr_detection_Enable\000"
+ 834      64657465 
+ 834      6374696F 
+ 834      6E5F456E 
+ 834      61626C65 
+ 835              	.LASF24:
+ 836 0015 64697370 		.ascii	"dispencerEnabled\000"
+ 836      656E6365 
+ 836      72456E61 
+ 836      626C6564 
+ 836      00
+ 837              	.LASF37:
+ 838 0026 4953525F 		.ascii	"ISR_detection_handler\000"
+ 838      64657465 
+ 838      6374696F 
+ 838      6E5F6861 
+ 838      6E646C65 
+ 839              	.LASF9:
+ 840 003c 5F5F696E 		.ascii	"__int32_t\000"
+ 840      7433325F 
+ 840      7400
+ 841              	.LASF4:
+ 842 0046 6C6F6E67 		.ascii	"long int\000"
+ 842      20696E74 
+ 842      00
+ 843              	.LASF30:
+ 844 004f 526F7461 		.ascii	"Rotate90\000"
+ 844      74653930 
+ 844      00
+ 845              	.LASF18:
+ 846 0058 61636365 		.ascii	"acceptCoin\000"
+ 846      7074436F 
+ 846      696E00
+ 847              	.LASF28:
+ 848 0063 636F696E 		.ascii	"coinInserted\000"
+ 848      496E7365 
+ 848      72746564 
+ 848      00
+ 849              	.LASF17:
+ 850 0070 72656A65 		.ascii	"rejectCoin\000"
+ 850      6374436F 
+ 850      696E00
+ 851              	.LASF11:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 20
+
+
+ 852 007b 666C6F61 		.ascii	"float\000"
+ 852      7400
+ 853              	.LASF36:
+ 854 0081 5C5C766D 		.ascii	"\\\\vmware-host\\Shared Folders\\Documents\\BallDis"
+ 854      77617265 
+ 854      2D686F73 
+ 854      745C5368 
+ 854      61726564 
+ 855 00af 70417070 		.ascii	"pApp\\Workspace12\\Bolddispenser_CoinMaster.cydsn\000"
+ 855      5C576F72 
+ 855      6B737061 
+ 855      63653132 
+ 855      5C426F6C 
+ 856              	.LASF1:
+ 857 00df 756E7369 		.ascii	"unsigned char\000"
+ 857      676E6564 
+ 857      20636861 
+ 857      7200
+ 858              	.LASF34:
+ 859 00ed 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 859      43313120 
+ 859      352E342E 
+ 859      31203230 
+ 859      31363036 
+ 860 0120 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 860      20726576 
+ 860      6973696F 
+ 860      6E203233 
+ 860      37373135 
+ 861 0153 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 861      66756E63 
+ 861      74696F6E 
+ 861      2D736563 
+ 861      74696F6E 
+ 862              	.LASF5:
+ 863 017b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 863      20756E73 
+ 863      69676E65 
+ 863      6420696E 
+ 863      7400
+ 864              	.LASF3:
+ 865 018d 73686F72 		.ascii	"short unsigned int\000"
+ 865      7420756E 
+ 865      7369676E 
+ 865      65642069 
+ 865      6E7400
+ 866              	.LASF16:
+ 867 01a0 696E6974 		.ascii	"initCoinDetector\000"
+ 867      436F696E 
+ 867      44657465 
+ 867      63746F72 
+ 867      00
+ 868              	.LASF23:
+ 869 01b1 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 869      52784275 
+ 869      66666572 
+ 869      00
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 21
+
+
+ 870              	.LASF12:
+ 871 01be 646F7562 		.ascii	"double\000"
+ 871      6C6500
+ 872              	.LASF31:
+ 873 01c5 72657652 		.ascii	"revRotate90\000"
+ 873      6F746174 
+ 873      65393000 
+ 874              	.LASF20:
+ 875 01d1 64697361 		.ascii	"disableDispenser\000"
+ 875      626C6544 
+ 875      69737065 
+ 875      6E736572 
+ 875      00
+ 876              	.LASF29:
+ 877 01e2 6973725F 		.ascii	"isr_detection_StartEx\000"
+ 877      64657465 
+ 877      6374696F 
+ 877      6E5F5374 
+ 877      61727445 
+ 878              	.LASF19:
+ 879 01f8 68616E64 		.ascii	"handleCoinDetection\000"
+ 879      6C65436F 
+ 879      696E4465 
+ 879      74656374 
+ 879      696F6E00 
+ 880              	.LASF22:
+ 881 020c 72657365 		.ascii	"resetDetectionISR\000"
+ 881      74446574 
+ 881      65637469 
+ 881      6F6E4953 
+ 881      5200
+ 882              	.LASF8:
+ 883 021e 756E7369 		.ascii	"unsigned int\000"
+ 883      676E6564 
+ 883      20696E74 
+ 883      00
+ 884              	.LASF7:
+ 885 022b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 885      206C6F6E 
+ 885      6720756E 
+ 885      7369676E 
+ 885      65642069 
+ 886              	.LASF26:
+ 887 0242 6973725F 		.ascii	"isr_detection_Disable\000"
+ 887      64657465 
+ 887      6374696F 
+ 887      6E5F4469 
+ 887      7361626C 
+ 888              	.LASF10:
+ 889 0258 696E7433 		.ascii	"int32_t\000"
+ 889      325F7400 
+ 890              	.LASF15:
+ 891 0260 73697A65 		.ascii	"sizetype\000"
+ 891      74797065 
+ 891      00
+ 892              	.LASF6:
+ 893 0269 6C6F6E67 		.ascii	"long long int\000"
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccqm4s4P.s 			page 22
+
+
+ 893      206C6F6E 
+ 893      6720696E 
+ 893      7400
+ 894              	.LASF13:
+ 895 0277 63686172 		.ascii	"char\000"
+ 895      00
+ 896              	.LASF2:
+ 897 027c 73686F72 		.ascii	"short int\000"
+ 897      7420696E 
+ 897      7400
+ 898              	.LASF35:
+ 899 0286 436F696E 		.ascii	"CoinDetection.c\000"
+ 899      44657465 
+ 899      6374696F 
+ 899      6E2E6300 
+ 900              	.LASF21:
+ 901 0296 656E6162 		.ascii	"enableDispenser\000"
+ 901      6C654469 
+ 901      7370656E 
+ 901      73657200 
+ 902              	.LASF14:
+ 903 02a6 6C6F6E67 		.ascii	"long double\000"
+ 903      20646F75 
+ 903      626C6500 
+ 904              	.LASF0:
+ 905 02b2 7369676E 		.ascii	"signed char\000"
+ 905      65642063 
+ 905      68617200 
+ 906              	.LASF27:
+ 907 02be 55415254 		.ascii	"UART_PutString\000"
+ 907      5F507574 
+ 907      53747269 
+ 907      6E6700
+ 908              	.LASF25:
+ 909 02cd 5F426F6F 		.ascii	"_Bool\000"
+ 909      6C00
+ 910              	.LASF33:
+ 911 02d3 6973725F 		.ascii	"isr_detection_ClearPending\000"
+ 911      64657465 
+ 911      6374696F 
+ 911      6E5F436C 
+ 911      65617250 
+ 912              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

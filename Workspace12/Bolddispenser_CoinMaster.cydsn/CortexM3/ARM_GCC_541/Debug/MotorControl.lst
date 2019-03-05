@@ -1,0 +1,2915 @@
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"MotorControl.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Motor_Timer_I_handler,"ax",%progbits
+  20              		.align	2
+  21              		.global	Motor_Timer_I_handler
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	Motor_Timer_I_handler, %function
+  25              	Motor_Timer_I_handler:
+  26              	.LFB64:
+  27              		.file 1 "MotorControl.c"
+   1:MotorControl.c **** #include "MotorControl.h"
+   2:MotorControl.c **** 
+   3:MotorControl.c **** #define STEPSLEEP 5
+   4:MotorControl.c **** 
+   5:MotorControl.c **** int stepCount = 0;
+   6:MotorControl.c **** int steppingMode = 0;
+   7:MotorControl.c **** bool readyForNextStep = false;
+   8:MotorControl.c **** int nextStep = 0;
+   9:MotorControl.c **** 
+  10:MotorControl.c **** int stepCount2 = 0;
+  11:MotorControl.c **** int steppingMode2 = 0;
+  12:MotorControl.c **** bool readyForNextStep2 = false;
+  13:MotorControl.c **** int nextStep2 = 0;
+  14:MotorControl.c **** 
+  15:MotorControl.c **** 
+  16:MotorControl.c **** /*******************************************************************************
+  17:MotorControl.c **** * Function Name: initMotorControl
+  18:MotorControl.c **** ********************************************************************************
+  19:MotorControl.c **** *
+  20:MotorControl.c **** * Summary:    This function initialises the timer that is used to control the 
+  21:MotorControl.c ****               motor speed. It also i initialises the interrupt receved from 
+  22:MotorControl.c ****               said timer.
+  23:MotorControl.c **** *
+  24:MotorControl.c **** * Parameters:
+  25:MotorControl.c **** *  None.
+  26:MotorControl.c **** *
+  27:MotorControl.c **** * Return:
+  28:MotorControl.c **** *  None.
+  29:MotorControl.c **** *
+  30:MotorControl.c **** *******************************************************************************/
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 2
+
+
+  31:MotorControl.c **** void initMotorControl()
+  32:MotorControl.c **** {
+  33:MotorControl.c ****     Motor_Timer_Start();
+  34:MotorControl.c ****     isr_timer_StartEx(Motor_Timer_I_handler);
+  35:MotorControl.c ****     isr_timer_Enable();
+  36:MotorControl.c **** };
+  37:MotorControl.c **** 
+  38:MotorControl.c **** 
+  39:MotorControl.c **** 
+  40:MotorControl.c **** /*******************************************************************************
+  41:MotorControl.c **** * Function Name: CY_ISR
+  42:MotorControl.c **** ********************************************************************************
+  43:MotorControl.c **** *
+  44:MotorControl.c **** * Summary:    This function is the default ISR handeler for the timer ISR.
+  45:MotorControl.c ****               It sets the readyForNextStep boolian to true which allows the 
+  46:MotorControl.c ****               motor to take the next step.
+  47:MotorControl.c **** *
+  48:MotorControl.c **** * Parameters:
+  49:MotorControl.c **** *  ISR_detection_handler spesifies which interrupt to handle
+  50:MotorControl.c **** *
+  51:MotorControl.c **** *******************************************************************************/
+  52:MotorControl.c **** CY_ISR(Motor_Timer_I_handler)
+  53:MotorControl.c **** {
+  28              		.loc 1 53 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  54:MotorControl.c ****     readyForNextStep = true;
+  33              		.loc 1 54 0
+  34 0000 024B     		ldr	r3, .L2
+  35 0002 0122     		movs	r2, #1
+  36 0004 1A70     		strb	r2, [r3]
+  55:MotorControl.c ****     readyForNextStep2 = true;
+  37              		.loc 1 55 0
+  38 0006 5A70     		strb	r2, [r3, #1]
+  39 0008 7047     		bx	lr
+  40              	.L3:
+  41 000a 00BF     		.align	2
+  42              	.L2:
+  43 000c 00000000 		.word	.LANCHOR0
+  44              		.cfi_endproc
+  45              	.LFE64:
+  46              		.size	Motor_Timer_I_handler, .-Motor_Timer_I_handler
+  47              		.section	.text.initMotorControl,"ax",%progbits
+  48              		.align	2
+  49              		.global	initMotorControl
+  50              		.thumb
+  51              		.thumb_func
+  52              		.type	initMotorControl, %function
+  53              	initMotorControl:
+  54              	.LFB63:
+  32:MotorControl.c ****     Motor_Timer_Start();
+  55              		.loc 1 32 0
+  56              		.cfi_startproc
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 3
+
+
+  59 0000 08B5     		push	{r3, lr}
+  60              		.cfi_def_cfa_offset 8
+  61              		.cfi_offset 3, -8
+  62              		.cfi_offset 14, -4
+  33:MotorControl.c ****     isr_timer_StartEx(Motor_Timer_I_handler);
+  63              		.loc 1 33 0
+  64 0002 FFF7FEFF 		bl	Motor_Timer_Start
+  65              	.LVL0:
+  34:MotorControl.c ****     isr_timer_Enable();
+  66              		.loc 1 34 0
+  67 0006 0348     		ldr	r0, .L6
+  68 0008 FFF7FEFF 		bl	isr_timer_StartEx
+  69              	.LVL1:
+  35:MotorControl.c **** };
+  70              		.loc 1 35 0
+  71 000c FFF7FEFF 		bl	isr_timer_Enable
+  72              	.LVL2:
+  73 0010 08BD     		pop	{r3, pc}
+  74              	.L7:
+  75 0012 00BF     		.align	2
+  76              	.L6:
+  77 0014 00000000 		.word	Motor_Timer_I_handler
+  78              		.cfi_endproc
+  79              	.LFE63:
+  80              		.size	initMotorControl, .-initMotorControl
+  81              		.section	.text.step,"ax",%progbits
+  82              		.align	2
+  83              		.global	step
+  84              		.thumb
+  85              		.thumb_func
+  86              		.type	step, %function
+  87              	step:
+  88              	.LFB65:
+  56:MotorControl.c **** }
+  57:MotorControl.c **** 
+  58:MotorControl.c ****         
+  59:MotorControl.c **** 
+  60:MotorControl.c **** /*******************************************************************************
+  61:MotorControl.c **** * Function Name: step
+  62:MotorControl.c **** ********************************************************************************
+  63:MotorControl.c **** *
+  64:MotorControl.c **** * Summary:    This function is the main control function for the motor.
+  65:MotorControl.c ****               It uses a control register to control a stepper motor in the full 
+  66:MotorControl.c ****               drive mode. The motor can run in both directions depending on the 
+  67:MotorControl.c ****               input.
+  68:MotorControl.c ****               It reads the nextStep variable then goes to that part of the
+  69:MotorControl.c ****               switch and sets the control register to the appropriate state then 
+  70:MotorControl.c ****               changes the nextStep to the next appropriate step.
+  71:MotorControl.c **** *
+  72:MotorControl.c **** * Parameters:
+  73:MotorControl.c **** *     mode:   Controls the motors direction.
+  74:MotorControl.c **** *
+  75:MotorControl.c **** * Return:
+  76:MotorControl.c **** *  None.
+  77:MotorControl.c **** *
+  78:MotorControl.c **** *******************************************************************************/
+  79:MotorControl.c **** void step(int mode)
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 4
+
+
+  80:MotorControl.c **** {
+  89              		.loc 1 80 0
+  90              		.cfi_startproc
+  91              		@ args = 0, pretend = 0, frame = 0
+  92              		@ frame_needed = 0, uses_anonymous_args = 0
+  93              	.LVL3:
+  94 0000 10B5     		push	{r4, lr}
+  95              		.cfi_def_cfa_offset 8
+  96              		.cfi_offset 4, -8
+  97              		.cfi_offset 14, -4
+  98 0002 0446     		mov	r4, r0
+  81:MotorControl.c **** 
+  82:MotorControl.c ****     switch (nextStep)
+  99              		.loc 1 82 0
+ 100 0004 1A4B     		ldr	r3, .L18
+ 101 0006 5B68     		ldr	r3, [r3, #4]
+ 102 0008 032B     		cmp	r3, #3
+ 103 000a 2FD8     		bhi	.L8
+ 104 000c DFE803F0 		tbb	[pc, r3]
+ 105              	.L11:
+ 106 0010 02       		.byte	(.L10-.L11)/2
+ 107 0011 11       		.byte	(.L12-.L11)/2
+ 108 0012 19       		.byte	(.L13-.L11)/2
+ 109 0013 21       		.byte	(.L14-.L11)/2
+ 110              		.p2align 1
+ 111              	.L10:
+  83:MotorControl.c ****     {
+  84:MotorControl.c ****         case 0 :
+  85:MotorControl.c ****         {
+  86:MotorControl.c ****             Motor_Reg_1_Write(0b0011);
+ 112              		.loc 1 86 0
+ 113 0014 0320     		movs	r0, #3
+ 114              	.LVL4:
+ 115 0016 FFF7FEFF 		bl	Motor_Reg_1_Write
+ 116              	.LVL5:
+  87:MotorControl.c ****             if(mode == -1)
+ 117              		.loc 1 87 0
+ 118 001a B4F1FF3F 		cmp	r4, #-1
+ 119 001e 03D1     		bne	.L15
+  88:MotorControl.c ****             {
+  89:MotorControl.c ****                 nextStep = 3;
+ 120              		.loc 1 89 0
+ 121 0020 0322     		movs	r2, #3
+ 122 0022 134B     		ldr	r3, .L18
+ 123 0024 5A60     		str	r2, [r3, #4]
+ 124 0026 10BD     		pop	{r4, pc}
+ 125              	.LVL6:
+ 126              	.L15:
+  90:MotorControl.c ****             }
+  91:MotorControl.c ****             else
+  92:MotorControl.c ****             {
+  93:MotorControl.c ****                 nextStep += mode;
+ 127              		.loc 1 93 0
+ 128 0028 114A     		ldr	r2, .L18
+ 129 002a 5368     		ldr	r3, [r2, #4]
+ 130 002c 1C44     		add	r4, r4, r3
+ 131              	.LVL7:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 5
+
+
+ 132 002e 5460     		str	r4, [r2, #4]
+ 133 0030 10BD     		pop	{r4, pc}
+ 134              	.LVL8:
+ 135              	.L12:
+  94:MotorControl.c ****             }
+  95:MotorControl.c ****         }
+  96:MotorControl.c ****             break;
+  97:MotorControl.c ****         case 1 :
+  98:MotorControl.c ****         {
+  99:MotorControl.c ****             Motor_Reg_1_Write(0b0110);
+ 136              		.loc 1 99 0
+ 137 0032 0620     		movs	r0, #6
+ 138              	.LVL9:
+ 139 0034 FFF7FEFF 		bl	Motor_Reg_1_Write
+ 140              	.LVL10:
+ 100:MotorControl.c ****             nextStep += mode;
+ 141              		.loc 1 100 0
+ 142 0038 0D4A     		ldr	r2, .L18
+ 143 003a 5368     		ldr	r3, [r2, #4]
+ 144 003c 1C44     		add	r4, r4, r3
+ 145              	.LVL11:
+ 146 003e 5460     		str	r4, [r2, #4]
+ 101:MotorControl.c ****         }
+ 102:MotorControl.c ****             break;
+ 147              		.loc 1 102 0
+ 148 0040 10BD     		pop	{r4, pc}
+ 149              	.LVL12:
+ 150              	.L13:
+ 103:MotorControl.c ****         case 2 :
+ 104:MotorControl.c ****         {
+ 105:MotorControl.c ****             Motor_Reg_1_Write(0b1100);
+ 151              		.loc 1 105 0
+ 152 0042 0C20     		movs	r0, #12
+ 153              	.LVL13:
+ 154 0044 FFF7FEFF 		bl	Motor_Reg_1_Write
+ 155              	.LVL14:
+ 106:MotorControl.c ****             nextStep += mode;
+ 156              		.loc 1 106 0
+ 157 0048 094A     		ldr	r2, .L18
+ 158 004a 5368     		ldr	r3, [r2, #4]
+ 159 004c 1C44     		add	r4, r4, r3
+ 160              	.LVL15:
+ 161 004e 5460     		str	r4, [r2, #4]
+ 107:MotorControl.c ****         }
+ 108:MotorControl.c ****             break;
+ 162              		.loc 1 108 0
+ 163 0050 10BD     		pop	{r4, pc}
+ 164              	.LVL16:
+ 165              	.L14:
+ 109:MotorControl.c ****         case 3 :
+ 110:MotorControl.c ****         {
+ 111:MotorControl.c ****             Motor_Reg_1_Write(0b1001);
+ 166              		.loc 1 111 0
+ 167 0052 0920     		movs	r0, #9
+ 168              	.LVL17:
+ 169 0054 FFF7FEFF 		bl	Motor_Reg_1_Write
+ 170              	.LVL18:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 6
+
+
+ 112:MotorControl.c ****             if(mode == 1)
+ 171              		.loc 1 112 0
+ 172 0058 012C     		cmp	r4, #1
+ 173 005a 03D1     		bne	.L16
+ 113:MotorControl.c ****             {
+ 114:MotorControl.c ****                 nextStep = 0;
+ 174              		.loc 1 114 0
+ 175 005c 0022     		movs	r2, #0
+ 176 005e 044B     		ldr	r3, .L18
+ 177 0060 5A60     		str	r2, [r3, #4]
+ 178 0062 10BD     		pop	{r4, pc}
+ 179              	.LVL19:
+ 180              	.L16:
+ 115:MotorControl.c ****             }
+ 116:MotorControl.c ****             else
+ 117:MotorControl.c ****             {
+ 118:MotorControl.c ****                 nextStep += mode;
+ 181              		.loc 1 118 0
+ 182 0064 024B     		ldr	r3, .L18
+ 183 0066 5A68     		ldr	r2, [r3, #4]
+ 184 0068 1444     		add	r4, r4, r2
+ 185              	.LVL20:
+ 186 006a 5C60     		str	r4, [r3, #4]
+ 187              	.L8:
+ 188 006c 10BD     		pop	{r4, pc}
+ 189              	.L19:
+ 190 006e 00BF     		.align	2
+ 191              	.L18:
+ 192 0070 00000000 		.word	.LANCHOR0
+ 193              		.cfi_endproc
+ 194              	.LFE65:
+ 195              		.size	step, .-step
+ 196              		.section	.text.Rotate90,"ax",%progbits
+ 197              		.align	2
+ 198              		.global	Rotate90
+ 199              		.thumb
+ 200              		.thumb_func
+ 201              		.type	Rotate90, %function
+ 202              	Rotate90:
+ 203              	.LFB66:
+ 119:MotorControl.c ****             }
+ 120:MotorControl.c ****         }
+ 121:MotorControl.c ****             break;
+ 122:MotorControl.c ****     }
+ 123:MotorControl.c **** }
+ 124:MotorControl.c **** 
+ 125:MotorControl.c **** 
+ 126:MotorControl.c **** 
+ 127:MotorControl.c **** /*******************************************************************************
+ 128:MotorControl.c **** * Function Name: rotate90
+ 129:MotorControl.c **** ********************************************************************************
+ 130:MotorControl.c **** *
+ 131:MotorControl.c **** * Summary:    This function makes the motor rotate 90 clockwise degrees.
+ 132:MotorControl.c ****               It waits for the readyForNextStep to become true then calls the 
+ 133:MotorControl.c ****               step function in forward mode. It then sets the readyForNextStep 
+ 134:MotorControl.c ****               to not true and loops again.
+ 135:MotorControl.c **** *
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 7
+
+
+ 136:MotorControl.c **** * Parameters:
+ 137:MotorControl.c **** *  None.
+ 138:MotorControl.c **** *
+ 139:MotorControl.c **** * Return:
+ 140:MotorControl.c **** *  None.
+ 141:MotorControl.c **** *
+ 142:MotorControl.c **** *******************************************************************************/
+ 143:MotorControl.c **** void Rotate90()
+ 144:MotorControl.c **** {
+ 204              		.loc 1 144 0
+ 205              		.cfi_startproc
+ 206              		@ args = 0, pretend = 0, frame = 0
+ 207              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208 0000 10B5     		push	{r4, lr}
+ 209              		.cfi_def_cfa_offset 8
+ 210              		.cfi_offset 4, -8
+ 211              		.cfi_offset 14, -4
+ 145:MotorControl.c ****     UART_PutString("Forward\r\n");
+ 212              		.loc 1 145 0
+ 213 0002 0B48     		ldr	r0, .L24
+ 214 0004 FFF7FEFF 		bl	UART_PutString
+ 215              	.LVL21:
+ 146:MotorControl.c ****     int x = 0;
+ 216              		.loc 1 146 0
+ 217 0008 0024     		movs	r4, #0
+ 147:MotorControl.c ****     while(x < 512)
+ 218              		.loc 1 147 0
+ 219 000a 0DE0     		b	.L21
+ 220              	.LVL22:
+ 221              	.L22:
+ 148:MotorControl.c ****     {
+ 149:MotorControl.c ****         while(!readyForNextStep)
+ 222              		.loc 1 149 0 discriminator 1
+ 223 000c 094B     		ldr	r3, .L24+4
+ 224 000e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 225 0010 002B     		cmp	r3, #0
+ 226 0012 FBD0     		beq	.L22
+ 150:MotorControl.c ****         {
+ 151:MotorControl.c ****         };
+ 152:MotorControl.c ****         step(Forward);
+ 227              		.loc 1 152 0
+ 228 0014 0120     		movs	r0, #1
+ 229 0016 FFF7FEFF 		bl	step
+ 230              	.LVL23:
+ 153:MotorControl.c ****         CyDelay(STEPSLEEP);
+ 231              		.loc 1 153 0
+ 232 001a 0520     		movs	r0, #5
+ 233 001c FFF7FEFF 		bl	CyDelay
+ 234              	.LVL24:
+ 154:MotorControl.c ****         //UART_PutString("Step\r\n");
+ 155:MotorControl.c ****         readyForNextStep = false;
+ 235              		.loc 1 155 0
+ 236 0020 0022     		movs	r2, #0
+ 237 0022 044B     		ldr	r3, .L24+4
+ 238 0024 1A70     		strb	r2, [r3]
+ 156:MotorControl.c ****         x++;
+ 239              		.loc 1 156 0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 8
+
+
+ 240 0026 0134     		adds	r4, r4, #1
+ 241              	.LVL25:
+ 242              	.L21:
+ 147:MotorControl.c ****     {
+ 243              		.loc 1 147 0
+ 244 0028 B4F5007F 		cmp	r4, #512
+ 245 002c EEDB     		blt	.L22
+ 157:MotorControl.c ****     }
+ 158:MotorControl.c **** };
+ 246              		.loc 1 158 0
+ 247 002e 10BD     		pop	{r4, pc}
+ 248              	.LVL26:
+ 249              	.L25:
+ 250              		.align	2
+ 251              	.L24:
+ 252 0030 00000000 		.word	.LC0
+ 253 0034 00000000 		.word	.LANCHOR0
+ 254              		.cfi_endproc
+ 255              	.LFE66:
+ 256              		.size	Rotate90, .-Rotate90
+ 257              		.section	.text.Rotate180,"ax",%progbits
+ 258              		.align	2
+ 259              		.global	Rotate180
+ 260              		.thumb
+ 261              		.thumb_func
+ 262              		.type	Rotate180, %function
+ 263              	Rotate180:
+ 264              	.LFB67:
+ 159:MotorControl.c **** 
+ 160:MotorControl.c **** 
+ 161:MotorControl.c **** 
+ 162:MotorControl.c **** /*******************************************************************************
+ 163:MotorControl.c **** * Function Name: Rotate180
+ 164:MotorControl.c **** ********************************************************************************
+ 165:MotorControl.c **** *
+ 166:MotorControl.c **** * Summary:    This function totates the motor 180 clockwise degrees and works 
+ 167:MotorControl.c ****               the same way as rotate90
+ 168:MotorControl.c **** *
+ 169:MotorControl.c **** * Parameters:
+ 170:MotorControl.c **** *  None.
+ 171:MotorControl.c **** *
+ 172:MotorControl.c **** * Return:
+ 173:MotorControl.c **** *  None.
+ 174:MotorControl.c **** *
+ 175:MotorControl.c **** *******************************************************************************/
+ 176:MotorControl.c **** void Rotate180()
+ 177:MotorControl.c **** {
+ 265              		.loc 1 177 0
+ 266              		.cfi_startproc
+ 267              		@ args = 0, pretend = 0, frame = 0
+ 268              		@ frame_needed = 0, uses_anonymous_args = 0
+ 269 0000 10B5     		push	{r4, lr}
+ 270              		.cfi_def_cfa_offset 8
+ 271              		.cfi_offset 4, -8
+ 272              		.cfi_offset 14, -4
+ 273              	.LVL27:
+ 178:MotorControl.c ****     int x = 0;
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 9
+
+
+ 274              		.loc 1 178 0
+ 275 0002 0024     		movs	r4, #0
+ 179:MotorControl.c ****     while(x < 1024)
+ 276              		.loc 1 179 0
+ 277 0004 0DE0     		b	.L27
+ 278              	.LVL28:
+ 279              	.L28:
+ 180:MotorControl.c ****     {
+ 181:MotorControl.c ****         while(!readyForNextStep)
+ 280              		.loc 1 181 0 discriminator 1
+ 281 0006 094B     		ldr	r3, .L30
+ 282 0008 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 283 000a 002B     		cmp	r3, #0
+ 284 000c FBD0     		beq	.L28
+ 182:MotorControl.c ****         {
+ 183:MotorControl.c ****         };
+ 184:MotorControl.c ****         step(Forward);
+ 285              		.loc 1 184 0
+ 286 000e 0120     		movs	r0, #1
+ 287 0010 FFF7FEFF 		bl	step
+ 288              	.LVL29:
+ 185:MotorControl.c ****         CyDelay(STEPSLEEP);
+ 289              		.loc 1 185 0
+ 290 0014 0520     		movs	r0, #5
+ 291 0016 FFF7FEFF 		bl	CyDelay
+ 292              	.LVL30:
+ 186:MotorControl.c ****         //UART_PutString("Step\r\n");
+ 187:MotorControl.c ****         readyForNextStep = false;
+ 293              		.loc 1 187 0
+ 294 001a 0022     		movs	r2, #0
+ 295 001c 034B     		ldr	r3, .L30
+ 296 001e 1A70     		strb	r2, [r3]
+ 188:MotorControl.c ****         x++;
+ 297              		.loc 1 188 0
+ 298 0020 0134     		adds	r4, r4, #1
+ 299              	.LVL31:
+ 300              	.L27:
+ 179:MotorControl.c ****     {
+ 301              		.loc 1 179 0
+ 302 0022 B4F5806F 		cmp	r4, #1024
+ 303 0026 EEDB     		blt	.L28
+ 189:MotorControl.c ****     }
+ 190:MotorControl.c **** };
+ 304              		.loc 1 190 0
+ 305 0028 10BD     		pop	{r4, pc}
+ 306              	.LVL32:
+ 307              	.L31:
+ 308 002a 00BF     		.align	2
+ 309              	.L30:
+ 310 002c 00000000 		.word	.LANCHOR0
+ 311              		.cfi_endproc
+ 312              	.LFE67:
+ 313              		.size	Rotate180, .-Rotate180
+ 314              		.section	.text.revRotate90,"ax",%progbits
+ 315              		.align	2
+ 316              		.global	revRotate90
+ 317              		.thumb
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 10
+
+
+ 318              		.thumb_func
+ 319              		.type	revRotate90, %function
+ 320              	revRotate90:
+ 321              	.LFB68:
+ 191:MotorControl.c **** 
+ 192:MotorControl.c **** 
+ 193:MotorControl.c **** 
+ 194:MotorControl.c **** /*******************************************************************************
+ 195:MotorControl.c **** * Function Name: revRotate90
+ 196:MotorControl.c **** ********************************************************************************
+ 197:MotorControl.c **** *
+ 198:MotorControl.c **** * Summary:    This function totates the motor 90 counter clockwise degrees and works 
+ 199:MotorControl.c ****               the same way as rotate90
+ 200:MotorControl.c **** *
+ 201:MotorControl.c **** * Parameters:
+ 202:MotorControl.c **** *  None.
+ 203:MotorControl.c **** *
+ 204:MotorControl.c **** * Return:
+ 205:MotorControl.c **** *  None.
+ 206:MotorControl.c **** *
+ 207:MotorControl.c **** *******************************************************************************/
+ 208:MotorControl.c **** void revRotate90()
+ 209:MotorControl.c **** {
+ 322              		.loc 1 209 0
+ 323              		.cfi_startproc
+ 324              		@ args = 0, pretend = 0, frame = 0
+ 325              		@ frame_needed = 0, uses_anonymous_args = 0
+ 326 0000 10B5     		push	{r4, lr}
+ 327              		.cfi_def_cfa_offset 8
+ 328              		.cfi_offset 4, -8
+ 329              		.cfi_offset 14, -4
+ 330              	.LVL33:
+ 210:MotorControl.c ****     int x = 0;
+ 211:MotorControl.c ****     UART_PutString("Rev\r\n");
+ 331              		.loc 1 211 0
+ 332 0002 0C48     		ldr	r0, .L36
+ 333 0004 FFF7FEFF 		bl	UART_PutString
+ 334              	.LVL34:
+ 210:MotorControl.c ****     int x = 0;
+ 335              		.loc 1 210 0
+ 336 0008 0024     		movs	r4, #0
+ 212:MotorControl.c ****     while(x < 512)
+ 337              		.loc 1 212 0
+ 338 000a 0EE0     		b	.L33
+ 339              	.LVL35:
+ 340              	.L34:
+ 213:MotorControl.c ****     {
+ 214:MotorControl.c ****         while(!readyForNextStep)
+ 341              		.loc 1 214 0 discriminator 1
+ 342 000c 0A4B     		ldr	r3, .L36+4
+ 343 000e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 344 0010 002B     		cmp	r3, #0
+ 345 0012 FBD0     		beq	.L34
+ 215:MotorControl.c ****         {
+ 216:MotorControl.c ****         };
+ 217:MotorControl.c ****         step(Backward);
+ 346              		.loc 1 217 0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 11
+
+
+ 347 0014 4FF0FF30 		mov	r0, #-1
+ 348 0018 FFF7FEFF 		bl	step
+ 349              	.LVL36:
+ 218:MotorControl.c ****         CyDelay(STEPSLEEP);
+ 350              		.loc 1 218 0
+ 351 001c 0520     		movs	r0, #5
+ 352 001e FFF7FEFF 		bl	CyDelay
+ 353              	.LVL37:
+ 219:MotorControl.c ****         //UART_PutString("Step\r\n");
+ 220:MotorControl.c ****         readyForNextStep = false;
+ 354              		.loc 1 220 0
+ 355 0022 0022     		movs	r2, #0
+ 356 0024 044B     		ldr	r3, .L36+4
+ 357 0026 1A70     		strb	r2, [r3]
+ 221:MotorControl.c ****         x++;
+ 358              		.loc 1 221 0
+ 359 0028 0134     		adds	r4, r4, #1
+ 360              	.LVL38:
+ 361              	.L33:
+ 212:MotorControl.c ****     {
+ 362              		.loc 1 212 0
+ 363 002a B4F5007F 		cmp	r4, #512
+ 364 002e EDDB     		blt	.L34
+ 222:MotorControl.c ****     }
+ 223:MotorControl.c **** };
+ 365              		.loc 1 223 0
+ 366 0030 10BD     		pop	{r4, pc}
+ 367              	.LVL39:
+ 368              	.L37:
+ 369 0032 00BF     		.align	2
+ 370              	.L36:
+ 371 0034 0C000000 		.word	.LC1
+ 372 0038 00000000 		.word	.LANCHOR0
+ 373              		.cfi_endproc
+ 374              	.LFE68:
+ 375              		.size	revRotate90, .-revRotate90
+ 376              		.section	.text.revRotate180,"ax",%progbits
+ 377              		.align	2
+ 378              		.global	revRotate180
+ 379              		.thumb
+ 380              		.thumb_func
+ 381              		.type	revRotate180, %function
+ 382              	revRotate180:
+ 383              	.LFB69:
+ 224:MotorControl.c **** 
+ 225:MotorControl.c **** 
+ 226:MotorControl.c **** 
+ 227:MotorControl.c **** /*******************************************************************************
+ 228:MotorControl.c **** * Function Name: revRotate180
+ 229:MotorControl.c **** ********************************************************************************
+ 230:MotorControl.c **** *
+ 231:MotorControl.c **** * Summary:    This function totates the motor 180 counter clockwise degrees and works 
+ 232:MotorControl.c ****               the same way as rotate90
+ 233:MotorControl.c **** *
+ 234:MotorControl.c **** * Parameters:
+ 235:MotorControl.c **** *  None.
+ 236:MotorControl.c **** *
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 12
+
+
+ 237:MotorControl.c **** * Return:
+ 238:MotorControl.c **** *  None.
+ 239:MotorControl.c **** *
+ 240:MotorControl.c **** *******************************************************************************/
+ 241:MotorControl.c **** void revRotate180()
+ 242:MotorControl.c **** {
+ 384              		.loc 1 242 0
+ 385              		.cfi_startproc
+ 386              		@ args = 0, pretend = 0, frame = 0
+ 387              		@ frame_needed = 0, uses_anonymous_args = 0
+ 388 0000 10B5     		push	{r4, lr}
+ 389              		.cfi_def_cfa_offset 8
+ 390              		.cfi_offset 4, -8
+ 391              		.cfi_offset 14, -4
+ 392              	.LVL40:
+ 243:MotorControl.c ****     int x = 0;
+ 393              		.loc 1 243 0
+ 394 0002 0024     		movs	r4, #0
+ 244:MotorControl.c ****     while(x < 1024)
+ 395              		.loc 1 244 0
+ 396 0004 0EE0     		b	.L39
+ 397              	.LVL41:
+ 398              	.L40:
+ 245:MotorControl.c ****     {
+ 246:MotorControl.c ****         while(!readyForNextStep)
+ 399              		.loc 1 246 0 discriminator 1
+ 400 0006 094B     		ldr	r3, .L42
+ 401 0008 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 402 000a 002B     		cmp	r3, #0
+ 403 000c FBD0     		beq	.L40
+ 247:MotorControl.c ****         {
+ 248:MotorControl.c ****         };
+ 249:MotorControl.c ****         step(Backward);
+ 404              		.loc 1 249 0
+ 405 000e 4FF0FF30 		mov	r0, #-1
+ 406 0012 FFF7FEFF 		bl	step
+ 407              	.LVL42:
+ 250:MotorControl.c ****         CyDelay(STEPSLEEP);
+ 408              		.loc 1 250 0
+ 409 0016 0520     		movs	r0, #5
+ 410 0018 FFF7FEFF 		bl	CyDelay
+ 411              	.LVL43:
+ 251:MotorControl.c ****         //UART_PutString("Step\r\n");
+ 252:MotorControl.c ****         readyForNextStep = false;
+ 412              		.loc 1 252 0
+ 413 001c 0022     		movs	r2, #0
+ 414 001e 034B     		ldr	r3, .L42
+ 415 0020 1A70     		strb	r2, [r3]
+ 253:MotorControl.c ****         x++;
+ 416              		.loc 1 253 0
+ 417 0022 0134     		adds	r4, r4, #1
+ 418              	.LVL44:
+ 419              	.L39:
+ 244:MotorControl.c ****     {
+ 420              		.loc 1 244 0
+ 421 0024 B4F5806F 		cmp	r4, #1024
+ 422 0028 EDDB     		blt	.L40
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 13
+
+
+ 254:MotorControl.c ****     }
+ 255:MotorControl.c **** };
+ 423              		.loc 1 255 0
+ 424 002a 10BD     		pop	{r4, pc}
+ 425              	.LVL45:
+ 426              	.L43:
+ 427              		.align	2
+ 428              	.L42:
+ 429 002c 00000000 		.word	.LANCHOR0
+ 430              		.cfi_endproc
+ 431              	.LFE69:
+ 432              		.size	revRotate180, .-revRotate180
+ 433              		.section	.text.step2,"ax",%progbits
+ 434              		.align	2
+ 435              		.global	step2
+ 436              		.thumb
+ 437              		.thumb_func
+ 438              		.type	step2, %function
+ 439              	step2:
+ 440              	.LFB70:
+ 256:MotorControl.c **** 
+ 257:MotorControl.c **** //----------------------------------------------------------------//
+ 258:MotorControl.c **** 
+ 259:MotorControl.c **** 
+ 260:MotorControl.c **** void step2(int mode)
+ 261:MotorControl.c **** {
+ 441              		.loc 1 261 0
+ 442              		.cfi_startproc
+ 443              		@ args = 0, pretend = 0, frame = 0
+ 444              		@ frame_needed = 0, uses_anonymous_args = 0
+ 445              	.LVL46:
+ 446 0000 10B5     		push	{r4, lr}
+ 447              		.cfi_def_cfa_offset 8
+ 448              		.cfi_offset 4, -8
+ 449              		.cfi_offset 14, -4
+ 450 0002 0446     		mov	r4, r0
+ 262:MotorControl.c **** 
+ 263:MotorControl.c ****     switch (nextStep2)
+ 451              		.loc 1 263 0
+ 452 0004 1A4B     		ldr	r3, .L54
+ 453 0006 9B68     		ldr	r3, [r3, #8]
+ 454 0008 032B     		cmp	r3, #3
+ 455 000a 2FD8     		bhi	.L44
+ 456 000c DFE803F0 		tbb	[pc, r3]
+ 457              	.L47:
+ 458 0010 02       		.byte	(.L46-.L47)/2
+ 459 0011 11       		.byte	(.L48-.L47)/2
+ 460 0012 19       		.byte	(.L49-.L47)/2
+ 461 0013 21       		.byte	(.L50-.L47)/2
+ 462              		.p2align 1
+ 463              	.L46:
+ 264:MotorControl.c ****     {
+ 265:MotorControl.c ****         case 0 :
+ 266:MotorControl.c ****         {
+ 267:MotorControl.c ****             Motor_Reg_2_Write(0b0011);
+ 464              		.loc 1 267 0
+ 465 0014 0320     		movs	r0, #3
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 14
+
+
+ 466              	.LVL47:
+ 467 0016 FFF7FEFF 		bl	Motor_Reg_2_Write
+ 468              	.LVL48:
+ 268:MotorControl.c ****             if(mode == -1)
+ 469              		.loc 1 268 0
+ 470 001a B4F1FF3F 		cmp	r4, #-1
+ 471 001e 03D1     		bne	.L51
+ 269:MotorControl.c ****             {
+ 270:MotorControl.c ****                 nextStep2 = 3;
+ 472              		.loc 1 270 0
+ 473 0020 0322     		movs	r2, #3
+ 474 0022 134B     		ldr	r3, .L54
+ 475 0024 9A60     		str	r2, [r3, #8]
+ 476 0026 10BD     		pop	{r4, pc}
+ 477              	.LVL49:
+ 478              	.L51:
+ 271:MotorControl.c ****             }
+ 272:MotorControl.c ****             else
+ 273:MotorControl.c ****             {
+ 274:MotorControl.c ****                 nextStep2 += mode;
+ 479              		.loc 1 274 0
+ 480 0028 114A     		ldr	r2, .L54
+ 481 002a 9368     		ldr	r3, [r2, #8]
+ 482 002c 1C44     		add	r4, r4, r3
+ 483              	.LVL50:
+ 484 002e 9460     		str	r4, [r2, #8]
+ 485 0030 10BD     		pop	{r4, pc}
+ 486              	.LVL51:
+ 487              	.L48:
+ 275:MotorControl.c ****             }
+ 276:MotorControl.c ****         }
+ 277:MotorControl.c ****             break;
+ 278:MotorControl.c ****         case 1 :
+ 279:MotorControl.c ****         {
+ 280:MotorControl.c ****             Motor_Reg_2_Write(0b0110);
+ 488              		.loc 1 280 0
+ 489 0032 0620     		movs	r0, #6
+ 490              	.LVL52:
+ 491 0034 FFF7FEFF 		bl	Motor_Reg_2_Write
+ 492              	.LVL53:
+ 281:MotorControl.c ****             nextStep2 += mode;
+ 493              		.loc 1 281 0
+ 494 0038 0D4A     		ldr	r2, .L54
+ 495 003a 9368     		ldr	r3, [r2, #8]
+ 496 003c 1C44     		add	r4, r4, r3
+ 497              	.LVL54:
+ 498 003e 9460     		str	r4, [r2, #8]
+ 282:MotorControl.c ****         }
+ 283:MotorControl.c ****             break;
+ 499              		.loc 1 283 0
+ 500 0040 10BD     		pop	{r4, pc}
+ 501              	.LVL55:
+ 502              	.L49:
+ 284:MotorControl.c ****         case 2 :
+ 285:MotorControl.c ****         {
+ 286:MotorControl.c ****             Motor_Reg_2_Write(0b1100);
+ 503              		.loc 1 286 0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 15
+
+
+ 504 0042 0C20     		movs	r0, #12
+ 505              	.LVL56:
+ 506 0044 FFF7FEFF 		bl	Motor_Reg_2_Write
+ 507              	.LVL57:
+ 287:MotorControl.c ****             nextStep2 += mode;
+ 508              		.loc 1 287 0
+ 509 0048 094A     		ldr	r2, .L54
+ 510 004a 9368     		ldr	r3, [r2, #8]
+ 511 004c 1C44     		add	r4, r4, r3
+ 512              	.LVL58:
+ 513 004e 9460     		str	r4, [r2, #8]
+ 288:MotorControl.c ****         }
+ 289:MotorControl.c ****             break;
+ 514              		.loc 1 289 0
+ 515 0050 10BD     		pop	{r4, pc}
+ 516              	.LVL59:
+ 517              	.L50:
+ 290:MotorControl.c ****         case 3 :
+ 291:MotorControl.c ****         {
+ 292:MotorControl.c ****             Motor_Reg_2_Write(0b1001);
+ 518              		.loc 1 292 0
+ 519 0052 0920     		movs	r0, #9
+ 520              	.LVL60:
+ 521 0054 FFF7FEFF 		bl	Motor_Reg_2_Write
+ 522              	.LVL61:
+ 293:MotorControl.c ****             if(mode == 1)
+ 523              		.loc 1 293 0
+ 524 0058 012C     		cmp	r4, #1
+ 525 005a 03D1     		bne	.L52
+ 294:MotorControl.c ****             {
+ 295:MotorControl.c ****                 nextStep2 = 0;
+ 526              		.loc 1 295 0
+ 527 005c 0022     		movs	r2, #0
+ 528 005e 044B     		ldr	r3, .L54
+ 529 0060 9A60     		str	r2, [r3, #8]
+ 530 0062 10BD     		pop	{r4, pc}
+ 531              	.LVL62:
+ 532              	.L52:
+ 296:MotorControl.c ****             }
+ 297:MotorControl.c ****             else
+ 298:MotorControl.c ****             {
+ 299:MotorControl.c ****                 nextStep2 += mode;
+ 533              		.loc 1 299 0
+ 534 0064 024B     		ldr	r3, .L54
+ 535 0066 9A68     		ldr	r2, [r3, #8]
+ 536 0068 1444     		add	r4, r4, r2
+ 537              	.LVL63:
+ 538 006a 9C60     		str	r4, [r3, #8]
+ 539              	.L44:
+ 540 006c 10BD     		pop	{r4, pc}
+ 541              	.L55:
+ 542 006e 00BF     		.align	2
+ 543              	.L54:
+ 544 0070 00000000 		.word	.LANCHOR0
+ 545              		.cfi_endproc
+ 546              	.LFE70:
+ 547              		.size	step2, .-step2
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 16
+
+
+ 548              		.section	.text.Rotate902,"ax",%progbits
+ 549              		.align	2
+ 550              		.global	Rotate902
+ 551              		.thumb
+ 552              		.thumb_func
+ 553              		.type	Rotate902, %function
+ 554              	Rotate902:
+ 555              	.LFB71:
+ 300:MotorControl.c ****             }
+ 301:MotorControl.c ****         }
+ 302:MotorControl.c ****             break;
+ 303:MotorControl.c ****     }
+ 304:MotorControl.c **** }
+ 305:MotorControl.c **** 
+ 306:MotorControl.c **** 
+ 307:MotorControl.c **** void Rotate902()
+ 308:MotorControl.c **** {
+ 556              		.loc 1 308 0
+ 557              		.cfi_startproc
+ 558              		@ args = 0, pretend = 0, frame = 0
+ 559              		@ frame_needed = 0, uses_anonymous_args = 0
+ 560 0000 10B5     		push	{r4, lr}
+ 561              		.cfi_def_cfa_offset 8
+ 562              		.cfi_offset 4, -8
+ 563              		.cfi_offset 14, -4
+ 564              	.LVL64:
+ 309:MotorControl.c ****     int x = 0;
+ 565              		.loc 1 309 0
+ 566 0002 0024     		movs	r4, #0
+ 310:MotorControl.c ****     while(x < 512)
+ 567              		.loc 1 310 0
+ 568 0004 0DE0     		b	.L57
+ 569              	.LVL65:
+ 570              	.L58:
+ 311:MotorControl.c ****     {
+ 312:MotorControl.c ****         while(!readyForNextStep2)
+ 571              		.loc 1 312 0 discriminator 1
+ 572 0006 094B     		ldr	r3, .L60
+ 573 0008 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 574 000a 002B     		cmp	r3, #0
+ 575 000c FBD0     		beq	.L58
+ 313:MotorControl.c ****         {
+ 314:MotorControl.c ****         };
+ 315:MotorControl.c ****         step2(Forward);
+ 576              		.loc 1 315 0
+ 577 000e 0120     		movs	r0, #1
+ 578 0010 FFF7FEFF 		bl	step2
+ 579              	.LVL66:
+ 316:MotorControl.c ****         CyDelay(STEPSLEEP);
+ 580              		.loc 1 316 0
+ 581 0014 0520     		movs	r0, #5
+ 582 0016 FFF7FEFF 		bl	CyDelay
+ 583              	.LVL67:
+ 317:MotorControl.c ****         //UART_PutString("Step\r\n");
+ 318:MotorControl.c ****         readyForNextStep2 = false;
+ 584              		.loc 1 318 0
+ 585 001a 0022     		movs	r2, #0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 17
+
+
+ 586 001c 034B     		ldr	r3, .L60
+ 587 001e 5A70     		strb	r2, [r3, #1]
+ 319:MotorControl.c ****         x++;
+ 588              		.loc 1 319 0
+ 589 0020 0134     		adds	r4, r4, #1
+ 590              	.LVL68:
+ 591              	.L57:
+ 310:MotorControl.c ****     {
+ 592              		.loc 1 310 0
+ 593 0022 B4F5007F 		cmp	r4, #512
+ 594 0026 EEDB     		blt	.L58
+ 320:MotorControl.c ****     }
+ 321:MotorControl.c **** };
+ 595              		.loc 1 321 0
+ 596 0028 10BD     		pop	{r4, pc}
+ 597              	.LVL69:
+ 598              	.L61:
+ 599 002a 00BF     		.align	2
+ 600              	.L60:
+ 601 002c 00000000 		.word	.LANCHOR0
+ 602              		.cfi_endproc
+ 603              	.LFE71:
+ 604              		.size	Rotate902, .-Rotate902
+ 605              		.section	.text.Rotate360,"ax",%progbits
+ 606              		.align	2
+ 607              		.global	Rotate360
+ 608              		.thumb
+ 609              		.thumb_func
+ 610              		.type	Rotate360, %function
+ 611              	Rotate360:
+ 612              	.LFB72:
+ 322:MotorControl.c **** 
+ 323:MotorControl.c **** void Rotate360()
+ 324:MotorControl.c **** {
+ 613              		.loc 1 324 0
+ 614              		.cfi_startproc
+ 615              		@ args = 0, pretend = 0, frame = 0
+ 616              		@ frame_needed = 0, uses_anonymous_args = 0
+ 617 0000 10B5     		push	{r4, lr}
+ 618              		.cfi_def_cfa_offset 8
+ 619              		.cfi_offset 4, -8
+ 620              		.cfi_offset 14, -4
+ 621              	.LVL70:
+ 325:MotorControl.c ****     int x = 0;
+ 622              		.loc 1 325 0
+ 623 0002 0024     		movs	r4, #0
+ 326:MotorControl.c ****     while(x < 2048 )
+ 624              		.loc 1 326 0
+ 625 0004 0DE0     		b	.L63
+ 626              	.LVL71:
+ 627              	.L64:
+ 327:MotorControl.c ****     {
+ 328:MotorControl.c ****         while(!readyForNextStep2)
+ 628              		.loc 1 328 0 discriminator 1
+ 629 0006 094B     		ldr	r3, .L66
+ 630 0008 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 631 000a 002B     		cmp	r3, #0
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 18
+
+
+ 632 000c FBD0     		beq	.L64
+ 329:MotorControl.c ****         {
+ 330:MotorControl.c ****         };
+ 331:MotorControl.c ****         step2(Forward);
+ 633              		.loc 1 331 0
+ 634 000e 0120     		movs	r0, #1
+ 635 0010 FFF7FEFF 		bl	step2
+ 636              	.LVL72:
+ 332:MotorControl.c ****         CyDelay(STEPSLEEP);
+ 637              		.loc 1 332 0
+ 638 0014 0520     		movs	r0, #5
+ 639 0016 FFF7FEFF 		bl	CyDelay
+ 640              	.LVL73:
+ 333:MotorControl.c ****         //UART_PutString("Step\r\n");
+ 334:MotorControl.c ****         readyForNextStep2 = false;
+ 641              		.loc 1 334 0
+ 642 001a 0022     		movs	r2, #0
+ 643 001c 034B     		ldr	r3, .L66
+ 644 001e 5A70     		strb	r2, [r3, #1]
+ 335:MotorControl.c ****         x++;
+ 645              		.loc 1 335 0
+ 646 0020 0134     		adds	r4, r4, #1
+ 647              	.LVL74:
+ 648              	.L63:
+ 326:MotorControl.c ****     {
+ 649              		.loc 1 326 0
+ 650 0022 B4F5006F 		cmp	r4, #2048
+ 651 0026 EEDB     		blt	.L64
+ 336:MotorControl.c ****     }
+ 337:MotorControl.c **** };
+ 652              		.loc 1 337 0
+ 653 0028 10BD     		pop	{r4, pc}
+ 654              	.LVL75:
+ 655              	.L67:
+ 656 002a 00BF     		.align	2
+ 657              	.L66:
+ 658 002c 00000000 		.word	.LANCHOR0
+ 659              		.cfi_endproc
+ 660              	.LFE72:
+ 661              		.size	Rotate360, .-Rotate360
+ 662              		.section	.text.revRotate902,"ax",%progbits
+ 663              		.align	2
+ 664              		.global	revRotate902
+ 665              		.thumb
+ 666              		.thumb_func
+ 667              		.type	revRotate902, %function
+ 668              	revRotate902:
+ 669              	.LFB73:
+ 338:MotorControl.c **** 
+ 339:MotorControl.c **** 
+ 340:MotorControl.c **** 
+ 341:MotorControl.c **** /*******************************************************************************
+ 342:MotorControl.c **** * Function Name: revRotate90
+ 343:MotorControl.c **** ********************************************************************************
+ 344:MotorControl.c **** *
+ 345:MotorControl.c **** * Summary:    This function totates the motor 90 counter clockwise degrees and works 
+ 346:MotorControl.c ****               the same way as rotate90
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 19
+
+
+ 347:MotorControl.c **** *
+ 348:MotorControl.c **** * Parameters:
+ 349:MotorControl.c **** *  None.
+ 350:MotorControl.c **** *
+ 351:MotorControl.c **** * Return:
+ 352:MotorControl.c **** *  None.
+ 353:MotorControl.c **** *
+ 354:MotorControl.c **** *******************************************************************************/
+ 355:MotorControl.c **** void revRotate902()
+ 356:MotorControl.c **** {
+ 670              		.loc 1 356 0
+ 671              		.cfi_startproc
+ 672              		@ args = 0, pretend = 0, frame = 0
+ 673              		@ frame_needed = 0, uses_anonymous_args = 0
+ 674 0000 10B5     		push	{r4, lr}
+ 675              		.cfi_def_cfa_offset 8
+ 676              		.cfi_offset 4, -8
+ 677              		.cfi_offset 14, -4
+ 678              	.LVL76:
+ 357:MotorControl.c ****     int x = 0;
+ 679              		.loc 1 357 0
+ 680 0002 0024     		movs	r4, #0
+ 358:MotorControl.c ****     while(x < 512)
+ 681              		.loc 1 358 0
+ 682 0004 0EE0     		b	.L69
+ 683              	.LVL77:
+ 684              	.L70:
+ 359:MotorControl.c ****     {
+ 360:MotorControl.c ****         while(!readyForNextStep2)
+ 685              		.loc 1 360 0 discriminator 1
+ 686 0006 0B4B     		ldr	r3, .L72
+ 687 0008 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 688 000a 002B     		cmp	r3, #0
+ 689 000c FBD0     		beq	.L70
+ 361:MotorControl.c ****         {
+ 362:MotorControl.c ****         };
+ 363:MotorControl.c ****         step2(Backward);
+ 690              		.loc 1 363 0
+ 691 000e 4FF0FF30 		mov	r0, #-1
+ 692 0012 FFF7FEFF 		bl	step2
+ 693              	.LVL78:
+ 364:MotorControl.c ****         CyDelay(STEPSLEEP);
+ 694              		.loc 1 364 0
+ 695 0016 0520     		movs	r0, #5
+ 696 0018 FFF7FEFF 		bl	CyDelay
+ 697              	.LVL79:
+ 365:MotorControl.c ****         //UART_PutString("Step\r\n");
+ 366:MotorControl.c ****         readyForNextStep2 = false;
+ 698              		.loc 1 366 0
+ 699 001c 0022     		movs	r2, #0
+ 700 001e 054B     		ldr	r3, .L72
+ 701 0020 5A70     		strb	r2, [r3, #1]
+ 367:MotorControl.c ****         x++;
+ 702              		.loc 1 367 0
+ 703 0022 0134     		adds	r4, r4, #1
+ 704              	.LVL80:
+ 705              	.L69:
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 20
+
+
+ 358:MotorControl.c ****     {
+ 706              		.loc 1 358 0
+ 707 0024 B4F5007F 		cmp	r4, #512
+ 708 0028 EDDB     		blt	.L70
+ 368:MotorControl.c ****     }
+ 369:MotorControl.c ****     UART_PutString("Rev\r\n");
+ 709              		.loc 1 369 0
+ 710 002a 0348     		ldr	r0, .L72+4
+ 711 002c FFF7FEFF 		bl	UART_PutString
+ 712              	.LVL81:
+ 713 0030 10BD     		pop	{r4, pc}
+ 714              	.LVL82:
+ 715              	.L73:
+ 716 0032 00BF     		.align	2
+ 717              	.L72:
+ 718 0034 00000000 		.word	.LANCHOR0
+ 719 0038 0C000000 		.word	.LC1
+ 720              		.cfi_endproc
+ 721              	.LFE73:
+ 722              		.size	revRotate902, .-revRotate902
+ 723              		.section	.text.revRotate1802,"ax",%progbits
+ 724              		.align	2
+ 725              		.global	revRotate1802
+ 726              		.thumb
+ 727              		.thumb_func
+ 728              		.type	revRotate1802, %function
+ 729              	revRotate1802:
+ 730              	.LFB74:
+ 370:MotorControl.c **** };
+ 371:MotorControl.c **** 
+ 372:MotorControl.c **** 
+ 373:MotorControl.c **** void revRotate1802()
+ 374:MotorControl.c **** {
+ 731              		.loc 1 374 0
+ 732              		.cfi_startproc
+ 733              		@ args = 0, pretend = 0, frame = 0
+ 734              		@ frame_needed = 0, uses_anonymous_args = 0
+ 735 0000 10B5     		push	{r4, lr}
+ 736              		.cfi_def_cfa_offset 8
+ 737              		.cfi_offset 4, -8
+ 738              		.cfi_offset 14, -4
+ 739              	.LVL83:
+ 375:MotorControl.c ****     int x = 0;
+ 740              		.loc 1 375 0
+ 741 0002 0024     		movs	r4, #0
+ 376:MotorControl.c ****     while(x < 1024)
+ 742              		.loc 1 376 0
+ 743 0004 0EE0     		b	.L75
+ 744              	.LVL84:
+ 745              	.L76:
+ 377:MotorControl.c ****     {
+ 378:MotorControl.c ****         while(!readyForNextStep2)
+ 746              		.loc 1 378 0 discriminator 1
+ 747 0006 094B     		ldr	r3, .L78
+ 748 0008 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 749 000a 002B     		cmp	r3, #0
+ 750 000c FBD0     		beq	.L76
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 21
+
+
+ 379:MotorControl.c ****         {
+ 380:MotorControl.c ****         };
+ 381:MotorControl.c ****         step2(Backward);
+ 751              		.loc 1 381 0
+ 752 000e 4FF0FF30 		mov	r0, #-1
+ 753 0012 FFF7FEFF 		bl	step2
+ 754              	.LVL85:
+ 382:MotorControl.c ****         CyDelay(STEPSLEEP);
+ 755              		.loc 1 382 0
+ 756 0016 0520     		movs	r0, #5
+ 757 0018 FFF7FEFF 		bl	CyDelay
+ 758              	.LVL86:
+ 383:MotorControl.c ****         //UART_PutString("Step\r\n");
+ 384:MotorControl.c ****         readyForNextStep2 = false;
+ 759              		.loc 1 384 0
+ 760 001c 0022     		movs	r2, #0
+ 761 001e 034B     		ldr	r3, .L78
+ 762 0020 5A70     		strb	r2, [r3, #1]
+ 385:MotorControl.c ****         x++;
+ 763              		.loc 1 385 0
+ 764 0022 0134     		adds	r4, r4, #1
+ 765              	.LVL87:
+ 766              	.L75:
+ 376:MotorControl.c ****     {
+ 767              		.loc 1 376 0
+ 768 0024 B4F5806F 		cmp	r4, #1024
+ 769 0028 EDDB     		blt	.L76
+ 386:MotorControl.c ****     }
+ 387:MotorControl.c **** };
+ 770              		.loc 1 387 0
+ 771 002a 10BD     		pop	{r4, pc}
+ 772              	.LVL88:
+ 773              	.L79:
+ 774              		.align	2
+ 775              	.L78:
+ 776 002c 00000000 		.word	.LANCHOR0
+ 777              		.cfi_endproc
+ 778              	.LFE74:
+ 779              		.size	revRotate1802, .-revRotate1802
+ 780              		.global	nextStep2
+ 781              		.global	readyForNextStep2
+ 782              		.global	steppingMode2
+ 783              		.global	stepCount2
+ 784              		.global	nextStep
+ 785              		.global	readyForNextStep
+ 786              		.global	steppingMode
+ 787              		.global	stepCount
+ 788              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 789              		.align	2
+ 790              	.LC0:
+ 791 0000 466F7277 		.ascii	"Forward\015\012\000"
+ 791      6172640D 
+ 791      0A00
+ 792 000a 0000     		.space	2
+ 793              	.LC1:
+ 794 000c 5265760D 		.ascii	"Rev\015\012\000"
+ 794      0A00
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 22
+
+
+ 795              		.bss
+ 796              		.align	2
+ 797              		.set	.LANCHOR0,. + 0
+ 798              		.type	readyForNextStep, %object
+ 799              		.size	readyForNextStep, 1
+ 800              	readyForNextStep:
+ 801 0000 00       		.space	1
+ 802              		.type	readyForNextStep2, %object
+ 803              		.size	readyForNextStep2, 1
+ 804              	readyForNextStep2:
+ 805 0001 00       		.space	1
+ 806 0002 0000     		.space	2
+ 807              		.type	nextStep, %object
+ 808              		.size	nextStep, 4
+ 809              	nextStep:
+ 810 0004 00000000 		.space	4
+ 811              		.type	nextStep2, %object
+ 812              		.size	nextStep2, 4
+ 813              	nextStep2:
+ 814 0008 00000000 		.space	4
+ 815              		.type	steppingMode2, %object
+ 816              		.size	steppingMode2, 4
+ 817              	steppingMode2:
+ 818 000c 00000000 		.space	4
+ 819              		.type	stepCount2, %object
+ 820              		.size	stepCount2, 4
+ 821              	stepCount2:
+ 822 0010 00000000 		.space	4
+ 823              		.type	steppingMode, %object
+ 824              		.size	steppingMode, 4
+ 825              	steppingMode:
+ 826 0014 00000000 		.space	4
+ 827              		.type	stepCount, %object
+ 828              		.size	stepCount, 4
+ 829              	stepCount:
+ 830 0018 00000000 		.space	4
+ 831              		.text
+ 832              	.Letext0:
+ 833              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 834              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 835              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 836              		.file 5 "Generated_Source\\PSoC5/Motor_Timer.h"
+ 837              		.file 6 "Generated_Source\\PSoC5/isr_timer.h"
+ 838              		.file 7 "Generated_Source\\PSoC5/Motor_Reg_1.h"
+ 839              		.file 8 "Generated_Source\\PSoC5/UART.h"
+ 840              		.file 9 "Generated_Source\\PSoC5/CyLib.h"
+ 841              		.file 10 "Generated_Source\\PSoC5/Motor_Reg_2.h"
+ 842              		.section	.debug_info,"",%progbits
+ 843              	.Ldebug_info0:
+ 844 0000 33050000 		.4byte	0x533
+ 845 0004 0400     		.2byte	0x4
+ 846 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 847 000a 04       		.byte	0x4
+ 848 000b 01       		.uleb128 0x1
+ 849 000c 00010000 		.4byte	.LASF45
+ 850 0010 0C       		.byte	0xc
+ 851 0011 CE010000 		.4byte	.LASF46
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 23
+
+
+ 852 0015 94000000 		.4byte	.LASF47
+ 853 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 854 001d 00000000 		.4byte	0
+ 855 0021 00000000 		.4byte	.Ldebug_line0
+ 856 0025 02       		.uleb128 0x2
+ 857 0026 01       		.byte	0x1
+ 858 0027 06       		.byte	0x6
+ 859 0028 04030000 		.4byte	.LASF0
+ 860 002c 02       		.uleb128 0x2
+ 861 002d 01       		.byte	0x1
+ 862 002e 08       		.byte	0x8
+ 863 002f F2000000 		.4byte	.LASF1
+ 864 0033 02       		.uleb128 0x2
+ 865 0034 02       		.byte	0x2
+ 866 0035 05       		.byte	0x5
+ 867 0036 F0010000 		.4byte	.LASF2
+ 868 003a 02       		.uleb128 0x2
+ 869 003b 02       		.byte	0x2
+ 870 003c 07       		.byte	0x7
+ 871 003d AE010000 		.4byte	.LASF3
+ 872 0041 03       		.uleb128 0x3
+ 873 0042 26000000 		.4byte	.LASF9
+ 874 0046 02       		.byte	0x2
+ 875 0047 3F       		.byte	0x3f
+ 876 0048 4C000000 		.4byte	0x4c
+ 877 004c 02       		.uleb128 0x2
+ 878 004d 04       		.byte	0x4
+ 879 004e 05       		.byte	0x5
+ 880 004f E5020000 		.4byte	.LASF4
+ 881 0053 02       		.uleb128 0x2
+ 882 0054 04       		.byte	0x4
+ 883 0055 07       		.byte	0x7
+ 884 0056 9C010000 		.4byte	.LASF5
+ 885 005a 02       		.uleb128 0x2
+ 886 005b 08       		.byte	0x8
+ 887 005c 05       		.byte	0x5
+ 888 005d 97020000 		.4byte	.LASF6
+ 889 0061 02       		.uleb128 0x2
+ 890 0062 08       		.byte	0x8
+ 891 0063 07       		.byte	0x7
+ 892 0064 41020000 		.4byte	.LASF7
+ 893 0068 04       		.uleb128 0x4
+ 894 0069 04       		.byte	0x4
+ 895 006a 05       		.byte	0x5
+ 896 006b 696E7400 		.ascii	"int\000"
+ 897 006f 02       		.uleb128 0x2
+ 898 0070 04       		.byte	0x4
+ 899 0071 07       		.byte	0x7
+ 900 0072 34020000 		.4byte	.LASF8
+ 901 0076 03       		.uleb128 0x3
+ 902 0077 74000000 		.4byte	.LASF10
+ 903 007b 03       		.byte	0x3
+ 904 007c 2C       		.byte	0x2c
+ 905 007d 41000000 		.4byte	0x41
+ 906 0081 02       		.uleb128 0x2
+ 907 0082 04       		.byte	0x4
+ 908 0083 04       		.byte	0x4
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 24
+
+
+ 909 0084 8E000000 		.4byte	.LASF11
+ 910 0088 02       		.uleb128 0x2
+ 911 0089 08       		.byte	0x8
+ 912 008a 04       		.byte	0x4
+ 913 008b DD010000 		.4byte	.LASF12
+ 914 008f 02       		.uleb128 0x2
+ 915 0090 01       		.byte	0x1
+ 916 0091 08       		.byte	0x8
+ 917 0092 A5020000 		.4byte	.LASF13
+ 918 0096 02       		.uleb128 0x2
+ 919 0097 08       		.byte	0x8
+ 920 0098 04       		.byte	0x4
+ 921 0099 EE020000 		.4byte	.LASF14
+ 922 009d 02       		.uleb128 0x2
+ 923 009e 04       		.byte	0x4
+ 924 009f 07       		.byte	0x7
+ 925 00a0 80020000 		.4byte	.LASF15
+ 926 00a4 05       		.uleb128 0x5
+ 927 00a5 0C020000 		.4byte	.LASF48
+ 928 00a9 01       		.byte	0x1
+ 929 00aa 34       		.byte	0x34
+ 930 00ab 00000000 		.4byte	.LFB64
+ 931 00af 10000000 		.4byte	.LFE64-.LFB64
+ 932 00b3 01       		.uleb128 0x1
+ 933 00b4 9C       		.byte	0x9c
+ 934 00b5 06       		.uleb128 0x6
+ 935 00b6 BD020000 		.4byte	.LASF16
+ 936 00ba 01       		.byte	0x1
+ 937 00bb 1F       		.byte	0x1f
+ 938 00bc 00000000 		.4byte	.LFB63
+ 939 00c0 18000000 		.4byte	.LFE63-.LFB63
+ 940 00c4 01       		.uleb128 0x1
+ 941 00c5 9C       		.byte	0x9c
+ 942 00c6 F4000000 		.4byte	0xf4
+ 943 00ca 07       		.uleb128 0x7
+ 944 00cb 06000000 		.4byte	.LVL0
+ 945 00cf E9040000 		.4byte	0x4e9
+ 946 00d3 08       		.uleb128 0x8
+ 947 00d4 0C000000 		.4byte	.LVL1
+ 948 00d8 F4040000 		.4byte	0x4f4
+ 949 00dc EA000000 		.4byte	0xea
+ 950 00e0 09       		.uleb128 0x9
+ 951 00e1 01       		.uleb128 0x1
+ 952 00e2 50       		.byte	0x50
+ 953 00e3 05       		.uleb128 0x5
+ 954 00e4 03       		.byte	0x3
+ 955 00e5 00000000 		.4byte	Motor_Timer_I_handler
+ 956 00e9 00       		.byte	0
+ 957 00ea 07       		.uleb128 0x7
+ 958 00eb 10000000 		.4byte	.LVL2
+ 959 00ef FF040000 		.4byte	0x4ff
+ 960 00f3 00       		.byte	0
+ 961 00f4 0A       		.uleb128 0xa
+ 962 00f5 30000000 		.4byte	.LASF21
+ 963 00f9 01       		.byte	0x1
+ 964 00fa 4F       		.byte	0x4f
+ 965 00fb 00000000 		.4byte	.LFB65
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 25
+
+
+ 966 00ff 74000000 		.4byte	.LFE65-.LFB65
+ 967 0103 01       		.uleb128 0x1
+ 968 0104 9C       		.byte	0x9c
+ 969 0105 61010000 		.4byte	0x161
+ 970 0109 0B       		.uleb128 0xb
+ 971 010a 69020000 		.4byte	.LASF23
+ 972 010e 01       		.byte	0x1
+ 973 010f 4F       		.byte	0x4f
+ 974 0110 68000000 		.4byte	0x68
+ 975 0114 00000000 		.4byte	.LLST0
+ 976 0118 08       		.uleb128 0x8
+ 977 0119 1A000000 		.4byte	.LVL5
+ 978 011d 0A050000 		.4byte	0x50a
+ 979 0121 2B010000 		.4byte	0x12b
+ 980 0125 09       		.uleb128 0x9
+ 981 0126 01       		.uleb128 0x1
+ 982 0127 50       		.byte	0x50
+ 983 0128 01       		.uleb128 0x1
+ 984 0129 33       		.byte	0x33
+ 985 012a 00       		.byte	0
+ 986 012b 08       		.uleb128 0x8
+ 987 012c 38000000 		.4byte	.LVL10
+ 988 0130 0A050000 		.4byte	0x50a
+ 989 0134 3E010000 		.4byte	0x13e
+ 990 0138 09       		.uleb128 0x9
+ 991 0139 01       		.uleb128 0x1
+ 992 013a 50       		.byte	0x50
+ 993 013b 01       		.uleb128 0x1
+ 994 013c 36       		.byte	0x36
+ 995 013d 00       		.byte	0
+ 996 013e 08       		.uleb128 0x8
+ 997 013f 48000000 		.4byte	.LVL14
+ 998 0143 0A050000 		.4byte	0x50a
+ 999 0147 51010000 		.4byte	0x151
+ 1000 014b 09       		.uleb128 0x9
+ 1001 014c 01       		.uleb128 0x1
+ 1002 014d 50       		.byte	0x50
+ 1003 014e 01       		.uleb128 0x1
+ 1004 014f 3C       		.byte	0x3c
+ 1005 0150 00       		.byte	0
+ 1006 0151 0C       		.uleb128 0xc
+ 1007 0152 58000000 		.4byte	.LVL18
+ 1008 0156 0A050000 		.4byte	0x50a
+ 1009 015a 09       		.uleb128 0x9
+ 1010 015b 01       		.uleb128 0x1
+ 1011 015c 50       		.byte	0x50
+ 1012 015d 01       		.uleb128 0x1
+ 1013 015e 39       		.byte	0x39
+ 1014 015f 00       		.byte	0
+ 1015 0160 00       		.byte	0
+ 1016 0161 06       		.uleb128 0x6
+ 1017 0162 42000000 		.4byte	.LASF17
+ 1018 0166 01       		.byte	0x1
+ 1019 0167 8F       		.byte	0x8f
+ 1020 0168 00000000 		.4byte	.LFB66
+ 1021 016c 38000000 		.4byte	.LFE66-.LFB66
+ 1022 0170 01       		.uleb128 0x1
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 26
+
+
+ 1023 0171 9C       		.byte	0x9c
+ 1024 0172 BD010000 		.4byte	0x1bd
+ 1025 0176 0D       		.uleb128 0xd
+ 1026 0177 7800     		.ascii	"x\000"
+ 1027 0179 01       		.byte	0x1
+ 1028 017a 92       		.byte	0x92
+ 1029 017b 68000000 		.4byte	0x68
+ 1030 017f 98000000 		.4byte	.LLST1
+ 1031 0183 08       		.uleb128 0x8
+ 1032 0184 08000000 		.4byte	.LVL21
+ 1033 0188 15050000 		.4byte	0x515
+ 1034 018c 9A010000 		.4byte	0x19a
+ 1035 0190 09       		.uleb128 0x9
+ 1036 0191 01       		.uleb128 0x1
+ 1037 0192 50       		.byte	0x50
+ 1038 0193 05       		.uleb128 0x5
+ 1039 0194 03       		.byte	0x3
+ 1040 0195 00000000 		.4byte	.LC0
+ 1041 0199 00       		.byte	0
+ 1042 019a 08       		.uleb128 0x8
+ 1043 019b 1A000000 		.4byte	.LVL23
+ 1044 019f F4000000 		.4byte	0xf4
+ 1045 01a3 AD010000 		.4byte	0x1ad
+ 1046 01a7 09       		.uleb128 0x9
+ 1047 01a8 01       		.uleb128 0x1
+ 1048 01a9 50       		.byte	0x50
+ 1049 01aa 01       		.uleb128 0x1
+ 1050 01ab 31       		.byte	0x31
+ 1051 01ac 00       		.byte	0
+ 1052 01ad 0C       		.uleb128 0xc
+ 1053 01ae 20000000 		.4byte	.LVL24
+ 1054 01b2 20050000 		.4byte	0x520
+ 1055 01b6 09       		.uleb128 0x9
+ 1056 01b7 01       		.uleb128 0x1
+ 1057 01b8 50       		.byte	0x50
+ 1058 01b9 01       		.uleb128 0x1
+ 1059 01ba 35       		.byte	0x35
+ 1060 01bb 00       		.byte	0
+ 1061 01bc 00       		.byte	0
+ 1062 01bd 06       		.uleb128 0x6
+ 1063 01be 58000000 		.4byte	.LASF18
+ 1064 01c2 01       		.byte	0x1
+ 1065 01c3 B0       		.byte	0xb0
+ 1066 01c4 00000000 		.4byte	.LFB67
+ 1067 01c8 30000000 		.4byte	.LFE67-.LFB67
+ 1068 01cc 01       		.uleb128 0x1
+ 1069 01cd 9C       		.byte	0x9c
+ 1070 01ce 02020000 		.4byte	0x202
+ 1071 01d2 0D       		.uleb128 0xd
+ 1072 01d3 7800     		.ascii	"x\000"
+ 1073 01d5 01       		.byte	0x1
+ 1074 01d6 B2       		.byte	0xb2
+ 1075 01d7 68000000 		.4byte	0x68
+ 1076 01db B7000000 		.4byte	.LLST2
+ 1077 01df 08       		.uleb128 0x8
+ 1078 01e0 14000000 		.4byte	.LVL29
+ 1079 01e4 F4000000 		.4byte	0xf4
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 27
+
+
+ 1080 01e8 F2010000 		.4byte	0x1f2
+ 1081 01ec 09       		.uleb128 0x9
+ 1082 01ed 01       		.uleb128 0x1
+ 1083 01ee 50       		.byte	0x50
+ 1084 01ef 01       		.uleb128 0x1
+ 1085 01f0 31       		.byte	0x31
+ 1086 01f1 00       		.byte	0
+ 1087 01f2 0C       		.uleb128 0xc
+ 1088 01f3 1A000000 		.4byte	.LVL30
+ 1089 01f7 20050000 		.4byte	0x520
+ 1090 01fb 09       		.uleb128 0x9
+ 1091 01fc 01       		.uleb128 0x1
+ 1092 01fd 50       		.byte	0x50
+ 1093 01fe 01       		.uleb128 0x1
+ 1094 01ff 35       		.byte	0x35
+ 1095 0200 00       		.byte	0
+ 1096 0201 00       		.byte	0
+ 1097 0202 06       		.uleb128 0x6
+ 1098 0203 E4010000 		.4byte	.LASF19
+ 1099 0207 01       		.byte	0x1
+ 1100 0208 D0       		.byte	0xd0
+ 1101 0209 00000000 		.4byte	.LFB68
+ 1102 020d 3C000000 		.4byte	.LFE68-.LFB68
+ 1103 0211 01       		.uleb128 0x1
+ 1104 0212 9C       		.byte	0x9c
+ 1105 0213 5F020000 		.4byte	0x25f
+ 1106 0217 0D       		.uleb128 0xd
+ 1107 0218 7800     		.ascii	"x\000"
+ 1108 021a 01       		.byte	0x1
+ 1109 021b D2       		.byte	0xd2
+ 1110 021c 68000000 		.4byte	0x68
+ 1111 0220 D6000000 		.4byte	.LLST3
+ 1112 0224 08       		.uleb128 0x8
+ 1113 0225 08000000 		.4byte	.LVL34
+ 1114 0229 15050000 		.4byte	0x515
+ 1115 022d 3B020000 		.4byte	0x23b
+ 1116 0231 09       		.uleb128 0x9
+ 1117 0232 01       		.uleb128 0x1
+ 1118 0233 50       		.byte	0x50
+ 1119 0234 05       		.uleb128 0x5
+ 1120 0235 03       		.byte	0x3
+ 1121 0236 0C000000 		.4byte	.LC1
+ 1122 023a 00       		.byte	0
+ 1123 023b 08       		.uleb128 0x8
+ 1124 023c 1C000000 		.4byte	.LVL36
+ 1125 0240 F4000000 		.4byte	0xf4
+ 1126 0244 4F020000 		.4byte	0x24f
+ 1127 0248 09       		.uleb128 0x9
+ 1128 0249 01       		.uleb128 0x1
+ 1129 024a 50       		.byte	0x50
+ 1130 024b 02       		.uleb128 0x2
+ 1131 024c 09       		.byte	0x9
+ 1132 024d FF       		.byte	0xff
+ 1133 024e 00       		.byte	0
+ 1134 024f 0C       		.uleb128 0xc
+ 1135 0250 22000000 		.4byte	.LVL37
+ 1136 0254 20050000 		.4byte	0x520
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 28
+
+
+ 1137 0258 09       		.uleb128 0x9
+ 1138 0259 01       		.uleb128 0x1
+ 1139 025a 50       		.byte	0x50
+ 1140 025b 01       		.uleb128 0x1
+ 1141 025c 35       		.byte	0x35
+ 1142 025d 00       		.byte	0
+ 1143 025e 00       		.byte	0
+ 1144 025f 06       		.uleb128 0x6
+ 1145 0260 D8020000 		.4byte	.LASF20
+ 1146 0264 01       		.byte	0x1
+ 1147 0265 F1       		.byte	0xf1
+ 1148 0266 00000000 		.4byte	.LFB69
+ 1149 026a 30000000 		.4byte	.LFE69-.LFB69
+ 1150 026e 01       		.uleb128 0x1
+ 1151 026f 9C       		.byte	0x9c
+ 1152 0270 A5020000 		.4byte	0x2a5
+ 1153 0274 0D       		.uleb128 0xd
+ 1154 0275 7800     		.ascii	"x\000"
+ 1155 0277 01       		.byte	0x1
+ 1156 0278 F3       		.byte	0xf3
+ 1157 0279 68000000 		.4byte	0x68
+ 1158 027d F5000000 		.4byte	.LLST4
+ 1159 0281 08       		.uleb128 0x8
+ 1160 0282 16000000 		.4byte	.LVL42
+ 1161 0286 F4000000 		.4byte	0xf4
+ 1162 028a 95020000 		.4byte	0x295
+ 1163 028e 09       		.uleb128 0x9
+ 1164 028f 01       		.uleb128 0x1
+ 1165 0290 50       		.byte	0x50
+ 1166 0291 02       		.uleb128 0x2
+ 1167 0292 09       		.byte	0x9
+ 1168 0293 FF       		.byte	0xff
+ 1169 0294 00       		.byte	0
+ 1170 0295 0C       		.uleb128 0xc
+ 1171 0296 1C000000 		.4byte	.LVL43
+ 1172 029a 20050000 		.4byte	0x520
+ 1173 029e 09       		.uleb128 0x9
+ 1174 029f 01       		.uleb128 0x1
+ 1175 02a0 50       		.byte	0x50
+ 1176 02a1 01       		.uleb128 0x1
+ 1177 02a2 35       		.byte	0x35
+ 1178 02a3 00       		.byte	0
+ 1179 02a4 00       		.byte	0
+ 1180 02a5 0E       		.uleb128 0xe
+ 1181 02a6 1F030000 		.4byte	.LASF22
+ 1182 02aa 01       		.byte	0x1
+ 1183 02ab 0401     		.2byte	0x104
+ 1184 02ad 00000000 		.4byte	.LFB70
+ 1185 02b1 74000000 		.4byte	.LFE70-.LFB70
+ 1186 02b5 01       		.uleb128 0x1
+ 1187 02b6 9C       		.byte	0x9c
+ 1188 02b7 14030000 		.4byte	0x314
+ 1189 02bb 0F       		.uleb128 0xf
+ 1190 02bc 69020000 		.4byte	.LASF23
+ 1191 02c0 01       		.byte	0x1
+ 1192 02c1 0401     		.2byte	0x104
+ 1193 02c3 68000000 		.4byte	0x68
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 29
+
+
+ 1194 02c7 14010000 		.4byte	.LLST5
+ 1195 02cb 08       		.uleb128 0x8
+ 1196 02cc 1A000000 		.4byte	.LVL48
+ 1197 02d0 2B050000 		.4byte	0x52b
+ 1198 02d4 DE020000 		.4byte	0x2de
+ 1199 02d8 09       		.uleb128 0x9
+ 1200 02d9 01       		.uleb128 0x1
+ 1201 02da 50       		.byte	0x50
+ 1202 02db 01       		.uleb128 0x1
+ 1203 02dc 33       		.byte	0x33
+ 1204 02dd 00       		.byte	0
+ 1205 02de 08       		.uleb128 0x8
+ 1206 02df 38000000 		.4byte	.LVL53
+ 1207 02e3 2B050000 		.4byte	0x52b
+ 1208 02e7 F1020000 		.4byte	0x2f1
+ 1209 02eb 09       		.uleb128 0x9
+ 1210 02ec 01       		.uleb128 0x1
+ 1211 02ed 50       		.byte	0x50
+ 1212 02ee 01       		.uleb128 0x1
+ 1213 02ef 36       		.byte	0x36
+ 1214 02f0 00       		.byte	0
+ 1215 02f1 08       		.uleb128 0x8
+ 1216 02f2 48000000 		.4byte	.LVL57
+ 1217 02f6 2B050000 		.4byte	0x52b
+ 1218 02fa 04030000 		.4byte	0x304
+ 1219 02fe 09       		.uleb128 0x9
+ 1220 02ff 01       		.uleb128 0x1
+ 1221 0300 50       		.byte	0x50
+ 1222 0301 01       		.uleb128 0x1
+ 1223 0302 3C       		.byte	0x3c
+ 1224 0303 00       		.byte	0
+ 1225 0304 0C       		.uleb128 0xc
+ 1226 0305 58000000 		.4byte	.LVL61
+ 1227 0309 2B050000 		.4byte	0x52b
+ 1228 030d 09       		.uleb128 0x9
+ 1229 030e 01       		.uleb128 0x1
+ 1230 030f 50       		.byte	0x50
+ 1231 0310 01       		.uleb128 0x1
+ 1232 0311 39       		.byte	0x39
+ 1233 0312 00       		.byte	0
+ 1234 0313 00       		.byte	0
+ 1235 0314 10       		.uleb128 0x10
+ 1236 0315 AA020000 		.4byte	.LASF24
+ 1237 0319 01       		.byte	0x1
+ 1238 031a 3301     		.2byte	0x133
+ 1239 031c 00000000 		.4byte	.LFB71
+ 1240 0320 30000000 		.4byte	.LFE71-.LFB71
+ 1241 0324 01       		.uleb128 0x1
+ 1242 0325 9C       		.byte	0x9c
+ 1243 0326 5B030000 		.4byte	0x35b
+ 1244 032a 11       		.uleb128 0x11
+ 1245 032b 7800     		.ascii	"x\000"
+ 1246 032d 01       		.byte	0x1
+ 1247 032e 3501     		.2byte	0x135
+ 1248 0330 68000000 		.4byte	0x68
+ 1249 0334 AC010000 		.4byte	.LLST6
+ 1250 0338 08       		.uleb128 0x8
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 30
+
+
+ 1251 0339 14000000 		.4byte	.LVL66
+ 1252 033d A5020000 		.4byte	0x2a5
+ 1253 0341 4B030000 		.4byte	0x34b
+ 1254 0345 09       		.uleb128 0x9
+ 1255 0346 01       		.uleb128 0x1
+ 1256 0347 50       		.byte	0x50
+ 1257 0348 01       		.uleb128 0x1
+ 1258 0349 31       		.byte	0x31
+ 1259 034a 00       		.byte	0
+ 1260 034b 0C       		.uleb128 0xc
+ 1261 034c 1A000000 		.4byte	.LVL67
+ 1262 0350 20050000 		.4byte	0x520
+ 1263 0354 09       		.uleb128 0x9
+ 1264 0355 01       		.uleb128 0x1
+ 1265 0356 50       		.byte	0x50
+ 1266 0357 01       		.uleb128 0x1
+ 1267 0358 35       		.byte	0x35
+ 1268 0359 00       		.byte	0
+ 1269 035a 00       		.byte	0
+ 1270 035b 10       		.uleb128 0x10
+ 1271 035c CE020000 		.4byte	.LASF25
+ 1272 0360 01       		.byte	0x1
+ 1273 0361 4301     		.2byte	0x143
+ 1274 0363 00000000 		.4byte	.LFB72
+ 1275 0367 30000000 		.4byte	.LFE72-.LFB72
+ 1276 036b 01       		.uleb128 0x1
+ 1277 036c 9C       		.byte	0x9c
+ 1278 036d A2030000 		.4byte	0x3a2
+ 1279 0371 11       		.uleb128 0x11
+ 1280 0372 7800     		.ascii	"x\000"
+ 1281 0374 01       		.byte	0x1
+ 1282 0375 4501     		.2byte	0x145
+ 1283 0377 68000000 		.4byte	0x68
+ 1284 037b CB010000 		.4byte	.LLST7
+ 1285 037f 08       		.uleb128 0x8
+ 1286 0380 14000000 		.4byte	.LVL72
+ 1287 0384 A5020000 		.4byte	0x2a5
+ 1288 0388 92030000 		.4byte	0x392
+ 1289 038c 09       		.uleb128 0x9
+ 1290 038d 01       		.uleb128 0x1
+ 1291 038e 50       		.byte	0x50
+ 1292 038f 01       		.uleb128 0x1
+ 1293 0390 31       		.byte	0x31
+ 1294 0391 00       		.byte	0
+ 1295 0392 0C       		.uleb128 0xc
+ 1296 0393 1A000000 		.4byte	.LVL73
+ 1297 0397 20050000 		.4byte	0x520
+ 1298 039b 09       		.uleb128 0x9
+ 1299 039c 01       		.uleb128 0x1
+ 1300 039d 50       		.byte	0x50
+ 1301 039e 01       		.uleb128 0x1
+ 1302 039f 35       		.byte	0x35
+ 1303 03a0 00       		.byte	0
+ 1304 03a1 00       		.byte	0
+ 1305 03a2 10       		.uleb128 0x10
+ 1306 03a3 35000000 		.4byte	.LASF26
+ 1307 03a7 01       		.byte	0x1
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 31
+
+
+ 1308 03a8 6301     		.2byte	0x163
+ 1309 03aa 00000000 		.4byte	.LFB73
+ 1310 03ae 3C000000 		.4byte	.LFE73-.LFB73
+ 1311 03b2 01       		.uleb128 0x1
+ 1312 03b3 9C       		.byte	0x9c
+ 1313 03b4 01040000 		.4byte	0x401
+ 1314 03b8 11       		.uleb128 0x11
+ 1315 03b9 7800     		.ascii	"x\000"
+ 1316 03bb 01       		.byte	0x1
+ 1317 03bc 6501     		.2byte	0x165
+ 1318 03be 68000000 		.4byte	0x68
+ 1319 03c2 EA010000 		.4byte	.LLST8
+ 1320 03c6 08       		.uleb128 0x8
+ 1321 03c7 16000000 		.4byte	.LVL78
+ 1322 03cb A5020000 		.4byte	0x2a5
+ 1323 03cf DA030000 		.4byte	0x3da
+ 1324 03d3 09       		.uleb128 0x9
+ 1325 03d4 01       		.uleb128 0x1
+ 1326 03d5 50       		.byte	0x50
+ 1327 03d6 02       		.uleb128 0x2
+ 1328 03d7 09       		.byte	0x9
+ 1329 03d8 FF       		.byte	0xff
+ 1330 03d9 00       		.byte	0
+ 1331 03da 08       		.uleb128 0x8
+ 1332 03db 1C000000 		.4byte	.LVL79
+ 1333 03df 20050000 		.4byte	0x520
+ 1334 03e3 ED030000 		.4byte	0x3ed
+ 1335 03e7 09       		.uleb128 0x9
+ 1336 03e8 01       		.uleb128 0x1
+ 1337 03e9 50       		.byte	0x50
+ 1338 03ea 01       		.uleb128 0x1
+ 1339 03eb 35       		.byte	0x35
+ 1340 03ec 00       		.byte	0
+ 1341 03ed 0C       		.uleb128 0xc
+ 1342 03ee 30000000 		.4byte	.LVL81
+ 1343 03f2 15050000 		.4byte	0x515
+ 1344 03f6 09       		.uleb128 0x9
+ 1345 03f7 01       		.uleb128 0x1
+ 1346 03f8 50       		.byte	0x50
+ 1347 03f9 05       		.uleb128 0x5
+ 1348 03fa 03       		.byte	0x3
+ 1349 03fb 0C000000 		.4byte	.LC1
+ 1350 03ff 00       		.byte	0
+ 1351 0400 00       		.byte	0
+ 1352 0401 10       		.uleb128 0x10
+ 1353 0402 8E010000 		.4byte	.LASF27
+ 1354 0406 01       		.byte	0x1
+ 1355 0407 7501     		.2byte	0x175
+ 1356 0409 00000000 		.4byte	.LFB74
+ 1357 040d 30000000 		.4byte	.LFE74-.LFB74
+ 1358 0411 01       		.uleb128 0x1
+ 1359 0412 9C       		.byte	0x9c
+ 1360 0413 49040000 		.4byte	0x449
+ 1361 0417 11       		.uleb128 0x11
+ 1362 0418 7800     		.ascii	"x\000"
+ 1363 041a 01       		.byte	0x1
+ 1364 041b 7701     		.2byte	0x177
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 32
+
+
+ 1365 041d 68000000 		.4byte	0x68
+ 1366 0421 09020000 		.4byte	.LLST9
+ 1367 0425 08       		.uleb128 0x8
+ 1368 0426 16000000 		.4byte	.LVL85
+ 1369 042a A5020000 		.4byte	0x2a5
+ 1370 042e 39040000 		.4byte	0x439
+ 1371 0432 09       		.uleb128 0x9
+ 1372 0433 01       		.uleb128 0x1
+ 1373 0434 50       		.byte	0x50
+ 1374 0435 02       		.uleb128 0x2
+ 1375 0436 09       		.byte	0x9
+ 1376 0437 FF       		.byte	0xff
+ 1377 0438 00       		.byte	0
+ 1378 0439 0C       		.uleb128 0xc
+ 1379 043a 1C000000 		.4byte	.LVL86
+ 1380 043e 20050000 		.4byte	0x520
+ 1381 0442 09       		.uleb128 0x9
+ 1382 0443 01       		.uleb128 0x1
+ 1383 0444 50       		.byte	0x50
+ 1384 0445 01       		.uleb128 0x1
+ 1385 0446 35       		.byte	0x35
+ 1386 0447 00       		.byte	0
+ 1387 0448 00       		.byte	0
+ 1388 0449 12       		.uleb128 0x12
+ 1389 044a C1010000 		.4byte	.LASF28
+ 1390 044e 04       		.byte	0x4
+ 1391 044f 1207     		.2byte	0x712
+ 1392 0451 55040000 		.4byte	0x455
+ 1393 0455 13       		.uleb128 0x13
+ 1394 0456 76000000 		.4byte	0x76
+ 1395 045a 14       		.uleb128 0x14
+ 1396 045b 11000000 		.4byte	.LASF29
+ 1397 045f 01       		.byte	0x1
+ 1398 0460 05       		.byte	0x5
+ 1399 0461 68000000 		.4byte	0x68
+ 1400 0465 05       		.uleb128 0x5
+ 1401 0466 03       		.byte	0x3
+ 1402 0467 00000000 		.4byte	stepCount
+ 1403 046b 14       		.uleb128 0x14
+ 1404 046c 4B000000 		.4byte	.LASF30
+ 1405 0470 01       		.byte	0x1
+ 1406 0471 06       		.byte	0x6
+ 1407 0472 68000000 		.4byte	0x68
+ 1408 0476 05       		.uleb128 0x5
+ 1409 0477 03       		.byte	0x3
+ 1410 0478 00000000 		.4byte	steppingMode
+ 1411 047c 14       		.uleb128 0x14
+ 1412 047d 00000000 		.4byte	.LASF31
+ 1413 0481 01       		.byte	0x1
+ 1414 0482 07       		.byte	0x7
+ 1415 0483 8D040000 		.4byte	0x48d
+ 1416 0487 05       		.uleb128 0x5
+ 1417 0488 03       		.byte	0x3
+ 1418 0489 00000000 		.4byte	readyForNextStep
+ 1419 048d 02       		.uleb128 0x2
+ 1420 048e 01       		.byte	0x1
+ 1421 048f 02       		.byte	0x2
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 33
+
+
+ 1422 0490 25030000 		.4byte	.LASF32
+ 1423 0494 14       		.uleb128 0x14
+ 1424 0495 B4020000 		.4byte	.LASF33
+ 1425 0499 01       		.byte	0x1
+ 1426 049a 08       		.byte	0x8
+ 1427 049b 68000000 		.4byte	0x68
+ 1428 049f 05       		.uleb128 0x5
+ 1429 04a0 03       		.byte	0x3
+ 1430 04a1 00000000 		.4byte	nextStep
+ 1431 04a5 14       		.uleb128 0x14
+ 1432 04a6 1B000000 		.4byte	.LASF34
+ 1433 04aa 01       		.byte	0x1
+ 1434 04ab 0A       		.byte	0xa
+ 1435 04ac 68000000 		.4byte	0x68
+ 1436 04b0 05       		.uleb128 0x5
+ 1437 04b1 03       		.byte	0x3
+ 1438 04b2 00000000 		.4byte	stepCount2
+ 1439 04b6 14       		.uleb128 0x14
+ 1440 04b7 89020000 		.4byte	.LASF35
+ 1441 04bb 01       		.byte	0x1
+ 1442 04bc 0B       		.byte	0xb
+ 1443 04bd 68000000 		.4byte	0x68
+ 1444 04c1 05       		.uleb128 0x5
+ 1445 04c2 03       		.byte	0x3
+ 1446 04c3 00000000 		.4byte	steppingMode2
+ 1447 04c7 14       		.uleb128 0x14
+ 1448 04c8 6E020000 		.4byte	.LASF36
+ 1449 04cc 01       		.byte	0x1
+ 1450 04cd 0C       		.byte	0xc
+ 1451 04ce 8D040000 		.4byte	0x48d
+ 1452 04d2 05       		.uleb128 0x5
+ 1453 04d3 03       		.byte	0x3
+ 1454 04d4 00000000 		.4byte	readyForNextStep2
+ 1455 04d8 14       		.uleb128 0x14
+ 1456 04d9 FA020000 		.4byte	.LASF37
+ 1457 04dd 01       		.byte	0x1
+ 1458 04de 0D       		.byte	0xd
+ 1459 04df 68000000 		.4byte	0x68
+ 1460 04e3 05       		.uleb128 0x5
+ 1461 04e4 03       		.byte	0x3
+ 1462 04e5 00000000 		.4byte	nextStep2
+ 1463 04e9 15       		.uleb128 0x15
+ 1464 04ea 62000000 		.4byte	.LASF38
+ 1465 04ee 62000000 		.4byte	.LASF38
+ 1466 04f2 05       		.byte	0x5
+ 1467 04f3 5A       		.byte	0x5a
+ 1468 04f4 15       		.uleb128 0x15
+ 1469 04f5 7C000000 		.4byte	.LASF39
+ 1470 04f9 7C000000 		.4byte	.LASF39
+ 1471 04fd 06       		.byte	0x6
+ 1472 04fe 18       		.byte	0x18
+ 1473 04ff 15       		.uleb128 0x15
+ 1474 0500 58020000 		.4byte	.LASF40
+ 1475 0504 58020000 		.4byte	.LASF40
+ 1476 0508 06       		.byte	0x6
+ 1477 0509 23       		.byte	0x23
+ 1478 050a 15       		.uleb128 0x15
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 34
+
+
+ 1479 050b 22020000 		.4byte	.LASF41
+ 1480 050f 22020000 		.4byte	.LASF41
+ 1481 0513 07       		.byte	0x7
+ 1482 0514 2F       		.byte	0x2f
+ 1483 0515 15       		.uleb128 0x15
+ 1484 0516 10030000 		.4byte	.LASF42
+ 1485 051a 10030000 		.4byte	.LASF42
+ 1486 051e 08       		.byte	0x8
+ 1487 051f 8B       		.byte	0x8b
+ 1488 0520 15       		.uleb128 0x15
+ 1489 0521 2B030000 		.4byte	.LASF43
+ 1490 0525 2B030000 		.4byte	.LASF43
+ 1491 0529 09       		.byte	0x9
+ 1492 052a 76       		.byte	0x76
+ 1493 052b 15       		.uleb128 0x15
+ 1494 052c FA010000 		.4byte	.LASF44
+ 1495 0530 FA010000 		.4byte	.LASF44
+ 1496 0534 0A       		.byte	0xa
+ 1497 0535 2F       		.byte	0x2f
+ 1498 0536 00       		.byte	0
+ 1499              		.section	.debug_abbrev,"",%progbits
+ 1500              	.Ldebug_abbrev0:
+ 1501 0000 01       		.uleb128 0x1
+ 1502 0001 11       		.uleb128 0x11
+ 1503 0002 01       		.byte	0x1
+ 1504 0003 25       		.uleb128 0x25
+ 1505 0004 0E       		.uleb128 0xe
+ 1506 0005 13       		.uleb128 0x13
+ 1507 0006 0B       		.uleb128 0xb
+ 1508 0007 03       		.uleb128 0x3
+ 1509 0008 0E       		.uleb128 0xe
+ 1510 0009 1B       		.uleb128 0x1b
+ 1511 000a 0E       		.uleb128 0xe
+ 1512 000b 55       		.uleb128 0x55
+ 1513 000c 17       		.uleb128 0x17
+ 1514 000d 11       		.uleb128 0x11
+ 1515 000e 01       		.uleb128 0x1
+ 1516 000f 10       		.uleb128 0x10
+ 1517 0010 17       		.uleb128 0x17
+ 1518 0011 00       		.byte	0
+ 1519 0012 00       		.byte	0
+ 1520 0013 02       		.uleb128 0x2
+ 1521 0014 24       		.uleb128 0x24
+ 1522 0015 00       		.byte	0
+ 1523 0016 0B       		.uleb128 0xb
+ 1524 0017 0B       		.uleb128 0xb
+ 1525 0018 3E       		.uleb128 0x3e
+ 1526 0019 0B       		.uleb128 0xb
+ 1527 001a 03       		.uleb128 0x3
+ 1528 001b 0E       		.uleb128 0xe
+ 1529 001c 00       		.byte	0
+ 1530 001d 00       		.byte	0
+ 1531 001e 03       		.uleb128 0x3
+ 1532 001f 16       		.uleb128 0x16
+ 1533 0020 00       		.byte	0
+ 1534 0021 03       		.uleb128 0x3
+ 1535 0022 0E       		.uleb128 0xe
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 35
+
+
+ 1536 0023 3A       		.uleb128 0x3a
+ 1537 0024 0B       		.uleb128 0xb
+ 1538 0025 3B       		.uleb128 0x3b
+ 1539 0026 0B       		.uleb128 0xb
+ 1540 0027 49       		.uleb128 0x49
+ 1541 0028 13       		.uleb128 0x13
+ 1542 0029 00       		.byte	0
+ 1543 002a 00       		.byte	0
+ 1544 002b 04       		.uleb128 0x4
+ 1545 002c 24       		.uleb128 0x24
+ 1546 002d 00       		.byte	0
+ 1547 002e 0B       		.uleb128 0xb
+ 1548 002f 0B       		.uleb128 0xb
+ 1549 0030 3E       		.uleb128 0x3e
+ 1550 0031 0B       		.uleb128 0xb
+ 1551 0032 03       		.uleb128 0x3
+ 1552 0033 08       		.uleb128 0x8
+ 1553 0034 00       		.byte	0
+ 1554 0035 00       		.byte	0
+ 1555 0036 05       		.uleb128 0x5
+ 1556 0037 2E       		.uleb128 0x2e
+ 1557 0038 00       		.byte	0
+ 1558 0039 3F       		.uleb128 0x3f
+ 1559 003a 19       		.uleb128 0x19
+ 1560 003b 03       		.uleb128 0x3
+ 1561 003c 0E       		.uleb128 0xe
+ 1562 003d 3A       		.uleb128 0x3a
+ 1563 003e 0B       		.uleb128 0xb
+ 1564 003f 3B       		.uleb128 0x3b
+ 1565 0040 0B       		.uleb128 0xb
+ 1566 0041 27       		.uleb128 0x27
+ 1567 0042 19       		.uleb128 0x19
+ 1568 0043 11       		.uleb128 0x11
+ 1569 0044 01       		.uleb128 0x1
+ 1570 0045 12       		.uleb128 0x12
+ 1571 0046 06       		.uleb128 0x6
+ 1572 0047 40       		.uleb128 0x40
+ 1573 0048 18       		.uleb128 0x18
+ 1574 0049 9742     		.uleb128 0x2117
+ 1575 004b 19       		.uleb128 0x19
+ 1576 004c 00       		.byte	0
+ 1577 004d 00       		.byte	0
+ 1578 004e 06       		.uleb128 0x6
+ 1579 004f 2E       		.uleb128 0x2e
+ 1580 0050 01       		.byte	0x1
+ 1581 0051 3F       		.uleb128 0x3f
+ 1582 0052 19       		.uleb128 0x19
+ 1583 0053 03       		.uleb128 0x3
+ 1584 0054 0E       		.uleb128 0xe
+ 1585 0055 3A       		.uleb128 0x3a
+ 1586 0056 0B       		.uleb128 0xb
+ 1587 0057 3B       		.uleb128 0x3b
+ 1588 0058 0B       		.uleb128 0xb
+ 1589 0059 11       		.uleb128 0x11
+ 1590 005a 01       		.uleb128 0x1
+ 1591 005b 12       		.uleb128 0x12
+ 1592 005c 06       		.uleb128 0x6
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 36
+
+
+ 1593 005d 40       		.uleb128 0x40
+ 1594 005e 18       		.uleb128 0x18
+ 1595 005f 9742     		.uleb128 0x2117
+ 1596 0061 19       		.uleb128 0x19
+ 1597 0062 01       		.uleb128 0x1
+ 1598 0063 13       		.uleb128 0x13
+ 1599 0064 00       		.byte	0
+ 1600 0065 00       		.byte	0
+ 1601 0066 07       		.uleb128 0x7
+ 1602 0067 898201   		.uleb128 0x4109
+ 1603 006a 00       		.byte	0
+ 1604 006b 11       		.uleb128 0x11
+ 1605 006c 01       		.uleb128 0x1
+ 1606 006d 31       		.uleb128 0x31
+ 1607 006e 13       		.uleb128 0x13
+ 1608 006f 00       		.byte	0
+ 1609 0070 00       		.byte	0
+ 1610 0071 08       		.uleb128 0x8
+ 1611 0072 898201   		.uleb128 0x4109
+ 1612 0075 01       		.byte	0x1
+ 1613 0076 11       		.uleb128 0x11
+ 1614 0077 01       		.uleb128 0x1
+ 1615 0078 31       		.uleb128 0x31
+ 1616 0079 13       		.uleb128 0x13
+ 1617 007a 01       		.uleb128 0x1
+ 1618 007b 13       		.uleb128 0x13
+ 1619 007c 00       		.byte	0
+ 1620 007d 00       		.byte	0
+ 1621 007e 09       		.uleb128 0x9
+ 1622 007f 8A8201   		.uleb128 0x410a
+ 1623 0082 00       		.byte	0
+ 1624 0083 02       		.uleb128 0x2
+ 1625 0084 18       		.uleb128 0x18
+ 1626 0085 9142     		.uleb128 0x2111
+ 1627 0087 18       		.uleb128 0x18
+ 1628 0088 00       		.byte	0
+ 1629 0089 00       		.byte	0
+ 1630 008a 0A       		.uleb128 0xa
+ 1631 008b 2E       		.uleb128 0x2e
+ 1632 008c 01       		.byte	0x1
+ 1633 008d 3F       		.uleb128 0x3f
+ 1634 008e 19       		.uleb128 0x19
+ 1635 008f 03       		.uleb128 0x3
+ 1636 0090 0E       		.uleb128 0xe
+ 1637 0091 3A       		.uleb128 0x3a
+ 1638 0092 0B       		.uleb128 0xb
+ 1639 0093 3B       		.uleb128 0x3b
+ 1640 0094 0B       		.uleb128 0xb
+ 1641 0095 27       		.uleb128 0x27
+ 1642 0096 19       		.uleb128 0x19
+ 1643 0097 11       		.uleb128 0x11
+ 1644 0098 01       		.uleb128 0x1
+ 1645 0099 12       		.uleb128 0x12
+ 1646 009a 06       		.uleb128 0x6
+ 1647 009b 40       		.uleb128 0x40
+ 1648 009c 18       		.uleb128 0x18
+ 1649 009d 9742     		.uleb128 0x2117
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 37
+
+
+ 1650 009f 19       		.uleb128 0x19
+ 1651 00a0 01       		.uleb128 0x1
+ 1652 00a1 13       		.uleb128 0x13
+ 1653 00a2 00       		.byte	0
+ 1654 00a3 00       		.byte	0
+ 1655 00a4 0B       		.uleb128 0xb
+ 1656 00a5 05       		.uleb128 0x5
+ 1657 00a6 00       		.byte	0
+ 1658 00a7 03       		.uleb128 0x3
+ 1659 00a8 0E       		.uleb128 0xe
+ 1660 00a9 3A       		.uleb128 0x3a
+ 1661 00aa 0B       		.uleb128 0xb
+ 1662 00ab 3B       		.uleb128 0x3b
+ 1663 00ac 0B       		.uleb128 0xb
+ 1664 00ad 49       		.uleb128 0x49
+ 1665 00ae 13       		.uleb128 0x13
+ 1666 00af 02       		.uleb128 0x2
+ 1667 00b0 17       		.uleb128 0x17
+ 1668 00b1 00       		.byte	0
+ 1669 00b2 00       		.byte	0
+ 1670 00b3 0C       		.uleb128 0xc
+ 1671 00b4 898201   		.uleb128 0x4109
+ 1672 00b7 01       		.byte	0x1
+ 1673 00b8 11       		.uleb128 0x11
+ 1674 00b9 01       		.uleb128 0x1
+ 1675 00ba 31       		.uleb128 0x31
+ 1676 00bb 13       		.uleb128 0x13
+ 1677 00bc 00       		.byte	0
+ 1678 00bd 00       		.byte	0
+ 1679 00be 0D       		.uleb128 0xd
+ 1680 00bf 34       		.uleb128 0x34
+ 1681 00c0 00       		.byte	0
+ 1682 00c1 03       		.uleb128 0x3
+ 1683 00c2 08       		.uleb128 0x8
+ 1684 00c3 3A       		.uleb128 0x3a
+ 1685 00c4 0B       		.uleb128 0xb
+ 1686 00c5 3B       		.uleb128 0x3b
+ 1687 00c6 0B       		.uleb128 0xb
+ 1688 00c7 49       		.uleb128 0x49
+ 1689 00c8 13       		.uleb128 0x13
+ 1690 00c9 02       		.uleb128 0x2
+ 1691 00ca 17       		.uleb128 0x17
+ 1692 00cb 00       		.byte	0
+ 1693 00cc 00       		.byte	0
+ 1694 00cd 0E       		.uleb128 0xe
+ 1695 00ce 2E       		.uleb128 0x2e
+ 1696 00cf 01       		.byte	0x1
+ 1697 00d0 3F       		.uleb128 0x3f
+ 1698 00d1 19       		.uleb128 0x19
+ 1699 00d2 03       		.uleb128 0x3
+ 1700 00d3 0E       		.uleb128 0xe
+ 1701 00d4 3A       		.uleb128 0x3a
+ 1702 00d5 0B       		.uleb128 0xb
+ 1703 00d6 3B       		.uleb128 0x3b
+ 1704 00d7 05       		.uleb128 0x5
+ 1705 00d8 27       		.uleb128 0x27
+ 1706 00d9 19       		.uleb128 0x19
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 38
+
+
+ 1707 00da 11       		.uleb128 0x11
+ 1708 00db 01       		.uleb128 0x1
+ 1709 00dc 12       		.uleb128 0x12
+ 1710 00dd 06       		.uleb128 0x6
+ 1711 00de 40       		.uleb128 0x40
+ 1712 00df 18       		.uleb128 0x18
+ 1713 00e0 9742     		.uleb128 0x2117
+ 1714 00e2 19       		.uleb128 0x19
+ 1715 00e3 01       		.uleb128 0x1
+ 1716 00e4 13       		.uleb128 0x13
+ 1717 00e5 00       		.byte	0
+ 1718 00e6 00       		.byte	0
+ 1719 00e7 0F       		.uleb128 0xf
+ 1720 00e8 05       		.uleb128 0x5
+ 1721 00e9 00       		.byte	0
+ 1722 00ea 03       		.uleb128 0x3
+ 1723 00eb 0E       		.uleb128 0xe
+ 1724 00ec 3A       		.uleb128 0x3a
+ 1725 00ed 0B       		.uleb128 0xb
+ 1726 00ee 3B       		.uleb128 0x3b
+ 1727 00ef 05       		.uleb128 0x5
+ 1728 00f0 49       		.uleb128 0x49
+ 1729 00f1 13       		.uleb128 0x13
+ 1730 00f2 02       		.uleb128 0x2
+ 1731 00f3 17       		.uleb128 0x17
+ 1732 00f4 00       		.byte	0
+ 1733 00f5 00       		.byte	0
+ 1734 00f6 10       		.uleb128 0x10
+ 1735 00f7 2E       		.uleb128 0x2e
+ 1736 00f8 01       		.byte	0x1
+ 1737 00f9 3F       		.uleb128 0x3f
+ 1738 00fa 19       		.uleb128 0x19
+ 1739 00fb 03       		.uleb128 0x3
+ 1740 00fc 0E       		.uleb128 0xe
+ 1741 00fd 3A       		.uleb128 0x3a
+ 1742 00fe 0B       		.uleb128 0xb
+ 1743 00ff 3B       		.uleb128 0x3b
+ 1744 0100 05       		.uleb128 0x5
+ 1745 0101 11       		.uleb128 0x11
+ 1746 0102 01       		.uleb128 0x1
+ 1747 0103 12       		.uleb128 0x12
+ 1748 0104 06       		.uleb128 0x6
+ 1749 0105 40       		.uleb128 0x40
+ 1750 0106 18       		.uleb128 0x18
+ 1751 0107 9742     		.uleb128 0x2117
+ 1752 0109 19       		.uleb128 0x19
+ 1753 010a 01       		.uleb128 0x1
+ 1754 010b 13       		.uleb128 0x13
+ 1755 010c 00       		.byte	0
+ 1756 010d 00       		.byte	0
+ 1757 010e 11       		.uleb128 0x11
+ 1758 010f 34       		.uleb128 0x34
+ 1759 0110 00       		.byte	0
+ 1760 0111 03       		.uleb128 0x3
+ 1761 0112 08       		.uleb128 0x8
+ 1762 0113 3A       		.uleb128 0x3a
+ 1763 0114 0B       		.uleb128 0xb
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 39
+
+
+ 1764 0115 3B       		.uleb128 0x3b
+ 1765 0116 05       		.uleb128 0x5
+ 1766 0117 49       		.uleb128 0x49
+ 1767 0118 13       		.uleb128 0x13
+ 1768 0119 02       		.uleb128 0x2
+ 1769 011a 17       		.uleb128 0x17
+ 1770 011b 00       		.byte	0
+ 1771 011c 00       		.byte	0
+ 1772 011d 12       		.uleb128 0x12
+ 1773 011e 34       		.uleb128 0x34
+ 1774 011f 00       		.byte	0
+ 1775 0120 03       		.uleb128 0x3
+ 1776 0121 0E       		.uleb128 0xe
+ 1777 0122 3A       		.uleb128 0x3a
+ 1778 0123 0B       		.uleb128 0xb
+ 1779 0124 3B       		.uleb128 0x3b
+ 1780 0125 05       		.uleb128 0x5
+ 1781 0126 49       		.uleb128 0x49
+ 1782 0127 13       		.uleb128 0x13
+ 1783 0128 3F       		.uleb128 0x3f
+ 1784 0129 19       		.uleb128 0x19
+ 1785 012a 3C       		.uleb128 0x3c
+ 1786 012b 19       		.uleb128 0x19
+ 1787 012c 00       		.byte	0
+ 1788 012d 00       		.byte	0
+ 1789 012e 13       		.uleb128 0x13
+ 1790 012f 35       		.uleb128 0x35
+ 1791 0130 00       		.byte	0
+ 1792 0131 49       		.uleb128 0x49
+ 1793 0132 13       		.uleb128 0x13
+ 1794 0133 00       		.byte	0
+ 1795 0134 00       		.byte	0
+ 1796 0135 14       		.uleb128 0x14
+ 1797 0136 34       		.uleb128 0x34
+ 1798 0137 00       		.byte	0
+ 1799 0138 03       		.uleb128 0x3
+ 1800 0139 0E       		.uleb128 0xe
+ 1801 013a 3A       		.uleb128 0x3a
+ 1802 013b 0B       		.uleb128 0xb
+ 1803 013c 3B       		.uleb128 0x3b
+ 1804 013d 0B       		.uleb128 0xb
+ 1805 013e 49       		.uleb128 0x49
+ 1806 013f 13       		.uleb128 0x13
+ 1807 0140 3F       		.uleb128 0x3f
+ 1808 0141 19       		.uleb128 0x19
+ 1809 0142 02       		.uleb128 0x2
+ 1810 0143 18       		.uleb128 0x18
+ 1811 0144 00       		.byte	0
+ 1812 0145 00       		.byte	0
+ 1813 0146 15       		.uleb128 0x15
+ 1814 0147 2E       		.uleb128 0x2e
+ 1815 0148 00       		.byte	0
+ 1816 0149 3F       		.uleb128 0x3f
+ 1817 014a 19       		.uleb128 0x19
+ 1818 014b 3C       		.uleb128 0x3c
+ 1819 014c 19       		.uleb128 0x19
+ 1820 014d 6E       		.uleb128 0x6e
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 40
+
+
+ 1821 014e 0E       		.uleb128 0xe
+ 1822 014f 03       		.uleb128 0x3
+ 1823 0150 0E       		.uleb128 0xe
+ 1824 0151 3A       		.uleb128 0x3a
+ 1825 0152 0B       		.uleb128 0xb
+ 1826 0153 3B       		.uleb128 0x3b
+ 1827 0154 0B       		.uleb128 0xb
+ 1828 0155 00       		.byte	0
+ 1829 0156 00       		.byte	0
+ 1830 0157 00       		.byte	0
+ 1831              		.section	.debug_loc,"",%progbits
+ 1832              	.Ldebug_loc0:
+ 1833              	.LLST0:
+ 1834 0000 00000000 		.4byte	.LVL3
+ 1835 0004 16000000 		.4byte	.LVL4
+ 1836 0008 0100     		.2byte	0x1
+ 1837 000a 50       		.byte	0x50
+ 1838 000b 16000000 		.4byte	.LVL4
+ 1839 000f 2E000000 		.4byte	.LVL7
+ 1840 0013 0100     		.2byte	0x1
+ 1841 0015 54       		.byte	0x54
+ 1842 0016 2E000000 		.4byte	.LVL7
+ 1843 001a 32000000 		.4byte	.LVL8
+ 1844 001e 0400     		.2byte	0x4
+ 1845 0020 F3       		.byte	0xf3
+ 1846 0021 01       		.uleb128 0x1
+ 1847 0022 50       		.byte	0x50
+ 1848 0023 9F       		.byte	0x9f
+ 1849 0024 32000000 		.4byte	.LVL8
+ 1850 0028 34000000 		.4byte	.LVL9
+ 1851 002c 0100     		.2byte	0x1
+ 1852 002e 50       		.byte	0x50
+ 1853 002f 34000000 		.4byte	.LVL9
+ 1854 0033 3E000000 		.4byte	.LVL11
+ 1855 0037 0100     		.2byte	0x1
+ 1856 0039 54       		.byte	0x54
+ 1857 003a 3E000000 		.4byte	.LVL11
+ 1858 003e 42000000 		.4byte	.LVL12
+ 1859 0042 0400     		.2byte	0x4
+ 1860 0044 F3       		.byte	0xf3
+ 1861 0045 01       		.uleb128 0x1
+ 1862 0046 50       		.byte	0x50
+ 1863 0047 9F       		.byte	0x9f
+ 1864 0048 42000000 		.4byte	.LVL12
+ 1865 004c 44000000 		.4byte	.LVL13
+ 1866 0050 0100     		.2byte	0x1
+ 1867 0052 50       		.byte	0x50
+ 1868 0053 44000000 		.4byte	.LVL13
+ 1869 0057 4E000000 		.4byte	.LVL15
+ 1870 005b 0100     		.2byte	0x1
+ 1871 005d 54       		.byte	0x54
+ 1872 005e 4E000000 		.4byte	.LVL15
+ 1873 0062 52000000 		.4byte	.LVL16
+ 1874 0066 0400     		.2byte	0x4
+ 1875 0068 F3       		.byte	0xf3
+ 1876 0069 01       		.uleb128 0x1
+ 1877 006a 50       		.byte	0x50
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 41
+
+
+ 1878 006b 9F       		.byte	0x9f
+ 1879 006c 52000000 		.4byte	.LVL16
+ 1880 0070 54000000 		.4byte	.LVL17
+ 1881 0074 0100     		.2byte	0x1
+ 1882 0076 50       		.byte	0x50
+ 1883 0077 54000000 		.4byte	.LVL17
+ 1884 007b 6A000000 		.4byte	.LVL20
+ 1885 007f 0100     		.2byte	0x1
+ 1886 0081 54       		.byte	0x54
+ 1887 0082 6A000000 		.4byte	.LVL20
+ 1888 0086 74000000 		.4byte	.LFE65
+ 1889 008a 0400     		.2byte	0x4
+ 1890 008c F3       		.byte	0xf3
+ 1891 008d 01       		.uleb128 0x1
+ 1892 008e 50       		.byte	0x50
+ 1893 008f 9F       		.byte	0x9f
+ 1894 0090 00000000 		.4byte	0
+ 1895 0094 00000000 		.4byte	0
+ 1896              	.LLST1:
+ 1897 0098 08000000 		.4byte	.LVL21
+ 1898 009c 0C000000 		.4byte	.LVL22
+ 1899 00a0 0200     		.2byte	0x2
+ 1900 00a2 30       		.byte	0x30
+ 1901 00a3 9F       		.byte	0x9f
+ 1902 00a4 0C000000 		.4byte	.LVL22
+ 1903 00a8 30000000 		.4byte	.LVL26
+ 1904 00ac 0100     		.2byte	0x1
+ 1905 00ae 54       		.byte	0x54
+ 1906 00af 00000000 		.4byte	0
+ 1907 00b3 00000000 		.4byte	0
+ 1908              	.LLST2:
+ 1909 00b7 02000000 		.4byte	.LVL27
+ 1910 00bb 06000000 		.4byte	.LVL28
+ 1911 00bf 0200     		.2byte	0x2
+ 1912 00c1 30       		.byte	0x30
+ 1913 00c2 9F       		.byte	0x9f
+ 1914 00c3 06000000 		.4byte	.LVL28
+ 1915 00c7 2A000000 		.4byte	.LVL32
+ 1916 00cb 0100     		.2byte	0x1
+ 1917 00cd 54       		.byte	0x54
+ 1918 00ce 00000000 		.4byte	0
+ 1919 00d2 00000000 		.4byte	0
+ 1920              	.LLST3:
+ 1921 00d6 02000000 		.4byte	.LVL33
+ 1922 00da 0C000000 		.4byte	.LVL35
+ 1923 00de 0200     		.2byte	0x2
+ 1924 00e0 30       		.byte	0x30
+ 1925 00e1 9F       		.byte	0x9f
+ 1926 00e2 0C000000 		.4byte	.LVL35
+ 1927 00e6 32000000 		.4byte	.LVL39
+ 1928 00ea 0100     		.2byte	0x1
+ 1929 00ec 54       		.byte	0x54
+ 1930 00ed 00000000 		.4byte	0
+ 1931 00f1 00000000 		.4byte	0
+ 1932              	.LLST4:
+ 1933 00f5 02000000 		.4byte	.LVL40
+ 1934 00f9 06000000 		.4byte	.LVL41
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 42
+
+
+ 1935 00fd 0200     		.2byte	0x2
+ 1936 00ff 30       		.byte	0x30
+ 1937 0100 9F       		.byte	0x9f
+ 1938 0101 06000000 		.4byte	.LVL41
+ 1939 0105 2C000000 		.4byte	.LVL45
+ 1940 0109 0100     		.2byte	0x1
+ 1941 010b 54       		.byte	0x54
+ 1942 010c 00000000 		.4byte	0
+ 1943 0110 00000000 		.4byte	0
+ 1944              	.LLST5:
+ 1945 0114 00000000 		.4byte	.LVL46
+ 1946 0118 16000000 		.4byte	.LVL47
+ 1947 011c 0100     		.2byte	0x1
+ 1948 011e 50       		.byte	0x50
+ 1949 011f 16000000 		.4byte	.LVL47
+ 1950 0123 2E000000 		.4byte	.LVL50
+ 1951 0127 0100     		.2byte	0x1
+ 1952 0129 54       		.byte	0x54
+ 1953 012a 2E000000 		.4byte	.LVL50
+ 1954 012e 32000000 		.4byte	.LVL51
+ 1955 0132 0400     		.2byte	0x4
+ 1956 0134 F3       		.byte	0xf3
+ 1957 0135 01       		.uleb128 0x1
+ 1958 0136 50       		.byte	0x50
+ 1959 0137 9F       		.byte	0x9f
+ 1960 0138 32000000 		.4byte	.LVL51
+ 1961 013c 34000000 		.4byte	.LVL52
+ 1962 0140 0100     		.2byte	0x1
+ 1963 0142 50       		.byte	0x50
+ 1964 0143 34000000 		.4byte	.LVL52
+ 1965 0147 3E000000 		.4byte	.LVL54
+ 1966 014b 0100     		.2byte	0x1
+ 1967 014d 54       		.byte	0x54
+ 1968 014e 3E000000 		.4byte	.LVL54
+ 1969 0152 42000000 		.4byte	.LVL55
+ 1970 0156 0400     		.2byte	0x4
+ 1971 0158 F3       		.byte	0xf3
+ 1972 0159 01       		.uleb128 0x1
+ 1973 015a 50       		.byte	0x50
+ 1974 015b 9F       		.byte	0x9f
+ 1975 015c 42000000 		.4byte	.LVL55
+ 1976 0160 44000000 		.4byte	.LVL56
+ 1977 0164 0100     		.2byte	0x1
+ 1978 0166 50       		.byte	0x50
+ 1979 0167 44000000 		.4byte	.LVL56
+ 1980 016b 4E000000 		.4byte	.LVL58
+ 1981 016f 0100     		.2byte	0x1
+ 1982 0171 54       		.byte	0x54
+ 1983 0172 4E000000 		.4byte	.LVL58
+ 1984 0176 52000000 		.4byte	.LVL59
+ 1985 017a 0400     		.2byte	0x4
+ 1986 017c F3       		.byte	0xf3
+ 1987 017d 01       		.uleb128 0x1
+ 1988 017e 50       		.byte	0x50
+ 1989 017f 9F       		.byte	0x9f
+ 1990 0180 52000000 		.4byte	.LVL59
+ 1991 0184 54000000 		.4byte	.LVL60
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 43
+
+
+ 1992 0188 0100     		.2byte	0x1
+ 1993 018a 50       		.byte	0x50
+ 1994 018b 54000000 		.4byte	.LVL60
+ 1995 018f 6A000000 		.4byte	.LVL63
+ 1996 0193 0100     		.2byte	0x1
+ 1997 0195 54       		.byte	0x54
+ 1998 0196 6A000000 		.4byte	.LVL63
+ 1999 019a 74000000 		.4byte	.LFE70
+ 2000 019e 0400     		.2byte	0x4
+ 2001 01a0 F3       		.byte	0xf3
+ 2002 01a1 01       		.uleb128 0x1
+ 2003 01a2 50       		.byte	0x50
+ 2004 01a3 9F       		.byte	0x9f
+ 2005 01a4 00000000 		.4byte	0
+ 2006 01a8 00000000 		.4byte	0
+ 2007              	.LLST6:
+ 2008 01ac 02000000 		.4byte	.LVL64
+ 2009 01b0 06000000 		.4byte	.LVL65
+ 2010 01b4 0200     		.2byte	0x2
+ 2011 01b6 30       		.byte	0x30
+ 2012 01b7 9F       		.byte	0x9f
+ 2013 01b8 06000000 		.4byte	.LVL65
+ 2014 01bc 2A000000 		.4byte	.LVL69
+ 2015 01c0 0100     		.2byte	0x1
+ 2016 01c2 54       		.byte	0x54
+ 2017 01c3 00000000 		.4byte	0
+ 2018 01c7 00000000 		.4byte	0
+ 2019              	.LLST7:
+ 2020 01cb 02000000 		.4byte	.LVL70
+ 2021 01cf 06000000 		.4byte	.LVL71
+ 2022 01d3 0200     		.2byte	0x2
+ 2023 01d5 30       		.byte	0x30
+ 2024 01d6 9F       		.byte	0x9f
+ 2025 01d7 06000000 		.4byte	.LVL71
+ 2026 01db 2A000000 		.4byte	.LVL75
+ 2027 01df 0100     		.2byte	0x1
+ 2028 01e1 54       		.byte	0x54
+ 2029 01e2 00000000 		.4byte	0
+ 2030 01e6 00000000 		.4byte	0
+ 2031              	.LLST8:
+ 2032 01ea 02000000 		.4byte	.LVL76
+ 2033 01ee 06000000 		.4byte	.LVL77
+ 2034 01f2 0200     		.2byte	0x2
+ 2035 01f4 30       		.byte	0x30
+ 2036 01f5 9F       		.byte	0x9f
+ 2037 01f6 06000000 		.4byte	.LVL77
+ 2038 01fa 32000000 		.4byte	.LVL82
+ 2039 01fe 0100     		.2byte	0x1
+ 2040 0200 54       		.byte	0x54
+ 2041 0201 00000000 		.4byte	0
+ 2042 0205 00000000 		.4byte	0
+ 2043              	.LLST9:
+ 2044 0209 02000000 		.4byte	.LVL83
+ 2045 020d 06000000 		.4byte	.LVL84
+ 2046 0211 0200     		.2byte	0x2
+ 2047 0213 30       		.byte	0x30
+ 2048 0214 9F       		.byte	0x9f
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 44
+
+
+ 2049 0215 06000000 		.4byte	.LVL84
+ 2050 0219 2C000000 		.4byte	.LVL88
+ 2051 021d 0100     		.2byte	0x1
+ 2052 021f 54       		.byte	0x54
+ 2053 0220 00000000 		.4byte	0
+ 2054 0224 00000000 		.4byte	0
+ 2055              		.section	.debug_aranges,"",%progbits
+ 2056 0000 74000000 		.4byte	0x74
+ 2057 0004 0200     		.2byte	0x2
+ 2058 0006 00000000 		.4byte	.Ldebug_info0
+ 2059 000a 04       		.byte	0x4
+ 2060 000b 00       		.byte	0
+ 2061 000c 0000     		.2byte	0
+ 2062 000e 0000     		.2byte	0
+ 2063 0010 00000000 		.4byte	.LFB64
+ 2064 0014 10000000 		.4byte	.LFE64-.LFB64
+ 2065 0018 00000000 		.4byte	.LFB63
+ 2066 001c 18000000 		.4byte	.LFE63-.LFB63
+ 2067 0020 00000000 		.4byte	.LFB65
+ 2068 0024 74000000 		.4byte	.LFE65-.LFB65
+ 2069 0028 00000000 		.4byte	.LFB66
+ 2070 002c 38000000 		.4byte	.LFE66-.LFB66
+ 2071 0030 00000000 		.4byte	.LFB67
+ 2072 0034 30000000 		.4byte	.LFE67-.LFB67
+ 2073 0038 00000000 		.4byte	.LFB68
+ 2074 003c 3C000000 		.4byte	.LFE68-.LFB68
+ 2075 0040 00000000 		.4byte	.LFB69
+ 2076 0044 30000000 		.4byte	.LFE69-.LFB69
+ 2077 0048 00000000 		.4byte	.LFB70
+ 2078 004c 74000000 		.4byte	.LFE70-.LFB70
+ 2079 0050 00000000 		.4byte	.LFB71
+ 2080 0054 30000000 		.4byte	.LFE71-.LFB71
+ 2081 0058 00000000 		.4byte	.LFB72
+ 2082 005c 30000000 		.4byte	.LFE72-.LFB72
+ 2083 0060 00000000 		.4byte	.LFB73
+ 2084 0064 3C000000 		.4byte	.LFE73-.LFB73
+ 2085 0068 00000000 		.4byte	.LFB74
+ 2086 006c 30000000 		.4byte	.LFE74-.LFB74
+ 2087 0070 00000000 		.4byte	0
+ 2088 0074 00000000 		.4byte	0
+ 2089              		.section	.debug_ranges,"",%progbits
+ 2090              	.Ldebug_ranges0:
+ 2091 0000 00000000 		.4byte	.LFB64
+ 2092 0004 10000000 		.4byte	.LFE64
+ 2093 0008 00000000 		.4byte	.LFB63
+ 2094 000c 18000000 		.4byte	.LFE63
+ 2095 0010 00000000 		.4byte	.LFB65
+ 2096 0014 74000000 		.4byte	.LFE65
+ 2097 0018 00000000 		.4byte	.LFB66
+ 2098 001c 38000000 		.4byte	.LFE66
+ 2099 0020 00000000 		.4byte	.LFB67
+ 2100 0024 30000000 		.4byte	.LFE67
+ 2101 0028 00000000 		.4byte	.LFB68
+ 2102 002c 3C000000 		.4byte	.LFE68
+ 2103 0030 00000000 		.4byte	.LFB69
+ 2104 0034 30000000 		.4byte	.LFE69
+ 2105 0038 00000000 		.4byte	.LFB70
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 45
+
+
+ 2106 003c 74000000 		.4byte	.LFE70
+ 2107 0040 00000000 		.4byte	.LFB71
+ 2108 0044 30000000 		.4byte	.LFE71
+ 2109 0048 00000000 		.4byte	.LFB72
+ 2110 004c 30000000 		.4byte	.LFE72
+ 2111 0050 00000000 		.4byte	.LFB73
+ 2112 0054 3C000000 		.4byte	.LFE73
+ 2113 0058 00000000 		.4byte	.LFB74
+ 2114 005c 30000000 		.4byte	.LFE74
+ 2115 0060 00000000 		.4byte	0
+ 2116 0064 00000000 		.4byte	0
+ 2117              		.section	.debug_line,"",%progbits
+ 2118              	.Ldebug_line0:
+ 2119 0000 0F030000 		.section	.debug_str,"MS",%progbits,1
+ 2119      02009E01 
+ 2119      00000201 
+ 2119      FB0E0D00 
+ 2119      01010101 
+ 2120              	.LASF31:
+ 2121 0000 72656164 		.ascii	"readyForNextStep\000"
+ 2121      79466F72 
+ 2121      4E657874 
+ 2121      53746570 
+ 2121      00
+ 2122              	.LASF29:
+ 2123 0011 73746570 		.ascii	"stepCount\000"
+ 2123      436F756E 
+ 2123      7400
+ 2124              	.LASF34:
+ 2125 001b 73746570 		.ascii	"stepCount2\000"
+ 2125      436F756E 
+ 2125      743200
+ 2126              	.LASF9:
+ 2127 0026 5F5F696E 		.ascii	"__int32_t\000"
+ 2127      7433325F 
+ 2127      7400
+ 2128              	.LASF21:
+ 2129 0030 73746570 		.ascii	"step\000"
+ 2129      00
+ 2130              	.LASF26:
+ 2131 0035 72657652 		.ascii	"revRotate902\000"
+ 2131      6F746174 
+ 2131      65393032 
+ 2131      00
+ 2132              	.LASF17:
+ 2133 0042 526F7461 		.ascii	"Rotate90\000"
+ 2133      74653930 
+ 2133      00
+ 2134              	.LASF30:
+ 2135 004b 73746570 		.ascii	"steppingMode\000"
+ 2135      70696E67 
+ 2135      4D6F6465 
+ 2135      00
+ 2136              	.LASF18:
+ 2137 0058 526F7461 		.ascii	"Rotate180\000"
+ 2137      74653138 
+ 2137      3000
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 46
+
+
+ 2138              	.LASF38:
+ 2139 0062 4D6F746F 		.ascii	"Motor_Timer_Start\000"
+ 2139      725F5469 
+ 2139      6D65725F 
+ 2139      53746172 
+ 2139      7400
+ 2140              	.LASF10:
+ 2141 0074 696E7433 		.ascii	"int32_t\000"
+ 2141      325F7400 
+ 2142              	.LASF39:
+ 2143 007c 6973725F 		.ascii	"isr_timer_StartEx\000"
+ 2143      74696D65 
+ 2143      725F5374 
+ 2143      61727445 
+ 2143      7800
+ 2144              	.LASF11:
+ 2145 008e 666C6F61 		.ascii	"float\000"
+ 2145      7400
+ 2146              	.LASF47:
+ 2147 0094 5C5C766D 		.ascii	"\\\\vmware-host\\Shared Folders\\Documents\\BallDis"
+ 2147      77617265 
+ 2147      2D686F73 
+ 2147      745C5368 
+ 2147      61726564 
+ 2148 00c2 70417070 		.ascii	"pApp\\Workspace12\\Bolddispenser_CoinMaster.cydsn\000"
+ 2148      5C576F72 
+ 2148      6B737061 
+ 2148      63653132 
+ 2148      5C426F6C 
+ 2149              	.LASF1:
+ 2150 00f2 756E7369 		.ascii	"unsigned char\000"
+ 2150      676E6564 
+ 2150      20636861 
+ 2150      7200
+ 2151              	.LASF45:
+ 2152 0100 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2152      43313120 
+ 2152      352E342E 
+ 2152      31203230 
+ 2152      31363036 
+ 2153 0133 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2153      20726576 
+ 2153      6973696F 
+ 2153      6E203233 
+ 2153      37373135 
+ 2154 0166 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2154      66756E63 
+ 2154      74696F6E 
+ 2154      2D736563 
+ 2154      74696F6E 
+ 2155              	.LASF27:
+ 2156 018e 72657652 		.ascii	"revRotate1802\000"
+ 2156      6F746174 
+ 2156      65313830 
+ 2156      3200
+ 2157              	.LASF5:
+ 2158 019c 6C6F6E67 		.ascii	"long unsigned int\000"
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 47
+
+
+ 2158      20756E73 
+ 2158      69676E65 
+ 2158      6420696E 
+ 2158      7400
+ 2159              	.LASF3:
+ 2160 01ae 73686F72 		.ascii	"short unsigned int\000"
+ 2160      7420756E 
+ 2160      7369676E 
+ 2160      65642069 
+ 2160      6E7400
+ 2161              	.LASF28:
+ 2162 01c1 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2162      52784275 
+ 2162      66666572 
+ 2162      00
+ 2163              	.LASF46:
+ 2164 01ce 4D6F746F 		.ascii	"MotorControl.c\000"
+ 2164      72436F6E 
+ 2164      74726F6C 
+ 2164      2E6300
+ 2165              	.LASF12:
+ 2166 01dd 646F7562 		.ascii	"double\000"
+ 2166      6C6500
+ 2167              	.LASF19:
+ 2168 01e4 72657652 		.ascii	"revRotate90\000"
+ 2168      6F746174 
+ 2168      65393000 
+ 2169              	.LASF2:
+ 2170 01f0 73686F72 		.ascii	"short int\000"
+ 2170      7420696E 
+ 2170      7400
+ 2171              	.LASF44:
+ 2172 01fa 4D6F746F 		.ascii	"Motor_Reg_2_Write\000"
+ 2172      725F5265 
+ 2172      675F325F 
+ 2172      57726974 
+ 2172      6500
+ 2173              	.LASF48:
+ 2174 020c 4D6F746F 		.ascii	"Motor_Timer_I_handler\000"
+ 2174      725F5469 
+ 2174      6D65725F 
+ 2174      495F6861 
+ 2174      6E646C65 
+ 2175              	.LASF41:
+ 2176 0222 4D6F746F 		.ascii	"Motor_Reg_1_Write\000"
+ 2176      725F5265 
+ 2176      675F315F 
+ 2176      57726974 
+ 2176      6500
+ 2177              	.LASF8:
+ 2178 0234 756E7369 		.ascii	"unsigned int\000"
+ 2178      676E6564 
+ 2178      20696E74 
+ 2178      00
+ 2179              	.LASF7:
+ 2180 0241 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2180      206C6F6E 
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 48
+
+
+ 2180      6720756E 
+ 2180      7369676E 
+ 2180      65642069 
+ 2181              	.LASF40:
+ 2182 0258 6973725F 		.ascii	"isr_timer_Enable\000"
+ 2182      74696D65 
+ 2182      725F456E 
+ 2182      61626C65 
+ 2182      00
+ 2183              	.LASF23:
+ 2184 0269 6D6F6465 		.ascii	"mode\000"
+ 2184      00
+ 2185              	.LASF36:
+ 2186 026e 72656164 		.ascii	"readyForNextStep2\000"
+ 2186      79466F72 
+ 2186      4E657874 
+ 2186      53746570 
+ 2186      3200
+ 2187              	.LASF15:
+ 2188 0280 73697A65 		.ascii	"sizetype\000"
+ 2188      74797065 
+ 2188      00
+ 2189              	.LASF35:
+ 2190 0289 73746570 		.ascii	"steppingMode2\000"
+ 2190      70696E67 
+ 2190      4D6F6465 
+ 2190      3200
+ 2191              	.LASF6:
+ 2192 0297 6C6F6E67 		.ascii	"long long int\000"
+ 2192      206C6F6E 
+ 2192      6720696E 
+ 2192      7400
+ 2193              	.LASF13:
+ 2194 02a5 63686172 		.ascii	"char\000"
+ 2194      00
+ 2195              	.LASF24:
+ 2196 02aa 526F7461 		.ascii	"Rotate902\000"
+ 2196      74653930 
+ 2196      3200
+ 2197              	.LASF33:
+ 2198 02b4 6E657874 		.ascii	"nextStep\000"
+ 2198      53746570 
+ 2198      00
+ 2199              	.LASF16:
+ 2200 02bd 696E6974 		.ascii	"initMotorControl\000"
+ 2200      4D6F746F 
+ 2200      72436F6E 
+ 2200      74726F6C 
+ 2200      00
+ 2201              	.LASF25:
+ 2202 02ce 526F7461 		.ascii	"Rotate360\000"
+ 2202      74653336 
+ 2202      3000
+ 2203              	.LASF20:
+ 2204 02d8 72657652 		.ascii	"revRotate180\000"
+ 2204      6F746174 
+ 2204      65313830 
+ARM GAS  C:\Users\au576633\AppData\Local\Temp\ccL9KzO5.s 			page 49
+
+
+ 2204      00
+ 2205              	.LASF4:
+ 2206 02e5 6C6F6E67 		.ascii	"long int\000"
+ 2206      20696E74 
+ 2206      00
+ 2207              	.LASF14:
+ 2208 02ee 6C6F6E67 		.ascii	"long double\000"
+ 2208      20646F75 
+ 2208      626C6500 
+ 2209              	.LASF37:
+ 2210 02fa 6E657874 		.ascii	"nextStep2\000"
+ 2210      53746570 
+ 2210      3200
+ 2211              	.LASF0:
+ 2212 0304 7369676E 		.ascii	"signed char\000"
+ 2212      65642063 
+ 2212      68617200 
+ 2213              	.LASF42:
+ 2214 0310 55415254 		.ascii	"UART_PutString\000"
+ 2214      5F507574 
+ 2214      53747269 
+ 2214      6E6700
+ 2215              	.LASF22:
+ 2216 031f 73746570 		.ascii	"step2\000"
+ 2216      3200
+ 2217              	.LASF32:
+ 2218 0325 5F426F6F 		.ascii	"_Bool\000"
+ 2218      6C00
+ 2219              	.LASF43:
+ 2220 032b 43794465 		.ascii	"CyDelay\000"
+ 2220      6C617900 
+ 2221              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
